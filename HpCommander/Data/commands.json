@@ -1,0 +1,146 @@
+{
+  "characters": [
+    "Amala", "Amy", "Arin", "Ashley", "Babs", "Brittney", "Compubrah", "Dan",
+    "Derek", "Doja Cat", "Frank", "Gisella", "Katherine", "Leah", "Lety",
+    "Liz Katz", "Madison", "Murray", "Patrick", "Phone Call", "Podcast",
+    "Rachael", "Stephanie", "Tater", "Vickie", "Player"
+  ],
+
+  "changeParts": [
+    "all", "accessories", "bottom", "top", "shoes",
+    "strapon", "undershirt", "underwear"
+  ],
+
+  "changeItemsByCharacter": {
+    "Amy": [
+      { "id": "arin_hair_amy", "label": "Arin's Hair" }
+    ],
+    "Katherine": [
+      { "id": "Katherine_glasses", "label": "Glasses (toggle)" },
+      { "id": "Katherine_glasses_ThinRimGlasses", "label": "Thin Rim Glasses" }
+    ]
+  },
+
+  "outfitsByCharacter": {
+    "Rachael": [ "Rachael Default", "HalloweenWingsAndHornsOnly" ]
+  },
+
+  "traits": [ "Exhibitionism", "Jealous" ],
+
+  "relationshipTypes": [ "Friendship", "Romance" ],
+
+  "genericValues": [
+    { "id": "spareroomdoor", "property": "IsLocked", "type": "bool01", "label": "Spare Bedroom Door Lock" }
+  ],
+
+  "states": [
+    "sweating", "ForcedToDance", "IndefinitelyErect", "IsOnFire",
+    "RunWhenCloseToTarget", "UnableToPlayVoicedAudioTriggers"
+  ],
+
+  "properties": [ "IsBloody" ],
+
+  "sizeParts": [
+    "butt", "cum", "chest", "feet", "hands", "head", "penis", "penistip", "testicles"
+  ],
+
+  "runFunctions": [
+    "EnableFaceAndChestSpermEffect", "untieshirt", "fixshirt"
+  ],
+
+  "items": {
+    "requiresEnable": [
+      { "display": "Ashley's Top", "enableName": "ashleytop" },
+      { "display": "Ashley's Panties", "enableName": "ashleypanties" },
+      { "display": "Ashley's Clothes", "enableName": "clothes" },
+      { "display": "Collar", "enableName": "collarbloody" },
+      { "display": "Condom", "enableName": "condom" },
+      { "display": "Dark Long Sleeve Women's Top", "enableName": "darklongsleevewomenstop" },
+      { "display": "Derek's Shirt", "enableName": "derekclothes" },
+      { "display": "Drone", "enableName": "drone" },
+      { "display": "El Escorpion Mezcal", "enableName": "scorpiontequila" },
+      { "display": "Fifty Dollars", "enableName": "50dollars" },
+      { "display": "Film Camera", "enableName": "filmcamera" },
+      { "display": "Goodbye Kitty Underwear", "enableName": "pinkunderwear" },
+      { "display": "Joint", "enableName": "joint" },
+      { "display": "Mama Chupacabra's", "enableName": "chilipeppers" },
+      { "display": "Marijuana", "enableName": "marijuana" },
+      { "display": "Money Makers Monthly", "enableName": "moneymakersmonthly" },
+      { "display": "Nerdy Taped Glasses", "enableName": "nerdytapedglasses" },
+      { "display": "Patrick's Phone", "enableName": "phone3" },
+      { "display": "Petition", "enableName": "petition" },
+      { "display": "Ripped Whale Poster", "enableName": "rippedwhaleposter" },
+      { "display": "Spray Paint", "enableName": "spraypaintcan" },
+      { "display": "Starbomb Box", "enableName": "starbombbox" },
+      { "display": "Sweeties", "enableName": "sweeties" },
+      { "display": "Vape", "enableName": "vape" },
+      { "display": "Wizbanger Poppers", "enableName": "popperbox" },
+      { "display": "Bike Lock Key", "enableName": "bikelockkey" }
+    ],
+    "aliasNames": [
+      { "display": "Bathroom Skeleton Key", "internal": "Key" },
+      { "display": "Chocolate Syrup", "internal": "Choclate Syrup" },
+      { "display": "Chocolate Bar", "internal": "ChocolateBar" },
+      { "display": "Empty Vodka Bottle", "internal": "Vodka" },
+      { "display": "Fast Food Bag", "internal": "Paper Bag" },
+      { "display": "Hot Tub Cover", "internal": "HotTubCoverFolded" },
+      { "display": "Katherine's Phone", "internal": "Phone2" },
+      { "display": "Laxatives", "internal": "Clear Eyes" },
+      { "display": "Madison's Diary", "internal": "Diary" },
+      { "display": "Madison's Phone", "internal": "A Phone" },
+      { "display": "Mysterious Key", "internal": "Key2" },
+      { "display": "Penguin", "internal": "Dusty Penguin" },
+      { "display": "Sleeping Mask", "internal": "SleepingMaskFolded" },
+      { "display": "Speaker", "internal": "Speaker2" },
+      { "display": "TV Remote", "internal": "Remote Control" },
+      { "display": "Vibratron 3000", "internal": "Vibrator" },
+      { "display": "Weird Dinosaur Suit", "internal": "DLiciousOutfit" },
+      { "display": "Whack Spankiel's", "internal": "Jack Daniel's" },
+      { "display": "Wood Planks", "internal": "PlankPileInYard" }
+    ],
+    "plain": [
+      "Battery Pack", "Blue Hair Dye", "Box of Nails", "Broom", "Cabernet",
+      "Camera", "Cell Phone Jammer", "Chardonnay", "Chicken", "Chicken Nuggets",
+      "Closed Briefcase", "Coffee", "Credit Card", "Cucumber", "Duct Tape",
+      "Eggs", "Empty Cup", "Flask", "Flower", "Foam Finger", "Gut Grip",
+      "Hammer", "Kettle", "Mayonnaise", "Merlot", "Motor Oil", "MP3 Player",
+      "Mug", "Painkillers", "Paper", "Pencil", "PlexiglassStacked", "Popcorn",
+      "Potatoes", "Rum", "Salami", "Salmon", "SD Card", "Soda", "Spoon",
+      "Sundress", "Sunglasses", "Tablet", "Thermos", "Towel", "Towel2",
+      "Towel3", "USB Stick", "Whipped Cream"
+    ],
+    "numberedRange": [
+      { "baseName": "nattylite", "label": "Natty Lite", "min": 1, "max": 14 }
+    ],
+    "locked": [ "Doja Cat's MP3 Player", "Vickie's Panties" ]
+  },
+
+  "legacyCombatActions": [ "Passout" ],
+
+  "intimacy": {
+    "note": "Confirmed patterns from 'example intimacy' (in-game console tokens do NOT appear to be order-sensitive): two-char start = 'sexualact intimacy {char1} {char2} {event}'; single-char start = 'sexualact {char1} {event} intimacy'; end = 'sexualact intimacy {char1} end'; action speed = 'intimacy {char1} {increaseactionspeed|decreaseactionspeed}'. The 'reset' subcommand has NO confirmed example - its command below is a best-guess by analogy to action speed, unverified.",
+    "subcommands": [
+      { "name": "SexualAct", "id": 0 },
+      { "name": "IncreaseActionSpeed", "id": 10 },
+      { "name": "DecreaseActionSpeed", "id": 11 },
+      { "name": "reset", "id": null }
+    ],
+    "events": [
+      { "name": "StartFingering", "id": 7000 },
+      { "name": "StartScissoring", "id": 8000 },
+      { "name": "StartMakingOut", "id": 9000 },
+      { "name": "StartBlowjob", "id": 10000 },
+      { "name": "StartHotTubHandJob", "id": 10011 },
+      { "name": "StartMissionary", "id": 10030 },
+      { "name": "StartDoggieStyle", "id": 10050 },
+      { "name": "StartMasturbation", "id": 10051 },
+      { "name": "StartCowGirl", "id": 10052 },
+      { "name": "StartCunnilingus", "id": 10053 },
+      { "name": "StartSixtyNine", "id": 10054 },
+      { "name": "StartWallSex", "id": 10055 },
+      { "name": "StartWallSex2", "id": 10056 },
+      { "name": "StartWallSex3", "id": 10057 },
+      { "name": "End", "id": 10060 }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+<UserControl x:Class="HpCommander.Views.StatesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="States" Style="{StaticResource SectionHeaderStyle}" />
+            <TextBlock Text="State (tip: check 'All Characters' as target for all.states(...))"
+                       Style="{StaticResource FieldLabelStyle}" MaxWidth="360" TextWrapping="Wrap" />
+            <ComboBox x:Name="StateCombo" IsEditable="True" Width="300" HorizontalAlignment="Left" />
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,14 @@
+<UserControl x:Class="HpCommander.Views.MiscView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="Misc" Style="{StaticResource SectionHeaderStyle}" />
+            <WrapPanel>
+                <Button x:Name="AchButton" Content="Achievements.clear" Click="AchButton_Click" />
+                <Button x:Name="UnstuckButton" Content="&lt;target&gt;.unstuck (uses first selected target, or 'Player')" Click="UnstuckButton_Click" />
+                <Button x:Name="HelpButton" Content="Help.V2" Click="HelpButton_Click" />
+            </WrapPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

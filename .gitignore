@@ -1,0 +1,11 @@
+# Build artifacts
+bin/
+obj/
+publish/
+
+# Old WinForms source (superseded by the WPF rewrite, kept locally only)
+old_winforms_backup/
+
+# IDE / editor
+.vs/
+*.user

@@ -1,0 +1,17 @@
+<UserControl x:Class="HpCommander.Views.InventoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="Inventory" Style="{StaticResource SectionHeaderStyle}" />
+
+            <TextBlock Text="Item" Style="{StaticResource FieldLabelStyle}" />
+            <ComboBox x:Name="ItemCombo" Width="380" HorizontalAlignment="Left"
+                      SelectionChanged="ItemCombo_SelectionChanged" />
+
+            <TextBlock Text="Number (for numbered items)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+            <controls:NumericStepper x:Name="NumberStepper" IsEnabled="False" ValueChanged="NumberStepper_ValueChanged" />
+        </StackPanel>
+    </Border>
+</UserControl>

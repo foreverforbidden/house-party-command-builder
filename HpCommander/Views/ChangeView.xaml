@@ -1,0 +1,25 @@
+<UserControl x:Class="HpCommander.Views.ChangeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="Change" Style="{StaticResource SectionHeaderStyle}" />
+
+            <TextBlock Text="Clothing slot or item ID" Style="{StaticResource FieldLabelStyle}" />
+            <ComboBox x:Name="PartCombo" IsEditable="True" Width="320" HorizontalAlignment="Left" />
+            <Button x:Name="RefreshButton" Content="Refresh item list for selected character"
+                    HorizontalAlignment="Left" Click="RefreshButton_Click" />
+
+            <TextBlock Text="Force state" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="ToggleRadio" Content="Toggle (no suffix)" GroupName="ChangeBool"
+                             IsChecked="True" Checked="Field_Changed" />
+                <RadioButton x:Name="TrueRadio" Content="Force On" GroupName="ChangeBool" Checked="Field_Changed" />
+                <RadioButton x:Name="FalseRadio" Content="Force Off" GroupName="ChangeBool" Checked="Field_Changed" />
+            </StackPanel>
+
+            <Button x:Name="ListButton" Content="Build change.list command instead"
+                    HorizontalAlignment="Left" Click="ListButton_Click" />
+        </StackPanel>
+    </Border>
+</UserControl>

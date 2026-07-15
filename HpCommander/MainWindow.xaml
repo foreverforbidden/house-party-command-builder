@@ -1,0 +1,71 @@
+<Window x:Class="HpCommander.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HP Commander - House Party V2 Console Command Builder"
+        Width="1150" Height="780" MinWidth="900" MinHeight="650"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="{StaticResource ContentBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="180" />
+        </Grid.RowDefinitions>
+
+        <!-- Sidebar nav -->
+        <ListBox x:Name="CategoryList" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                 Style="{StaticResource SidebarListBoxStyle}"
+                 ItemContainerStyle="{StaticResource SidebarListBoxItemStyle}"
+                 SelectionChanged="CategoryList_SelectionChanged" />
+
+        <!-- Content area: chip picker row + dynamic content host -->
+        <Grid Grid.Column="1" Grid.Row="0" Margin="16,16,16,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border x:Name="TargetsCard" Grid.Row="0" Style="{StaticResource CardStyle}">
+                <ContentControl x:Name="ChipPickerHost" />
+            </Border>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ContentControl x:Name="ContentHost" />
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Output bar -->
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource CardStyle}" Margin="16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="220" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Command output" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="History (double-click to recopy)" Style="{StaticResource SectionHeaderStyle}" Margin="12,0,0,10" />
+
+                <Grid Grid.Column="0" Grid.Row="1" Margin="0,0,8,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="OutputBox" Grid.Row="0" IsReadOnly="True" TextWrapping="Wrap"
+                             FontFamily="Consolas" FontSize="13" VerticalContentAlignment="Top" Height="Auto"
+                             VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Margin="0,0,0,8" />
+                    <Button x:Name="CopyButton" Grid.Row="1" Content="Copy to Clipboard" Style="{StaticResource PrimaryButtonStyle}"
+                            HorizontalAlignment="Stretch" Click="CopyButton_Click" />
+                </Grid>
+
+                <ListBox x:Name="HistoryList" Grid.Column="1" Grid.Row="1" Margin="12,0,0,0"
+                         MouseDoubleClick="HistoryList_MouseDoubleClick" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

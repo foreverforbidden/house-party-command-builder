@@ -1,0 +1,47 @@
+<UserControl x:Class="HpCommander.Views.ValuesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="Values" Style="{StaticResource SectionHeaderStyle}" />
+            <TabControl x:Name="ModeTabs" Style="{StaticResource SegmentedTabControlStyle}"
+                        SelectionChanged="ModeTabs_SelectionChanged">
+                <TabItem Header="Trait" Style="{StaticResource SegmentedTabItemStyle}">
+                    <StackPanel Margin="0,8,0,0">
+                        <TextBlock Text="Trait (case-sensitive - pick from list)" Style="{StaticResource FieldLabelStyle}" />
+                        <ComboBox x:Name="TraitCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="Selector_Changed" />
+                        <TextBlock Text="Value" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                        <controls:NumericStepper x:Name="TraitValueStepper" Minimum="-1000" Maximum="1000" Increment="1"
+                                                  DecimalPlaces="0" Value="100" ValueChanged="Field_Changed" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Relationship" Style="{StaticResource SegmentedTabItemStyle}">
+                    <StackPanel Margin="0,8,0,0">
+                        <TextBlock Text="Other character (Player is in the list too)" Style="{StaticResource FieldLabelStyle}" />
+                        <ComboBox x:Name="RelOtherCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="Selector_Changed" />
+                        <TextBlock Text="Relationship type" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                        <ComboBox x:Name="RelTypeCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="Selector_Changed" />
+                        <TextBlock Text="Value" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                        <controls:NumericStepper x:Name="RelValueStepper" Minimum="-1000" Maximum="1000" Increment="1"
+                                                  DecimalPlaces="0" Value="10" ValueChanged="Field_Changed" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Object Value" Style="{StaticResource SegmentedTabItemStyle}">
+                    <StackPanel Margin="0,8,0,0">
+                        <TextBlock Text="Object value (e.g. door lock)" Style="{StaticResource FieldLabelStyle}" />
+                        <ComboBox x:Name="GenCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="Selector_Changed" />
+                        <CheckBox x:Name="GenCheckBox" Content="Set to true/1 (unchecked = false/0)" IsChecked="True"
+                                  Checked="Field_ChangedRouted" Unchecked="Field_ChangedRouted" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="List / Filter" Style="{StaticResource SegmentedTabItemStyle}">
+                    <StackPanel Margin="0,8,0,0">
+                        <TextBlock Text="Filter text (optional)" Style="{StaticResource FieldLabelStyle}" />
+                        <TextBox x:Name="FilterBox" Width="300" HorizontalAlignment="Left" TextChanged="Field_ChangedRouted" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Border>
+</UserControl>

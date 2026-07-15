@@ -1,0 +1,18 @@
+<UserControl x:Class="HpCommander.Controls.NumericStepper"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="22" />
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="ValueBox" Grid.Column="0" TextAlignment="Right"
+                 LostFocus="ValueBox_LostFocus" KeyDown="ValueBox_KeyDown" Margin="0,0,0,10" />
+        <StackPanel Grid.Column="1" Margin="2,0,0,10">
+            <RepeatButton x:Name="UpButton" Content="+" Height="15" FontSize="10" Padding="0"
+                          Margin="0,0,0,1" Click="UpButton_Click" />
+            <RepeatButton x:Name="DownButton" Content="-" Height="15" FontSize="10" Padding="0"
+                          Margin="0" Click="DownButton_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
