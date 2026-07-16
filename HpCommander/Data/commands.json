@@ -411,6 +411,33 @@
 
   "legacyCombatActions": [ "fight", "passout", "wakeup", "cancel" ],
 
+  "socialValues": [ "drunk", "mood" ],
+  "socialRelationships": [ "friendship", "romance" ],
+  "socialModifiers": [ "add", "equals" ],
+  "socialActions": [
+    { "name": "sendtext", "needsTarget": false, "label": "Send a text" },
+    { "name": "talkto", "needsTarget": true, "label": "Talk to (must be nearby)" }
+  ],
+
+  "doorActions": [ "open", "close", "lock", "unlock" ],
+  "doors": [
+    "Front Door",
+    "Slider Door",
+    "Garage Door",
+    "Bathroom Door",
+    "Bedroom Door",
+    "Master Bathroom Door",
+    "Master Bedroom Door",
+    "Laundry Room Door",
+    "Utility Closet Door",
+    "Dryer Door",
+    "Microwave Door",
+    "SRClosetDoor1",
+    "SRClosetDoor2",
+    "SRClosetDoor3",
+    "SRClosetDoor4"
+  ],
+
   "questsByCharacter": {
     "Amala": [
       "Drunk and Disorderly - Amala",

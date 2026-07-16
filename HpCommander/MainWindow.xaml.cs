@@ -11,8 +11,9 @@ public partial class MainWindow : Window
 {
     private static readonly string[] CategoryNames =
     {
-        "Change", "Outfit", "Inventory", "Values", "Quest", "States", "Properties",
-        "Run", "Addforce", "Misc", "Legacy (V1)", "Intimacy", "Size", "Time",
+        "Change", "Outfit", "Inventory", "Values", "Social", "Quest", "Door",
+        "States", "Properties", "Run", "Addforce", "Misc", "Legacy (V1)",
+        "Intimacy", "Size", "Time",
     };
 
     private readonly GameData _data;
@@ -83,7 +84,9 @@ public partial class MainWindow : Window
         "Outfit" => new OutfitView(_data, _chipPicker),
         "Inventory" => new InventoryView(_data),
         "Values" => new ValuesView(_data, _chipPicker),
+        "Social" => new SocialView(_data),
         "Quest" => new QuestView(_data),
+        "Door" => new DoorView(_data),
         "States" => new StatesView(_data, _chipPicker),
         "Properties" => new PropertiesView(_data, _chipPicker),
         "Run" => new RunView(_data, _chipPicker),

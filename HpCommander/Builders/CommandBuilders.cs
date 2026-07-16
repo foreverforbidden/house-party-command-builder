@@ -173,6 +173,38 @@ public static class LegacyCommandBuilder
     public const string ExampleIntimacy = "example intimacy";
 }
 
+public static class SocialCommandBuilder
+{
+    public const string AllTarget = "all";
+
+    /// <summary>drunk | mood. Mirrors `social all drunk 25 equals`. <paramref name="character"/> may be "all".</summary>
+    public static string Value(string character, string value, int amount, string modifier) =>
+        $"social {character} {value} {amount} {modifier}";
+
+    /// <summary>friendship | romance. Mirrors `social rachael player romance equals 10`.</summary>
+    public static string Relationship(string character, string target, string relationship, string modifier, int amount) =>
+        $"social {character} {target} {relationship} {modifier} {amount}";
+
+    /// <summary>Mirrors `social amy sendtext`.</summary>
+    public static string Action(string character, string action) =>
+        $"social {character} {action}";
+
+    /// <summary>Mirrors `social madison derek talkto`.</summary>
+    public static string ActionWithTarget(string character, string target, string action) =>
+        $"social {character} {target} {action}";
+}
+
+public static class DoorCommandBuilder
+{
+    /// <summary>open | close | lock | unlock. Door names are matched space-insensitively,
+    /// but must be quoted when they contain spaces (`door close "Slider Door"`).</summary>
+    public static string Build(string door, string action)
+    {
+        var quoted = door.Contains(' ') ? $"\"{door}\"" : door;
+        return $"door {quoted} {action}";
+    }
+}
+
 public static class QuestCommandBuilder
 {
     /// <summary>start | fail | increment | complete. Quest names are quoted (they contain spaces/apostrophes).</summary>

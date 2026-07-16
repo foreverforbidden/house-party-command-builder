@@ -50,6 +50,14 @@ public sealed class IntimacyCatalog
     [JsonPropertyName("events")] public List<IntimacyEntry> Events { get; set; } = new();
 }
 
+public sealed class SocialAction
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = "";
+    [JsonPropertyName("needsTarget")] public bool NeedsTarget { get; set; }
+    [JsonPropertyName("label")] public string Label { get; set; } = "";
+    public override string ToString() => Label.Length > 0 ? Label : Name;
+}
+
 public sealed class ItemCatalog
 {
     [JsonPropertyName("requiresEnable")] public List<ItemAlias> RequiresEnable { get; set; } = new();
@@ -74,6 +82,12 @@ public sealed class GameData
     [JsonPropertyName("runFunctions")] public List<string> RunFunctions { get; set; } = new();
     [JsonPropertyName("items")] public ItemCatalog Items { get; set; } = new();
     [JsonPropertyName("legacyCombatActions")] public List<string> LegacyCombatActions { get; set; } = new();
+    [JsonPropertyName("socialValues")] public List<string> SocialValues { get; set; } = new();
+    [JsonPropertyName("socialRelationships")] public List<string> SocialRelationships { get; set; } = new();
+    [JsonPropertyName("socialModifiers")] public List<string> SocialModifiers { get; set; } = new();
+    [JsonPropertyName("socialActions")] public List<SocialAction> SocialActions { get; set; } = new();
+    [JsonPropertyName("doorActions")] public List<string> DoorActions { get; set; } = new();
+    [JsonPropertyName("doors")] public List<string> Doors { get; set; } = new();
     [JsonPropertyName("questsByCharacter")] public Dictionary<string, List<string>> QuestsByCharacter { get; set; } = new();
     [JsonPropertyName("intimacy")] public IntimacyCatalog Intimacy { get; set; } = new();
 

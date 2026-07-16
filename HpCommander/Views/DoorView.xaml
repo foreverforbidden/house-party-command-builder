@@ -1,0 +1,21 @@
+<UserControl x:Class="HpCommander.Views.DoorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <TextBlock Text="Door" Style="{StaticResource SectionHeaderStyle}" />
+
+            <TextBlock Text="Door" Style="{StaticResource FieldLabelStyle}" />
+            <ComboBox x:Name="DoorCombo" IsEditable="True" Width="300" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Action" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+            <ComboBox x:Name="ActionCombo" Width="300" HorizontalAlignment="Left"
+                      SelectionChanged="Selector_Changed" />
+
+            <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,8,0,0"
+                       Text="Names are matched space-insensitively, so 'masterbedroomdoor' and 'Master Bedroom Door' both work; the quoting is handled for you. The list is a starting point - type any door name the game knows." />
+            <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440"
+                       Text="The community guide says door locking moved to values.spareroomdoor.set(IsLocked)=1. The game documents this command directly, so both appear to work." />
+        </StackPanel>
+    </Border>
+</UserControl>
