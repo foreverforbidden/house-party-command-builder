@@ -118,7 +118,167 @@
   "legacyCombatActions": [ "fight", "passout", "wakeup", "cancel" ],
 
   "questsByCharacter": {
-    "Rachael": [ "Hunt for Red's Thermos" ]
+    "Amala": [
+      "Drunk and Disorderly - Amala",
+      "Jur-ASS-ic Hunt",
+      "Play That Good Shit",
+      "Why Why (Can't I Come to the Party)"
+    ],
+    "Amy": [
+      "Chasing Amy",
+      "Scavenger Hunt"
+    ],
+    "Arin": [
+      "Return of the Grumps"
+    ],
+    "Ashley": [
+      "A Change of Heart",
+      "Ashley's Wet",
+      "Drunk and Disorderly - Ashley",
+      "Family Time",
+      "Invasion of Privacy",
+      "Laying Some Pipe",
+      "Matchmaker",
+      "Military Precision",
+      "Redemption",
+      "Road to Redemption",
+      "Sibling Warfare",
+      "Signs of Affection",
+      "Sisterhood and Shenanigans",
+      "Smooth Operator - Ashley",
+      "Stud Search",
+      "The Candyman Can!",
+      "Voicemail Vengeance"
+    ],
+    "Brittney": [
+      "Breast Diversion",
+      "Brittney's Secret Someone",
+      "Love Conquers All",
+      "Shirt Delivery",
+      "The Crush",
+      "The Crush(es)",
+      "The New Dudette"
+    ],
+    "Derek": [
+      "Derek Smash!",
+      "Derek's New Job",
+      "Host Hijinks",
+      "Memory Lane",
+      "Mission Impawsible",
+      "Runner Runner",
+      "Talk to Derek",
+      "That Don't Impress Me Much",
+      "The New Dude",
+      "The Tyrannosaurus Wreck"
+    ],
+    "Doja Cat": [
+      "Doja's Dope-Ass Dinolicious Danceapalooza",
+      "Need to Know (How to Build a Stage)",
+      "Secure the Perimeter",
+      "The Camera Crew",
+      "White Rose's Protege"
+    ],
+    "Frank": [
+      "A \"Ball\" of Mystery",
+      "Budding Bromance",
+      "CockBall Fight",
+      "Frankly, I Don't Trust You",
+      "Look at This Photograph!",
+      "Nail the Coffin",
+      "The Penis Games"
+    ],
+    "Gisella": [
+      "2 Nut 2 Bust",
+      "Back to the Present",
+      "Busted Nut",
+      "Hootin' and Hollerin'",
+      "Lights, Camera, Action",
+      "Primo Promo",
+      "Smoke and Mirrors",
+      "The Climax",
+      "The Hills Have Stagehands"
+    ],
+    "Katherine": [
+      "Express Yourself",
+      "Game Jam",
+      "Katherine Needs a Drink",
+      "Katherine's \"D\"-Mands",
+      "Katherine's Dilemma"
+    ],
+    "Leah": [
+      "...Screw Like a Bee?",
+      "Broken Code",
+      "Causing a Ruckus",
+      "Guiding Light",
+      "Snake in the Grass"
+    ],
+    "Lety": [
+      "Disrupt the Disruptor",
+      "Hunt the Hunk",
+      "Just in the KICK of Time",
+      "Queen in the North",
+      "Try Anything Once",
+      "Vida La Lety"
+    ],
+    "Liz Katz": [
+      "Acts of Asspionage",
+      "Blackout",
+      "Drunk and Disorderly - Liz Katz",
+      "Getting Ahead",
+      "Invitation",
+      "Look What the Katz Dragged In",
+      "The Murder of Patrick",
+      "Too Hot To Handle",
+      "Will and Testament"
+    ],
+    "Madison": [
+      "Artsy Fartsy",
+      "Crack the Code",
+      "Deck the Balls",
+      "Drunk and Disorderly - Madison",
+      "High and Dry",
+      "Humiliate Ashley",
+      "Like a French Girl",
+      "Magnum Opus",
+      "Return Madison's Phone",
+      "Simon Says...",
+      "Smooth Operator - Madison",
+      "The Muse",
+      "Vickie Vixen"
+    ],
+    "Patrick": [
+      "Cloud of Mystery",
+      "Down the Mystery Hole",
+      "Fuck Tuesday",
+      "Genie in a Brahttle",
+      "Get the Man Some Drugs!",
+      "Nocturnal Temptations",
+      "Palectrick Feel",
+      "Patty's Striking Resemblance",
+      "Phonegate",
+      "Story Time with Patrick",
+      "Tabooty"
+    ],
+    "Rachael": [
+      "Benedict Brahrnold",
+      "Dare Interference",
+      "Hunt for Red's Thermos",
+      "Turnt Up"
+    ],
+    "Stephanie": [
+      "Apply Pressure",
+      "Dirtier Dancing",
+      "Drunk and Disorderly - Stephanie",
+      "Follow Your Calling",
+      "I'm Not Whipped, Bro!",
+      "Meltdown",
+      "Special Tutoring"
+    ],
+    "Vickie": [
+      "Good Guests Gone Bad",
+      "Masked Up",
+      "Training Day"
+    ]
   },
 
   "intimacy": {
