@@ -19,8 +19,16 @@
                     <Button x:Name="EnableItemButton" Content="Build 'Item ... setenabled true'"
                             HorizontalAlignment="Left" Click="EnableItemButton_Click" />
 
-                    <TextBlock Text="Character to spawn/enable (e.g. DLC characters not yet in your scene)"
+                    <TextBlock Text="Spawn/enable or disable a character (e.g. DLC characters not yet in your scene)"
                                Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" TextWrapping="Wrap" MaxWidth="260" />
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Initial state is set in the constructor, not here: setting IsChecked in XAML
+                             fires Checked during InitializeComponent, before EnableNpcButton exists. -->
+                        <RadioButton x:Name="NpcEnableRadio" Content="Enable" GroupName="NpcToggle"
+                                     Checked="NpcToggle_Changed" />
+                        <RadioButton x:Name="NpcDisableRadio" Content="Disable" GroupName="NpcToggle"
+                                     Checked="NpcToggle_Changed" />
+                    </StackPanel>
                     <ComboBox x:Name="EnableNpcCombo" IsEditable="True" Style="{StaticResource CharacterComboBoxStyle}" />
                     <Button x:Name="EnableNpcButton" Content="Build 'EnableNPC &lt;character&gt;'"
                             HorizontalAlignment="Left" Click="EnableNpcButton_Click" />
@@ -29,13 +37,20 @@
                 <StackPanel Grid.Column="1" Margin="0,0,16,0">
                     <TextBlock Text="Combat" Style="{StaticResource SectionHeaderStyle}" FontSize="13" />
 
-                    <TextBlock Text="Combat target character" Style="{StaticResource FieldLabelStyle}" />
-                    <ComboBox x:Name="CombatTargetCombo" IsEditable="True" Style="{StaticResource CharacterComboBoxStyle}" />
+                    <TextBlock Text="Subcommand" Style="{StaticResource FieldLabelStyle}" />
+                    <ComboBox x:Name="CombatSubcommandCombo" Style="{StaticResource CharacterComboBoxStyle}"
+                              SelectionChanged="CombatSubcommandCombo_SelectionChanged" />
 
-                    <TextBlock Text="Combat action" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                    <ComboBox x:Name="CombatActionCombo" IsEditable="True" Style="{StaticResource CharacterComboBoxStyle}" />
+                    <TextBlock Text="Character (or 'all')" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                    <ComboBox x:Name="CombatCharacterCombo" IsEditable="True" Style="{StaticResource CharacterComboBoxStyle}" />
 
-                    <Button x:Name="CombatButton" Content="Build 'Combat &lt;target&gt; &lt;action&gt;'"
+                    <TextBlock x:Name="CombatFightTargetLabel" Text="Fight target" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                    <ComboBox x:Name="CombatFightTargetCombo" IsEditable="True" Style="{StaticResource CharacterComboBoxStyle}" />
+
+                    <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="260"
+                               Text="Fight only works between enabled characters." />
+
+                    <Button x:Name="CombatButton" Content="Build combat command"
                             HorizontalAlignment="Left" Click="CombatButton_Click" />
                 </StackPanel>
 

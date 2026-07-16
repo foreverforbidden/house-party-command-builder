@@ -153,12 +153,32 @@ public static class LegacyCommandBuilder
         return $"Item {quoted} setenabled true";
     }
 
-    public static string Combat(string target, string action) =>
-        $"Combat {target} {action}";
+    /// <summary>passout | wakeup | cancel. <paramref name="character"/> may be "all".</summary>
+    public static string Combat(string character, string subcommand) =>
+        $"combat {character} {subcommand}";
 
-    public static string EnableNpc(string character) =>
-        $"EnableNPC {character}";
+    /// <summary>An empty <paramref name="target"/> is only valid for the "all" free-for-all form.</summary>
+    public static string CombatFight(string attacker, string? target) =>
+        string.IsNullOrWhiteSpace(target)
+            ? $"combat {attacker} fight"
+            : attacker.Equals(CombatAllTarget, StringComparison.OrdinalIgnoreCase)
+                ? $"combat all fight {target}"
+                : $"combat {attacker} {target} fight";
 
+    public static string SetNpcEnabled(string character, bool enabled) =>
+        $"{(enabled ? "EnableNPC" : "DisableNPC")} {character}";
+
+    public const string CombatAllTarget = "all";
     public const string HelpIntimacy = "help intimacy";
     public const string ExampleIntimacy = "example intimacy";
+}
+
+public static class QuestCommandBuilder
+{
+    /// <summary>start | fail | increment | complete. Quest names are quoted (they contain spaces/apostrophes).</summary>
+    public static string Manage(string subcommand, string questName) =>
+        $"quest {subcommand} \"{questName}\"";
+
+    public static string List(string character) =>
+        $"quest list {character}";
 }

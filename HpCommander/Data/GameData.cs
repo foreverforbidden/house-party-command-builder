@@ -74,6 +74,7 @@ public sealed class GameData
     [JsonPropertyName("runFunctions")] public List<string> RunFunctions { get; set; } = new();
     [JsonPropertyName("items")] public ItemCatalog Items { get; set; } = new();
     [JsonPropertyName("legacyCombatActions")] public List<string> LegacyCombatActions { get; set; } = new();
+    [JsonPropertyName("questsByCharacter")] public Dictionary<string, List<string>> QuestsByCharacter { get; set; } = new();
     [JsonPropertyName("intimacy")] public IntimacyCatalog Intimacy { get; set; } = new();
 
     private static readonly JsonSerializerOptions SerializerOptions = new()

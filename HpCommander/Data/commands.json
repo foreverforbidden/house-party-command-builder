@@ -115,7 +115,11 @@
     "locked": [ "Doja Cat's MP3 Player", "Vickie's Panties" ]
   },
 
-  "legacyCombatActions": [ "Passout" ],
+  "legacyCombatActions": [ "fight", "passout", "wakeup", "cancel" ],
+
+  "questsByCharacter": {
+    "Rachael": [ "Hunt for Red's Thermos" ]
+  },
 
   "intimacy": {
     "note": "Confirmed patterns from 'example intimacy' (in-game console tokens do NOT appear to be order-sensitive): two-char start = 'sexualact intimacy {char1} {char2} {event}'; single-char start = 'sexualact {char1} {event} intimacy'; end = 'sexualact intimacy {char1} end'; action speed = 'intimacy {char1} {increaseactionspeed|decreaseactionspeed}'. The 'reset' subcommand has NO confirmed example - its command below is a best-guess by analogy to action speed, unverified.",

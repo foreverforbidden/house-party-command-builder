@@ -11,7 +11,7 @@ public partial class MainWindow : Window
 {
     private static readonly string[] CategoryNames =
     {
-        "Change", "Outfit", "Inventory", "Values", "States", "Properties",
+        "Change", "Outfit", "Inventory", "Values", "Quest", "States", "Properties",
         "Run", "Addforce", "Misc", "Legacy (V1)", "Intimacy", "Size", "Time",
     };
 
@@ -83,6 +83,7 @@ public partial class MainWindow : Window
         "Outfit" => new OutfitView(_data, _chipPicker),
         "Inventory" => new InventoryView(_data),
         "Values" => new ValuesView(_data, _chipPicker),
+        "Quest" => new QuestView(_data),
         "States" => new StatesView(_data, _chipPicker),
         "Properties" => new PropertiesView(_data, _chipPicker),
         "Run" => new RunView(_data, _chipPicker),
