@@ -14,7 +14,7 @@ House Party's built-in developer console supports both a legacy space-separated 
 ## Requirements
 
 - Windows
-- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) to build (the app itself targets `net6.0-windows` with WPF)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) to build (the app itself targets `net10.0-windows` with WPF)
 
 ## Building
 
