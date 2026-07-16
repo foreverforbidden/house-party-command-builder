@@ -11,6 +11,14 @@ House Party's built-in developer console supports both a legacy space-separated 
 - All game-specific data (characters, items, traits, states, etc.) lives in an editable `Data/commands.json` — extend it as you discover more without recompiling
 - Clipboard copy with a short history of recently built commands
 
+## Console reference
+
+[`docs/console-reference.md`](docs/console-reference.md) documents the **v1.5.2** console —
+all 39 V1 commands with syntax confirmed against the game's own `help`/`example` output, plus
+corrections to the community guide (`Social` and `Door` are not obsolete; there is no
+`personality` command). [`docs/item-functions.json`](docs/item-functions.json) lists all 133
+items and their 176 available item functions.
+
 ## Requirements
 
 - Windows
