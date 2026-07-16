@@ -1,0 +1,1098 @@
+[
+  {
+    "name": "ACExplosion_A",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "ACExplosion_M",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "ACExplosion_MA",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 3,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "AmyPlayerBedroomSex",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "AshleyFinale",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "AshleyFinale_c",
+    "pack": "Base",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "AshleySupporter",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "AshleySupporter_c",
+    "pack": "Supporter",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "BabsSpecial",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "BabsSpecial_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DC_FenceEvent",
+    "pack": "Doja Cat",
+    "zone": "ArtRoomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DC_FenceEvent_Trailer",
+    "pack": "Doja Cat",
+    "zone": "ArtRoomZone",
+    "npcs": 3,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DerekFinale",
+    "pack": "Explicit Content",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DerekFinale_c",
+    "pack": "Base",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DerekSupporter",
+    "pack": "Explicit Content",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DerekSupporter_c",
+    "pack": "Supporter",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaFinale",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformanceCompleteFail",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 3,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformanceDroneFail",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformanceGood",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformanceHotTubFail",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformanceLive",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "DojaPerformancePatFail",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_AmyBrittney_AshleyRoom_Voyeur",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_AmyBrittney_AshleyRoom_Voyeur_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_AshleyFinale",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_AshleyFinale_c",
+    "pack": "Base",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_AshleySupporter",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_AshleySupporter_c",
+    "pack": "Supporter",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_BabsSpecial",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_BabsSpecial_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_BrittneyFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_BrittneyFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_DerekFinale",
+    "pack": "Explicit Content",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_DerekFinale_c",
+    "pack": "Base",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_DerekSupporter",
+    "pack": "Explicit Content",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_DerekSupporter_c",
+    "pack": "Supporter",
+    "zone": "LaundryRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_DojaFinale",
+    "pack": "Doja Cat",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_FrankFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_FrankFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_FridgeReveal",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_GisellaFinaleHero",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_GisellaFinaleHero_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_GisellaFinaleVillain",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_GisellaFinaleVillain_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_KatherineFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_KatherineFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizFinale",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizFinale_c",
+    "pack": "Liz Katz",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizVR",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizVR_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizWashroom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_LizWashroom_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ModernGisellaFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ModernGisellaFinale_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_MP3Reach",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_PatrickFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_PatrickFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_PlayerGarageSex",
+    "pack": "Explicit Content",
+    "zone": "GarageZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerGarageSex_c",
+    "pack": "Base",
+    "zone": "GarageZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerMasterBedroomSex1",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerMasterBedroomSex1_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerMasterBedroomSex_Straight",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerMasterBedroomSex_Straight 1",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_PlayerMasterBedroomSex_Straight_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Female"
+  },
+  {
+    "name": "F_RachaelFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_RachaelFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_TentacleMastSeat1",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_TentacleMastSeat2",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_TentacleMastSeat3",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_TentacleMastSeat4",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ThreesomeFFF_AshleyRoom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ThreesomeFFF_AshleyRoom_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ThreesomeFFM_MasterBedroom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_ThreesomeFFM_MasterBedroom_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_VickieFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "F_VickieFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "FinalConfrontation",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 5,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "FinalConfrontationNoMadison",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 4,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "FrankBlowjob",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "FrankBlowjob_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "FrankFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "FrankFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "FridgeReveal",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "GenericSpareRoom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleHero",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleHero_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleVickie",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleVickie_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "SpareRoomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleVillain",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "GisellaFinaleVillain_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "HotTubTimeTravel",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "Intro_F",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "Intro_M",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "KatherineFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "KatherineFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizChanging",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizChanging_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizEntry",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizFinale",
+    "pack": "Explicit Content",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizFinale_c",
+    "pack": "Liz Katz",
+    "zone": "SpareRoomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizTentacle",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizTentacle_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizVR",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizVR_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizWashroom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "LizWashroom_c",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ModernGisellaFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ModernGisellaFinale_c",
+    "pack": "Nocturnal Temptations",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "MP3Reach",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "Patjump",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "PlayerGarageSex",
+    "pack": "Explicit Content",
+    "zone": "GarageZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "PlayerGarageSex_c",
+    "pack": "Base",
+    "zone": "GarageZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "PlayerMasterBedroomSex1",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "PlayerMasterBedroomSex1_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "RachaelFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "RachaelFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "TentacleMastSeat1",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "TentacleMastSeat2",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "TentacleMastSeat3",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "TentacleMastSeat4",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 0,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "TentacleReveal",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_AshleyRoom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_AshleyRoom_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_EasterEgg",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_EasterEgg_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_Gazebo",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_Gazebo_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_MasterBedroom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeFFM_MasterBedroom_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeMMF_1_Gazebo",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeMMF_1_Gazebo_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeMMF_ArtRoom",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "ThreesomeMMF_ArtRoom_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "VentRelease",
+    "pack": "Liz Katz",
+    "zone": "MasterBedroomZone",
+    "npcs": 2,
+    "isSexScene": false,
+    "starGender": "Male"
+  },
+  {
+    "name": "VickieFinale",
+    "pack": "Explicit Content",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  },
+  {
+    "name": "VickieFinale_c",
+    "pack": "Base",
+    "zone": "MasterBedroomZone",
+    "npcs": 1,
+    "isSexScene": true,
+    "starGender": "Male"
+  }
+]

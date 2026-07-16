@@ -16,8 +16,13 @@ House Party's built-in developer console supports both a legacy space-separated 
 [`docs/console-reference.md`](docs/console-reference.md) documents the **v1.5.2** console —
 all 39 V1 commands with syntax confirmed against the game's own `help`/`example` output, plus
 corrections to the community guide (`Social` and `Door` are not obsolete; there is no
-`personality` command). [`docs/item-functions.json`](docs/item-functions.json) lists all 133
-items and their 176 available item functions.
+`personality` command).
+
+Reference data ripped from the game's own files:
+
+- [`docs/clothing-ids.json`](docs/clothing-ids.json) — 2,053 clothing IDs across 9 content packs
+- [`docs/cutscenes.json`](docs/cutscenes.json) — 137 cutscenes with zone and cast info
+- [`docs/item-functions.json`](docs/item-functions.json) — 133 items, 176 item functions
 
 ## Requirements
 

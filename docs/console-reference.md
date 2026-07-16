@@ -221,6 +221,30 @@ infodump
 Dumps every event trigger for every character, with its trigger type and enabled state.
 Large output — read it from the debug log rather than the console.
 
+## Ripped reference data
+
+`StreamingAssets` ships its game data as **plain UTF-16LE JSON** — no asset ripping needed.
+Data lives per content pack (`Base` plus one folder per DLC), under `<pack>/Data/`.
+
+| File | Source | Contents |
+|---|---|---|
+| [`clothing-ids.json`](clothing-ids.json) | `*/Data/ClothingData.json` | 2,053 clothing IDs across 9 packs, with friendly name + type |
+| [`cutscenes.json`](cutscenes.json) | `*/Data/CutSceneData.json` | 137 cutscenes across 6 packs, with zone / NPC count / sex-scene flag |
+| [`item-functions.json`](item-functions.json) | `item itemfunction list` | 133 items, 176 distinct functions |
+
+Outfits (`*/Data/OutfitData.json`) carry an explicit `WearableBy`, so they're mapped per
+character and shipped in the app's own `Data/commands.json` — 253 entries across 21
+characters.
+
+**Clothing is not reliably mappable to characters from static data.** `SelectedCharacter` is
+`Any` for 395/400 base entries, and only ~30% of IDs carry a character-name prefix (and even
+those lie — `arin_hair_amy` is Arin's hair *for Amy*). The authoritative per-character list
+comes from `<Character>.change.list` in-game.
+
+Quest names come from the Custom Story Creator files at
+`StreamingAssets/Mods/Stories/<Story>/*.character` (also UTF-16LE JSON), under each
+character's `Quests` array — `Name` is what the `quest` command takes.
+
 ## Corrections
 
 The pinned Steam guide ("House Party Version 1.4.2.13172 V2 Console Commands Documentation")
