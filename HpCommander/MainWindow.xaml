@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="HP Commander - House Party V2 Console Command Builder"
         Width="1150" Height="780" MinWidth="900" MinHeight="650"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Background="{StaticResource ContentBackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -14,11 +15,21 @@
             <RowDefinition Height="180" />
         </Grid.RowDefinitions>
 
-        <!-- Sidebar nav -->
-        <ListBox x:Name="CategoryList" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                 Style="{StaticResource SidebarListBoxStyle}"
-                 ItemContainerStyle="{StaticResource SidebarListBoxItemStyle}"
-                 SelectionChanged="CategoryList_SelectionChanged" />
+        <!-- Sidebar nav: search box over grouped category list -->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="{StaticResource SidebarBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="SearchBox" Grid.Row="0" Margin="10,12,10,2"
+                     Style="{StaticResource SidebarSearchBoxStyle}"
+                     TextChanged="SearchBox_TextChanged"
+                     PreviewKeyDown="SearchBox_PreviewKeyDown" />
+            <ListBox x:Name="CategoryList" Grid.Row="1"
+                     Style="{StaticResource SidebarListBoxStyle}"
+                     ItemContainerStyle="{StaticResource SidebarNavItemStyle}"
+                     SelectionChanged="CategoryList_SelectionChanged" />
+        </Grid>
 
         <!-- Content area: chip picker row + dynamic content host -->
         <Grid Grid.Column="1" Grid.Row="0" Margin="16,16,16,0">
@@ -31,7 +42,7 @@
                 <ContentControl x:Name="ChipPickerHost" />
             </Border>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="ContentScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto">
                 <ContentControl x:Name="ContentHost" />
             </ScrollViewer>
         </Grid>

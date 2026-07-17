@@ -5,10 +5,8 @@
         <StackPanel>
             <TextBlock Text="Outfit" Style="{StaticResource SectionHeaderStyle}" />
 
-            <TextBlock Text="Outfit ID (see Change tab's change.list command for options)" Style="{StaticResource FieldLabelStyle}" />
+            <TextBlock Text="Outfit ID (list follows the selected character)" Style="{StaticResource FieldLabelStyle}" />
             <ComboBox x:Name="OutfitCombo" IsEditable="True" Width="320" HorizontalAlignment="Left" />
-            <Button x:Name="RefreshButton" Content="Refresh outfits for selected character"
-                    HorizontalAlignment="Left" Click="RefreshButton_Click" />
 
             <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="360"
                        Text="Note: outfit has no false/undo form - to remove pieces afterward use the Change tab per-item." />

@@ -9,17 +9,36 @@ namespace HpCommander;
 
 public partial class MainWindow : Window
 {
-    private static readonly string[] CategoryNames =
+    private static readonly NavEntry[] Nav =
     {
-        "Change", "Outfit", "Inventory", "Values", "Social", "Quest", "Door",
-        "States", "Properties", "Run", "Addforce", "Misc", "Legacy (V1)",
-        "Intimacy", "Size", "Time",
+        NavEntry.Header("APPEARANCE"),
+        NavEntry.Item("Change", "clothing", "clothes", "top", "bottom", "underwear", "undershirt", "naked", "undress", "hair", "accessories", "glasses", "shoes", "strapon"),
+        NavEntry.Item("Outfit", "clothes", "dress", "costume", "default"),
+        NavEntry.Item("Size", "scale", "body", "head", "chest", "grow", "shrink"),
+        NavEntry.Header("CHARACTER"),
+        NavEntry.Item("Values", "trait", "relationship", "friendship", "romance", "exhibitionism", "jealous", "list", "filter"),
+        NavEntry.Item("Social", "drunk", "mood", "friendship", "romance", "sendtext", "talkto"),
+        NavEntry.Item("States", "sweating", "dance", "fire", "erect"),
+        NavEntry.Item("Properties", "bloody"),
+        NavEntry.Item("Intimacy", "sex", "sexualact", "masturbation", "act", "speed"),
+        NavEntry.Header("ACTIONS"),
+        NavEntry.Item("Addforce", "push", "force", "physics", "launch"),
+        NavEntry.Item("Run", "function", "effect", "animation"),
+        NavEntry.Header("WORLD"),
+        NavEntry.Item("Inventory", "item", "give", "spawn", "beer", "nattylite", "condom", "key"),
+        NavEntry.Item("Door", "lock", "unlock", "open", "close"),
+        NavEntry.Item("Quest", "story", "start", "complete", "increment", "fail", "mission"),
+        NavEntry.Item("Time", "timescale", "slow", "fast", "speed"),
+        NavEntry.Header("CONSOLE"),
+        NavEntry.Item("Misc", "achievements", "unstuck", "help", "clear"),
+        NavEntry.Item("Legacy (V1)", "enablenpc", "disablenpc", "npc", "combat", "fight", "passout", "wakeup", "setenabled", "enable", "disable"),
     };
 
     private readonly GameData _data;
     private readonly CharacterChipPicker _chipPicker;
     private readonly Dictionary<string, ICommandCategoryView> _viewCache = new();
     private ICommandCategoryView? _activeView;
+    private string? _activeName;
 
     public MainWindow()
     {
@@ -31,12 +50,15 @@ public partial class MainWindow : Window
         _chipPicker.SelectionChanged += (_, _) =>
         {
             if (_activeView?.NeedsGlobalTargets == true)
+            {
+                _activeView.OnTargetsChanged();
                 Recompute();
+            }
         };
         ChipPickerHost.Content = _chipPicker;
 
-        CategoryList.ItemsSource = CategoryNames;
-        CategoryList.SelectedIndex = 0;
+        CategoryList.ItemsSource = Nav;
+        CategoryList.SelectedItem = Nav.First(n => !n.IsHeader);
     }
 
     private static GameData LoadGameData()
@@ -56,12 +78,15 @@ public partial class MainWindow : Window
 
     private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (CategoryList.SelectedItem is string name)
-            ShowCategory(name);
+        if (CategoryList.SelectedItem is NavEntry { IsHeader: false } entry)
+            ShowCategory(entry.Name);
     }
 
     private void ShowCategory(string name)
     {
+        if (_activeName == name)
+            return;
+
         if (_activeView != null)
             _activeView.CommandChanged -= ActiveView_CommandChanged;
 
@@ -71,11 +96,92 @@ public partial class MainWindow : Window
             _viewCache[name] = view;
         }
 
+        _activeName = name;
         _activeView = view;
         _activeView.CommandChanged += ActiveView_CommandChanged;
+        // Per-character lists follow the current target selection, so a view opened
+        // after the selection changed still reflects it without a manual refresh.
+        _activeView.OnTargetsChanged();
         ContentHost.Content = view;
+        ContentScroll.ScrollToTop();
         TargetsCard.Visibility = view.NeedsGlobalTargets ? Visibility.Visible : Visibility.Collapsed;
         Recompute();
+    }
+
+    // ---------------- Sidebar search ----------------
+
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var query = SearchBox.Text.Trim();
+        List<NavEntry> visible;
+
+        if (query.Length == 0)
+        {
+            visible = Nav.ToList();
+        }
+        else
+        {
+            visible = new List<NavEntry>();
+            NavEntry? pendingHeader = null;
+            foreach (var entry in Nav)
+            {
+                if (entry.IsHeader)
+                {
+                    pendingHeader = entry;
+                }
+                else if (entry.Matches(query))
+                {
+                    if (pendingHeader != null)
+                    {
+                        visible.Add(pendingHeader);
+                        pendingHeader = null;
+                    }
+                    visible.Add(entry);
+                }
+            }
+        }
+
+        var selected = CategoryList.SelectedItem as NavEntry;
+        CategoryList.ItemsSource = visible;
+        if (selected != null && visible.Contains(selected))
+            CategoryList.SelectedItem = selected;
+    }
+
+    private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            var target = (CategoryList.ItemsSource as IEnumerable<NavEntry>)?.FirstOrDefault(n => !n.IsHeader);
+            if (target != null)
+            {
+                SearchBox.Clear();
+                CategoryList.SelectedItem = target;
+                CategoryList.ScrollIntoView(target);
+                CategoryList.UpdateLayout();
+                (CategoryList.ItemContainerGenerator.ContainerFromItem(target) as ListBoxItem)?.Focus();
+            }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            SearchBox.Clear();
+            e.Handled = true;
+        }
+    }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            SearchBox.Focus();
+            SearchBox.SelectAll();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            CopyToClipboard(OutputBox.Text);
+            e.Handled = true;
+        }
     }
 
     private ICommandCategoryView CreateView(string name) => name switch

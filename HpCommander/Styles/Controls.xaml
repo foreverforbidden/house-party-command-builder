@@ -146,7 +146,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Border x:Name="AccentBar" Grid.Column="0" Background="{StaticResource AccentBrush}" CornerRadius="2" Opacity="0" Margin="0,4" />
-                            <ContentPresenter Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center" />
+                            <ContentPresenter Grid.Column="1" Margin="10,7,10,7" VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -156,6 +156,57 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource SidebarSelectedBackgroundBrush}" />
                             <Setter TargetName="AccentBar" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SidebarNavItemStyle" TargetType="ListBoxItem" BasedOn="{StaticResource SidebarListBoxItemStyle}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsHeader}" Value="True">
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <TextBlock Text="{Binding Name}" FontSize="10.5" FontWeight="SemiBold"
+                                       Foreground="#8A8F9A" Margin="14,12,10,4" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SidebarSearchBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SidebarSelectedBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource SidebarForegroundBrush}" />
+        <Setter Property="CaretBrush" Value="{StaticResource SidebarForegroundBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="FontSize" Value="12.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="8,0">
+                        <Grid VerticalAlignment="Center">
+                            <TextBlock x:Name="Hint" Text="Search   (Ctrl+K)" Foreground="#7A8090"
+                                       Visibility="Collapsed" />
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Hint" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

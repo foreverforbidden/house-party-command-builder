@@ -27,7 +27,7 @@ public partial class ChangeView : UserControl, ICommandCategoryView
         RefreshItems();
     }
 
-    private void RefreshButton_Click(object sender, RoutedEventArgs e) => RefreshItems();
+    public void OnTargetsChanged() => RefreshItems();
 
     private void RefreshItems()
     {

@@ -23,15 +23,18 @@ public partial class OutfitView : UserControl, ICommandCategoryView
         _targets = targets;
 
         OutfitCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
+        OnTargetsChanged();
     }
 
-    private void RefreshButton_Click(object sender, RoutedEventArgs e)
+    public void OnTargetsChanged()
     {
+        var current = OutfitCombo.Text;
         OutfitCombo.Items.Clear();
         var character = _targets.GetSingleSelectedCharacter();
         if (character != null && _data.OutfitsByCharacter.TryGetValue(character, out var outfits))
             foreach (var o in outfits)
                 OutfitCombo.Items.Add(o);
+        OutfitCombo.Text = current;
     }
 
     private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
