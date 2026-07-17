@@ -28,11 +28,13 @@ public partial class MainWindow : Window
         NavEntry.Header("WORLD"),
         NavEntry.Item("Inventory", "item", "give", "spawn", "beer", "nattylite", "condom", "key"),
         NavEntry.Item("Door", "lock", "unlock", "open", "close"),
+        NavEntry.Item("Cutscene", "scene", "playscene", "sex", "play", "random", "endscene"),
         NavEntry.Item("Quest", "story", "start", "complete", "increment", "fail", "mission"),
         NavEntry.Item("Time", "timescale", "slow", "fast", "speed"),
         NavEntry.Header("CONSOLE"),
         NavEntry.Item("Misc", "achievements", "unstuck", "help", "clear"),
         NavEntry.Item("Legacy (V1)", "enablenpc", "disablenpc", "npc", "combat", "fight", "passout", "wakeup", "setenabled", "enable", "disable"),
+        NavEntry.Item("Info", "about", "readme", "issue", "report", "bug", "version"),
     };
 
     private readonly GameData _data;
@@ -194,6 +196,8 @@ public partial class MainWindow : Window
         "Social" => new SocialView(_data),
         "Quest" => new QuestView(_data),
         "Door" => new DoorView(_data),
+        "Cutscene" => new CutsceneView(_data),
+        "Info" => new InfoView(),
         "States" => new StatesView(_data, _chipPicker),
         "Properties" => new PropertiesView(_data, _chipPicker),
         "Run" => new RunView(_data, _chipPicker),

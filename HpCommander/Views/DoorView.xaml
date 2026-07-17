@@ -13,7 +13,7 @@
                       SelectionChanged="Selector_Changed" />
 
             <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,8,0,0"
-                       Text="Names are matched space-insensitively, so 'masterbedroomdoor' and 'Master Bedroom Door' both work; the quoting is handled for you. The list is a starting point - type any door name the game knows." />
+                       Text="Picking a door from the list emits the game's normalised form (e.g. 'frontdoor'), which is the form the console proves works. Typing a name with spaces quotes it as a fallback." />
             <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440"
                        Text="The community guide says door locking moved to values.spareroomdoor.set(IsLocked)=1. The game documents this command directly, so both appear to work." />
         </StackPanel>

@@ -12,11 +12,18 @@ public partial class DoorView : UserControl, ICommandCategoryView
 
     public bool NeedsGlobalTargets => false;
 
+    // Maps a door's display text (what's shown/typed) to its console form.
+    private readonly Dictionary<string, string> _consoleByDisplay = new(StringComparer.OrdinalIgnoreCase);
+
     public DoorView(GameData data)
     {
         InitializeComponent();
 
-        foreach (var d in data.Doors) DoorCombo.Items.Add(d);
+        foreach (var d in data.Doors)
+        {
+            DoorCombo.Items.Add(d.Display);
+            _consoleByDisplay[d.Display] = d.Console;
+        }
         foreach (var a in data.DoorActions) ActionCombo.Items.Add(a);
         if (ActionCombo.Items.Count > 0) ActionCombo.SelectedIndex = 0;
 
@@ -29,11 +36,13 @@ public partial class DoorView : UserControl, ICommandCategoryView
 
     public string BuildCommand()
     {
-        var door = DoorCombo.Text.Trim();
-        if (string.IsNullOrWhiteSpace(door))
+        var typed = DoorCombo.Text.Trim();
+        if (string.IsNullOrWhiteSpace(typed))
             return "(pick or type a door)";
         if (ActionCombo.SelectedItem is not string action)
             return "(pick an action)";
+        // Prefer the proven console form for a known door; otherwise pass the typed text through.
+        var door = _consoleByDisplay.TryGetValue(typed, out var console) ? console : typed;
         return DoorCommandBuilder.Build(door, action);
     }
 }

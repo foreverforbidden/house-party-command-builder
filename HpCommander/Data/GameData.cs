@@ -50,6 +50,26 @@ public sealed class IntimacyCatalog
     [JsonPropertyName("events")] public List<IntimacyEntry> Events { get; set; } = new();
 }
 
+public sealed class GameDoor
+{
+    [JsonPropertyName("display")] public string Display { get; set; } = "";
+
+    /// <summary>The console-normalised form, e.g. "frontdoor", which the game accepts unquoted.</summary>
+    [JsonPropertyName("console")] public string Console { get; set; } = "";
+
+    public override string ToString() => Display.Length > 0 ? Display : Console;
+}
+
+public sealed class Cutscene
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = "";
+    [JsonPropertyName("npcs")] public int Npcs { get; set; }
+    [JsonPropertyName("zone")] public string Zone { get; set; } = "";
+
+    public override string ToString() =>
+        Zone.Length > 0 ? $"{Name}  ({Npcs} NPC, {Zone})" : $"{Name}  ({Npcs} NPC)";
+}
+
 public sealed class GameLocation
 {
     /// <summary>The form the console accepts, e.g. "hottubseat1".</summary>
@@ -98,7 +118,8 @@ public sealed class GameData
     [JsonPropertyName("socialModifiers")] public List<string> SocialModifiers { get; set; } = new();
     [JsonPropertyName("socialActions")] public List<SocialAction> SocialActions { get; set; } = new();
     [JsonPropertyName("doorActions")] public List<string> DoorActions { get; set; } = new();
-    [JsonPropertyName("doors")] public List<string> Doors { get; set; } = new();
+    [JsonPropertyName("doors")] public List<GameDoor> Doors { get; set; } = new();
+    [JsonPropertyName("cutscenes")] public List<Cutscene> Cutscenes { get; set; } = new();
     /// <summary>Quests are story-specific: story -> character -> quest names.</summary>
     [JsonPropertyName("questsByStory")] public Dictionary<string, Dictionary<string, List<string>>> QuestsByStory { get; set; } = new();
 

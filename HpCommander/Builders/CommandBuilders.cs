@@ -247,13 +247,36 @@ public static class SocialCommandBuilder
 
 public static class DoorCommandBuilder
 {
-    /// <summary>open | close | lock | unlock. Door names are matched space-insensitively,
-    /// but must be quoted when they contain spaces (`door close "Slider Door"`).</summary>
+    /// <summary>open | close | lock | unlock. The door name is emitted in the console-normalised
+    /// form (`frontdoor`) that the game accepts unquoted - the proven form from `example door`
+    /// (`frontdoor door open`). Free-typed names with spaces are quoted as a fallback.</summary>
     public static string Build(string door, string action)
     {
-        var quoted = door.Contains(' ') ? $"\"{door}\"" : door;
-        return $"door {quoted} {action}";
+        var name = door.Contains(' ') ? $"\"{door}\"" : door;
+        return $"door {name} {action}";
     }
+}
+
+public static class CutsceneCommandBuilder
+{
+    /// <summary>Mirrors `cutscene playscene PlayerMasterBedroomSex1 player amy`. The cast is the
+    /// star followed by each NPC; the scene needs the right NPC count to play.</summary>
+    public static string PlayScene(string scene, string star, IEnumerable<string> npcs)
+    {
+        var cast = new List<string> { star };
+        cast.AddRange(npcs.Where(n => !string.IsNullOrWhiteSpace(n)));
+        return $"cutscene playscene {scene} {string.Join(" ", cast)}";
+    }
+
+    /// <summary>Mirrors `cutscene endscene PlayerMasterBedroomSex1`.</summary>
+    public static string EndScene(string scene) => $"cutscene endscene {scene}";
+
+    /// <summary>Mirrors `cutscene EndAnySceneWithPlayer`.</summary>
+    public const string EndAnyWithPlayer = "cutscene EndAnySceneWithPlayer";
+
+    /// <summary>Mirrors `playrandomscenefromlocation masterbedroomzone cutscene player rachael`.</summary>
+    public static string RandomFromLocation(string zone, string other) =>
+        $"playrandomscenefromlocation {zone} cutscene player {other}";
 }
 
 public static class QuestCommandBuilder
