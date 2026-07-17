@@ -142,7 +142,7 @@ public partial class MovementView : UserControl, ICommandCategoryView
     {
         if (RoamCharCombo.SelectedItem is not string c)
             return "(pick a character)";
-        return RoamActionCombo.SelectedItem as string switch
+        return (RoamActionCombo.SelectedItem as string) switch
         {
             "list" => MovementCommandBuilder.RoamingList(c),
             "allow" => MovementCommandBuilder.RoamingAllow(c, RoamAllowTrue.IsChecked == true),
