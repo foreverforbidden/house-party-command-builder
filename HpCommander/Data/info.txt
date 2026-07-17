@@ -7,6 +7,3 @@ but the console is fiddly and some commands may not behave exactly as expected.
 If something is wrong or missing, please report it — bug reports and corrections
 are genuinely helpful and shape what gets fixed next. Use the "Report an issue"
 button below (or the Issues tab on the GitHub repo).
-
-You can edit this message yourself: it lives in Data/info.txt next to the app.
-Type whatever you like here and press Save.

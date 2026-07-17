@@ -20,37 +20,15 @@ public partial class InfoView : UserControl, ICommandCategoryView
     public InfoView()
     {
         InitializeComponent();
-        LoadInfo();
-    }
-
-    private void LoadInfo()
-    {
         try
         {
-            InfoBox.Text = File.Exists(InfoPath) ? File.ReadAllText(InfoPath) : "";
-            StatusText.Text = "";
+            InfoText.Text = File.Exists(InfoPath) ? File.ReadAllText(InfoPath) : "";
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Could not load: {ex.Message}";
+            InfoText.Text = $"(could not load Data/info.txt: {ex.Message})";
         }
     }
-
-    private void SaveButton_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(InfoPath)!);
-            File.WriteAllText(InfoPath, InfoBox.Text);
-            StatusText.Text = $"Saved to Data/info.txt at {DateTime.Now:HH:mm:ss}";
-        }
-        catch (Exception ex)
-        {
-            StatusText.Text = $"Could not save: {ex.Message}";
-        }
-    }
-
-    private void ReloadButton_Click(object sender, RoutedEventArgs e) => LoadInfo();
 
     private void IssueButton_Click(object sender, RoutedEventArgs e)
     {
@@ -58,9 +36,9 @@ public partial class InfoView : UserControl, ICommandCategoryView
         {
             Process.Start(new ProcessStartInfo(IssuesUrl) { UseShellExecute = true });
         }
-        catch (Exception ex)
+        catch
         {
-            StatusText.Text = $"Could not open browser: {ex.Message}";
+            // Opening the browser is best-effort; nothing to recover if it fails.
         }
     }
 

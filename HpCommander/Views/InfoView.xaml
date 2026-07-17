@@ -5,28 +5,20 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="Info" Style="{StaticResource SectionHeaderStyle}" />
-            <TextBlock Grid.Row="1" Style="{StaticResource NoteTextStyle}" MaxWidth="560"
-                       Text="This message is shown to whoever opens the app. Edit it freely and press Save - it's stored in Data/info.txt, which ships next to the build." />
 
-            <TextBox x:Name="InfoBox" Grid.Row="2" Margin="0,4,0,10"
-                     AcceptsReturn="True" TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto" MinHeight="220"
-                     FontFamily="Segoe UI" FontSize="13" Padding="8" />
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,4,0,10">
+                <TextBlock x:Name="InfoText" TextWrapping="Wrap" FontSize="13.5"
+                           Foreground="{StaticResource TextPrimaryBrush}" LineHeight="20" />
+            </ScrollViewer>
 
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button x:Name="SaveButton" Content="Save" Style="{StaticResource PrimaryButtonStyle}"
-                        Click="SaveButton_Click" />
-                <Button x:Name="ReloadButton" Content="Reload" Click="ReloadButton_Click" />
-                <Button x:Name="IssueButton" Content="Report an issue" Click="IssueButton_Click" />
-                <TextBlock x:Name="StatusText" VerticalAlignment="Center" Margin="10,0,0,0"
-                           Foreground="{StaticResource TextSecondaryBrush}" />
-            </StackPanel>
+            <Button x:Name="IssueButton" Grid.Row="2" Content="Report an issue"
+                    Style="{StaticResource PrimaryButtonStyle}" HorizontalAlignment="Left"
+                    Click="IssueButton_Click" />
         </Grid>
     </Border>
 </UserControl>
