@@ -173,6 +173,57 @@ public static class LegacyCommandBuilder
     public const string ExampleIntimacy = "example intimacy";
 }
 
+public static class MovementCommandBuilder
+{
+    public const string AllTarget = "all";
+
+    /// <summary>Instant teleport. Destination is another character, a location name, or "x y z"
+    /// coordinates. Mirrors `warpto vickie player`, `warpto frank bedleft`, `warpto player 11 0 12`.</summary>
+    public static string WarpTo(string character, string destination) =>
+        $"warpto {character} {destination}";
+
+    /// <summary>Mirrors `warpto player 11 0 12` (also the `0 0 0` stuck-fix).</summary>
+    public static string WarpToCoords(string character, int x, int y, int z) =>
+        $"warpto {character} {x} {y} {z}";
+
+    /// <summary>Pathfind to a destination. Mirrors `walkto brittney hottubseat1`,
+    /// `walkto all outside cancel`.</summary>
+    public static string WalkTo(string character, string destination, bool cancel) =>
+        cancel ? $"walkto {character} {destination} cancel" : $"walkto {character} {destination}";
+
+    /// <summary>Mirrors `warpovertime vickie player 3`.</summary>
+    public static string WarpOverTime(string character, string destination, double seconds) =>
+        $"warpovertime {character} {destination} {seconds.ToString("0.###")}";
+
+    /// <summary>Mirrors `turn derek around`.</summary>
+    public static string TurnAround(string character) =>
+        $"turn {character} around";
+
+    /// <summary>Mirrors `turn rachael toward player`, `turn katherine toward toaster true`.</summary>
+    public static string TurnToward(string character, string target, bool instant) =>
+        instant ? $"turn {character} toward {target} true" : $"turn {character} toward {target}";
+
+    /// <summary>Mirrors `roaming derek list`.</summary>
+    public static string RoamingList(string character) =>
+        $"roaming {character} list";
+
+    /// <summary>Mirrors `roaming all allow false`. <paramref name="character"/> may be "all".</summary>
+    public static string RoamingAllow(string character, bool allow) =>
+        $"roaming {character} allow {(allow ? "true" : "false")}";
+
+    /// <summary>Mirrors `roaming derek allowlocation hottub`.</summary>
+    public static string RoamingAllowLocation(string character, string destination) =>
+        $"roaming {character} allowlocation {destination}";
+
+    /// <summary>Mirrors `derek prohibitlocation roaming stephanie` (verb-first form).</summary>
+    public static string RoamingProhibitLocation(string character, string destination) =>
+        $"roaming {character} prohibitlocation {destination}";
+
+    /// <summary>Mirrors `vickie roaming clearlists` (verb-first form).</summary>
+    public static string RoamingClearLists(string character) =>
+        $"roaming {character} clearlists";
+}
+
 public static class SocialCommandBuilder
 {
     public const string AllTarget = "all";
