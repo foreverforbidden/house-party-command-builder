@@ -1,0 +1,548 @@
+[
+  {
+    "name": "Social Butterfly",
+    "steamName": "SocialButterfly",
+    "description": "Meet all of the characters at the party in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Ashley",
+    "steamName": "Ashley",
+    "description": "Complete Ashley's story by helping her prank her sister!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Drunk and Disorderly: Ashley",
+    "steamName": "DnD_Ashley",
+    "description": "Get Ashley drunk and on a path of destruction!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Smooth Operator: Ashley",
+    "steamName": "SO_Ashley",
+    "description": "Smooth talk your way into Ashley's affection without completing her main storyline.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Rachael",
+    "steamName": "Rachael",
+    "description": "Complete Rachael's storyline and win her affection.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Katherine",
+    "steamName": "Katherine",
+    "description": "Complete Katherine's main storyline and help her get back at her boyfriend.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Newcomer: Vickie",
+    "steamName": "NC_Vickie",
+    "description": "Get Vickie Vixen to show up at the party.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Vickie",
+    "steamName": "Vickie",
+    "description": "Complete Vickie's main storyline for a \"hot\" ending.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Amy: Scavenger Hunt",
+    "steamName": "Amy_Scav",
+    "description": "Complete Amy's Scavenger Hunt path.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Amy",
+    "steamName": "Amy",
+    "description": "Complete Amy's main storyline and win her affection.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Duck n' Weave",
+    "steamName": "DuckNWeave",
+    "description": "Avoid Frank AND Derek's fists at the same time for at least 60 seconds. (No locking doors!)",
+    "story": "Original Story"
+  },
+  {
+    "name": "First Impressions",
+    "steamName": "FirstImpressions",
+    "description": "Strip at the door and make your first impression to every party goer in the nude. (Vickie Not Needed)",
+    "story": "Original Story"
+  },
+  {
+    "name": "Ice Bath",
+    "steamName": "IceBath",
+    "description": "Get on the \"shit list\" of every guest of the opposite sex at the party. (Guests you have to invite not included.)",
+    "story": "Original Story"
+  },
+  {
+    "name": "Inspector",
+    "steamName": "Inspector",
+    "description": "Inspect at least 30 items in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Smooth Operator: Madison",
+    "steamName": "SO_Madison",
+    "description": "Sweet talk your way into unlocking the special social ability of the vaunted dumpster raccoon.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Drunk and Disorderly: Madison",
+    "steamName": "DnD_Madison",
+    "description": "Give Madison a few and see what happens when she takes on the persona of her favorite reality TV star.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Drunk and Disorderly: Stephanie",
+    "steamName": "DnD_Stephanie",
+    "description": "Give Steph some liquid courage and find out what she REALLY thinks of her boss!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Stephanie",
+    "steamName": "Stephanie",
+    "description": "Say no to milk, drink school, and help Stephanie discover her true calling in life.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Muse: Madison",
+    "steamName": "TM_Madison",
+    "description": "Show off your artistic skills and ruin a friendship to get a reward from Madison!",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Muse: Derek",
+    "steamName": "TM_Derek",
+    "description": "Take the high road by not sleeping with Madison and experience the wonders of friendship with Derek.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Rule 34",
+    "steamName": "Penguinlover",
+    "description": "Yeah I mean...you can, but why would you?",
+    "story": "Original Story"
+  },
+  {
+    "name": "Howz It Goin Dood",
+    "steamName": "TM_Frank",
+    "description": "Experience a magical, non-violent, artistic moment with Frank.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Relentless",
+    "steamName": "Pat_Relentless",
+    "description": "Outside of \"Derek Smash!\", get Patrick beaten up 5 times in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Do You Smell Blood?",
+    "steamName": "SmellBlood",
+    "description": "Give Frank a concussion, then take advantage of the situation and free the booze!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Caught in the Act",
+    "steamName": "CaughtInAct",
+    "description": "Get caught by another character in the middle of some sexy time!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Party Pooper",
+    "steamName": "PoopEnding",
+    "description": "Experience a better life through chemistry, and shed six pounds at the same time! Thanks Laxapas!",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Brahdyssey",
+    "steamName": "Brahdyssey",
+    "description": "Politely listen to all of Patrick's epic backstory.",
+    "story": "Original Story"
+  },
+  {
+    "name": "I'll Be Back",
+    "steamName": "BeBack",
+    "description": "Unlock CompuBrah, learn about Patrick's businesses, and maybe, just maybe stop a Skynet situation from playing out.",
+    "story": "Original Story"
+  },
+  {
+    "name": "If at First You Don't Succeed...",
+    "steamName": "Succeed",
+    "description": "Throw a dildo at it. Obviously. Do we have to tell you everything?",
+    "story": "Original Story"
+  },
+  {
+    "name": "Benedict Brahrnold",
+    "steamName": "BBrahrnold",
+    "description": "Give Patrick Rachael's death mix and do what it takes to shut down his site!",
+    "story": "Original Story"
+  },
+  {
+    "name": "A Striking Resemblance",
+    "steamName": "StrikingResemblance",
+    "description": "Get to the bottom of Patrick and Rachael's drama, and help Pat win her over!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Notice Me, Sensei",
+    "steamName": "NoticeMe",
+    "description": "Provide a little inspiration, a bit of fitness guidance, and a nutritional treat to increase Leah's power level.",
+    "story": "Original Story"
+  },
+  {
+    "name": "La Coochadora",
+    "steamName": "cooch",
+    "description": "Stoke the fires of rivalry within Brittney by giving her an extremely fishy gift.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Derezzed",
+    "steamName": "derezzed",
+    "description": "They're smarter than they look! Experience the Easter Egg ending of Lety's content.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Te Amo Lety",
+    "steamName": "tal",
+    "description": "Complete the Opportunity \"Vida La Lety\".",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Elder Brahs",
+    "steamName": "elderbrahs",
+    "description": "Reverse pickpocket an item into Patrick's pants during \"Disrupt the Disruptor\".",
+    "story": "Original Story"
+  },
+  {
+    "name": "Simple Geometry",
+    "steamName": "geometry",
+    "description": "Successfully interrupt Leah and Lety's conversation with a popper, from very long range.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Harder They Fall...Dood",
+    "steamName": "HarderDood",
+    "description": "Defeat Frank 1-on-1 without any sparring or combat training.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Bride",
+    "steamName": "Bride",
+    "description": "Help Leah bring the serpent to a swift end, and reap the rewards...",
+    "story": "Original Story"
+  },
+  {
+    "name": "Ronin",
+    "steamName": "Ronin",
+    "description": "Convince Leah to abandon her lawful ways...and survive!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Sucker Punch",
+    "steamName": "SuckerPunch",
+    "description": "Punch Frank, Derek, and Patrick when they're not looking and not in combat, all in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Money Shot",
+    "steamName": "MoneyShot",
+    "description": "Peg Frank with a sex toy while he is dancing on the roof. Not peg...hit. You get it.",
+    "story": "Original Story"
+  },
+  {
+    "name": "I Know Grump-Fu",
+    "steamName": "GrumpFu",
+    "description": "Help the Game Grumps leave the party using the magic of virtual reality!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Do Not Burn",
+    "steamName": "DoNotBurn",
+    "description": "Do the opposite of this, and get the Game Grumps onto their noble steeds! Yeehaw, and stuff.",
+    "story": "Original Story"
+  },
+  {
+    "name": "IRL Let's Player",
+    "steamName": "IRLLetsPlay",
+    "description": "Watch the Game Grumps cause a scene 8 times in one playthrough. Don't forget to subscribe, thumbs up, rate me, updoot, etc.",
+    "story": "Original Story"
+  },
+  {
+    "name": "D-Club Certified",
+    "steamName": "DClubCert",
+    "description": "Get Frank to join the D-Club.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Casanova",
+    "steamName": "Casanova",
+    "description": "Reach a...climactic moment with four ladies in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Casabrova",
+    "steamName": "Casabrova",
+    "description": "Reach a...climactic moment with two men in one playthrough.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Good Ol' Days",
+    "steamName": "gooddays",
+    "description": "Complete \"Memory Lane\" and convince Derek you take your past as seriously as he does.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Snapped",
+    "steamName": "snapped",
+    "description": "Uncover the fate of Purgalicious and present the evidence to Derek.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Beyond the Call of Dude-y",
+    "steamName": "BeyondTheCall",
+    "description": "Really give Frank something to cherish...for instance, a fully naked picture of Katherine.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Good Riddance!",
+    "steamName": "GoodRiddance",
+    "description": "Crush Frank's self-esteem and his notions about manhood to the point where he can't take it anymore! Buh bye, dude!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Against All Odds",
+    "steamName": "AgainstAllOdds",
+    "description": "For once, make love, not war with Frank.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Now It's a Party!",
+    "steamName": "NowItsAParty",
+    "description": "Liven up the scenery by getting three or more partygoers to enjoy the rest of the night while showing varying amounts of skin.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Magic Number",
+    "steamName": "TheMagicNumber",
+    "description": "Cumplete Vickie's \"Good Guests Gone Bad\" Opportunity with Vickie and another lover.",
+    "story": "Original Story"
+  },
+  {
+    "name": "A Friend in Need...",
+    "steamName": "FriendInNeed",
+    "description": "Help your gal pal Brittney out by fulfilling her request for a spare shirt.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Crush",
+    "steamName": "TheCrush",
+    "description": "Get Brittney to realize who would really make her happy. Then, play wingwoman and help her score!",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Crush(es)",
+    "steamName": "TheCrushes",
+    "description": "Get Brittney to realize who would really make her happy. Then, see if she'll share a little bit of that pleasure with you.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Host Hijinks",
+    "steamName": "HostHijinks",
+    "description": "Help Derek get back at Madison for subjecting him to all her mind games.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Hijinks Averted",
+    "steamName": "HijinksAverted",
+    "description": "Help Derek take the higher path, and instead of getting revenge on Madison, make a more wholesome choice.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Love Conquers All",
+    "steamName": "LCA",
+    "description": "Can you give more to Brittney than just a boring old shirt? Take your relationship to new heights and find out!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Congrats, A Celebrity Hates You",
+    "steamName": "CongratsACelebrityHatesYou",
+    "description": "Fail the Doja Cat DLC before you even get her to the party.",
+    "story": "Original Story"
+  },
+  {
+    "name": "That's a Nice Bush!",
+    "steamName": "ThatsANiceBush",
+    "description": "Catch drunk Amala red-handed with some hedge trimmers.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Doja's Dope-Ass Dinolicious Danceapalooza ",
+    "steamName": "DojaDinoliciousDanceapalooza",
+    "description": "Successfully pull off one of the greatest backyard concerts ever.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Hungry Hungry Hot Tubs",
+    "steamName": "HungryHungryHotTubs",
+    "description": "Accidentally make Doja Cat go for a swim.",
+    "story": "Original Story"
+  },
+  {
+    "name": "It Smells Like Roses",
+    "steamName": "ItSmellsLikeRoses",
+    "description": "Listen to the soothing sounds of nature, directly from Doja Cat.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Life Found a Way",
+    "steamName": "LifeFoundAWay",
+    "description": "You were so preoccupied with whether or not you could, you didn't stop to think if you should... be wasting time with this.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Most Wonderful Time of the Year",
+    "steamName": "TheMostWonderfulTimeOfTheYear",
+    "description": "Get all the party guests involved in a snowball fight.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Deck the Balls",
+    "steamName": "DeckTheBalls",
+    "description": "Make the holidays merrier by hanging Nana's special mistletoe.",
+    "story": "Original Story"
+  },
+  {
+    "name": "It's an Older Code, But It Checks Out",
+    "steamName": "OlderCode",
+    "description": "Successfully unlock Brahd Mode on Compubrah.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Release the Kraken",
+    "steamName": "ReleaseTheKraken",
+    "description": "Share a few drinks with Liz Katz and become a third wheel in your own adventure.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Elementary, My Dear Player",
+    "steamName": "ElementaryMyDearPlayer",
+    "description": "Solve the most convoluted Murder Mystery of all time.",
+    "story": "Original Story"
+  },
+  {
+    "name": "That's Not How You Get Ahead",
+    "steamName": "ThatsNotHowYouGetAhead",
+    "description": "Discover the consequences of overheating.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Mask of Virility",
+    "steamName": "MaskOfVirility",
+    "description": "Get interrupted three times with Liz Katz and then let her get her claws in you.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Stop It Step Bro",
+    "steamName": "StopItStepBro",
+    "description": "Rescue Liz Katz from the dryer of doom in the most romantic way possible.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Dumbest Player Achievement",
+    "steamName": "DumbestPlayerAchievement",
+    "description": "Really? You couldn't figure it out even with the hint? Is that your fault or ours?",
+    "story": "Original Story"
+  },
+  {
+    "name": "Dancing for Gold Coins",
+    "steamName": "DancingForGoldCoins",
+    "description": "Fulfill every WoW player's fantasy and have Liz Katz cosplay as an elf.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Solar Flare",
+    "steamName": "SolarFlare",
+    "description": "Help Derek's dancing burn brighter than the sun and then help protect his dignity... sort of.",
+    "story": "Original Story"
+  },
+  {
+    "name": "A Display of Affection",
+    "steamName": "ADisplayOfAffection",
+    "description": "\rChoose the right person to share a valentine gift with for an Easter Egg!",
+    "story": "Original Story"
+  },
+  {
+    "name": "Job Well Done",
+    "steamName": "JobWellDone",
+    "description": "Help Derek land the job of his dreams - which is any job. The economy is rough, people.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Laying Some Pipe",
+    "steamName": "LayingSomePipe",
+    "description": "Successfully repair a leaky pipe and a sisterly relationship. Only one repair will last, though!",
+    "story": "Original Story"
+  },
+  {
+    "name": "One Is the Loneliest Number",
+    "steamName": "OneIsTheLoneliestNumber",
+    "description": "Be too afraid to talk to girls.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Future Is Ads",
+    "steamName": "TheFutureIsAds",
+    "description": "Have Derek's handyman lesson get interrupted by an ad.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Greatest Trip of Her Life",
+    "steamName": "TheGreatestTripOfHerLife",
+    "description": "Give Madison the Babs Special and see her trip through to its conclusion.",
+    "story": "Original Story"
+  },
+  {
+    "name": "One Man Army",
+    "steamName": "OneManArmy",
+    "description": "Use the power of Nano-Nuts to fight your way back to the hot tub.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Meat's Back on the Menu",
+    "steamName": "MeatsBackOnTheMenu",
+    "description": "Reawaken a wasteland warrior through the scent of burning flesh.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Nocturnal Temptations",
+    "steamName": "NocturnalTemptations",
+    "description": "Travel back in time and complete the filming of Nocturnal Temptations.",
+    "story": "Original Story"
+  },
+  {
+    "name": "The Future Is Ads 2",
+    "steamName": "TheFutureIsAdsTwo",
+    "description": "Get interrupted by an ad while listening to Down the Mystery Hole.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Toga! Toga!",
+    "steamName": "TogaToga",
+    "description": "Find and wear a hillbilly's bedsheets. Just don't look too closely at the stains.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Some People Just Want to Watch the World Burn",
+    "steamName": "SPJWWWB",
+    "description": "Immortalize tiny Patrick on film by giving him the spotlight with Gisella.",
+    "story": "Original Story"
+  },
+  {
+    "name": "Some People Just Want to Watch Girls Kiss",
+    "steamName": "SPJWWGS",
+    "description": "Make Vickie's dreams come true by giving her the spotlight with Gisella.",
+    "story": "Original Story"
+  }
+]

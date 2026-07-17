@@ -1,0 +1,622 @@
+[
+  {
+    "description": "because we know this will fucking happen...if you get stranded in the darkness of deep space",
+    "command": "warpto player kitchen"
+  },
+  {
+    "description": "a command seems to be missing or isn't working, it was probably upgraded to V2.  Type v2.help for more info.If everyone is walking outside, cancel their movement to the outside",
+    "command": "walkto all outside cancel"
+  },
+  {
+    "description": "type is being redefined, the base type has to be self-referenced.If you appear to be on solid ground but cannot walk, to ATTEMPT to fix it",
+    "command": "warpto player 0 0 0"
+  },
+  {
+    "description": "Unstuck ALL characters",
+    "command": "characters.unstuck"
+  },
+  {
+    "description": "Unstuck Amy",
+    "command": "amy.unstuck"
+  },
+  {
+    "description": "add the \"AllowRoaming\" State to all characters",
+    "command": "characters.states(AllowRoaming) = true"
+  },
+  {
+    "description": "add the \"DoesNotFightBack\" Property to all characters",
+    "command": "characters.properties(DoesNotFightBack) = true"
+  },
+  {
+    "description": "add the Player's Orgasm value to Derek's mood, because why not",
+    "command": "combinevalue derek mood player orgasm"
+  },
+  {
+    "description": "add the Spoon to the Player's inventory",
+    "command": "spoon.inventory = true"
+  },
+  {
+    "description": "allow Vickie to roam anywhere, provided that her roaming is enabled",
+    "command": "vickie roaming clearlists"
+  },
+  {
+    "description": "allow derek to roam to the hottub",
+    "command": "roaming derek allowlocation hottub"
+  },
+  {
+    "description": "change Frank's head to 1.5",
+    "command": "frank.size(head) = 1.5"
+  },
+  {
+    "description": "change Vickie's panties to their alternate (A Vickie Vixen Valentine) texture",
+    "command": "item \"vickie's panties\" itemfunction ChangeVickiePanties"
+  },
+  {
+    "description": "change all characters to scale 1.5",
+    "command": "characters.size = 1.5"
+  },
+  {
+    "description": "change the Dinolicious Suit to its repaired version in the inventory",
+    "command": "item DLiciousOutfit setinventoryicon 2"
+  },
+  {
+    "description": "change the microwave's inspect text to \"Step 1",
+    "command": "Insert Fork, Step 2: Press Buttons, Step 3: ???, Step 4: Profit!\":"
+  },
+  {
+    "description": "change the size of the crosshairs, simply follow the command with a number (# or #.##, etc.) value between zero and 20.To change to alternate texture 0 on Leah",
+    "command": "leah.run(SwitchToAlternateTexture) = 0"
+  },
+  {
+    "description": "close the sliding door",
+    "command": "door close \"Slider Door\""
+  },
+  {
+    "description": "disable Frank (but not all game mechanics associated with him...sorry!)",
+    "command": "item setenabled frank false"
+  },
+  {
+    "description": "disable Frank's reaction to the player jerking off on him",
+    "command": "frank setenabled false events genplayerejaconfrank"
+  },
+  {
+    "description": "disable Frank",
+    "command": "disablenpc frank"
+  },
+  {
+    "description": "disable all characters",
+    "command": "disablenpc all"
+  },
+  {
+    "description": "disable roaming on all characters",
+    "command": "roaming all allow false"
+  },
+  {
+    "description": "display 'Hello Fuck Face!' in a narrative frame",
+    "command": "gamemsg \"Hello Fuck Face!\" narration"
+  },
+  {
+    "description": "display 'Hello World!' in a system message",
+    "command": "centerscreentext \"Hello World!\" gamemsg"
+  },
+  {
+    "description": "display 'Hello World!' in a thoughtbubble",
+    "command": "\"Hello World!\" thoughtbubble gamemsg"
+  },
+  {
+    "description": "do this, go to Project Settings > Player > Other Settings and modify the Graphics APIs for To enable Arin",
+    "command": "enablenpc arin"
+  },
+  {
+    "description": "enable all disabled NPCs",
+    "command": "enablenpc all"
+  },
+  {
+    "description": "execute the \"UntieTop\" character function for Ashley",
+    "command": "ashleytop.run(UntieShirt)"
+  },
+  {
+    "description": "fling all characters into the air",
+    "command": "characters.addforce(0:200:200)"
+  },
+  {
+    "description": "force Frank to look at the player",
+    "command": "lookat frank player"
+  },
+  {
+    "description": "force Katherine to look at the microwave",
+    "command": "katherine lookat microwave"
+  },
+  {
+    "description": "force all characters to change their location",
+    "command": "all changelocation roaming"
+  },
+  {
+    "description": "get Frank ready for his duck-face selfie",
+    "command": "puckeredlips emote frank 100"
+  },
+  {
+    "description": "give Patrick the freedom to explore the world in all of its single-family home glory",
+    "command": "patrick roaming true allow"
+  },
+  {
+    "description": "have Amy pretend she's texting",
+    "command": "social amy sendtext"
+  },
+  {
+    "description": "have Frank start doggie style with Derek",
+    "command": "frank 0 10050 derek intimacy"
+  },
+  {
+    "description": "have Katherine react as if she  just witnessed the player having sex",
+    "command": "performevent katherine events genplayersexcaughtbykath"
+  },
+  {
+    "description": "have Madison talk to Derek, if they are close to each other",
+    "command": "social madison derek talkto"
+  },
+  {
+    "description": "have Vickie start masturbating",
+    "command": "sexualact vickie 10051 intimacy"
+  },
+  {
+    "description": "have the player start missionary with Madison",
+    "command": "sexualact intimacy player madison startdoggiestyle"
+  },
+  {
+    "description": "immediately complete Rachael's \"Hunt for Red's Thermos\" quest",
+    "command": "complete quest \"Hunt for Red's Thermos\""
+  },
+  {
+    "description": "increase the rate at which Madison is giving a blowjob",
+    "command": "intimacy madison increaseactionspeed"
+  },
+  {
+    "description": "list all Properties Amy currently has enabled",
+    "command": "amy.states.list"
+  },
+  {
+    "description": "list all functions the Laptop currently has",
+    "command": "laptop.run.list"
+  },
+  {
+    "description": "list all of Ashley's quests",
+    "command": "quest list ashley"
+  },
+  {
+    "description": "list all states Amy currently has on",
+    "command": "amy.states.list"
+  },
+  {
+    "description": "list all the Criteria Groups in your main story",
+    "command": "critgrp list"
+  },
+  {
+    "description": "list available event triggers for a Vickie",
+    "command": "events vickie list"
+  },
+  {
+    "description": "lock the master bedroom door",
+    "command": "lock door masterbedroomdoor"
+  },
+  {
+    "description": "make Amy fight Patrick",
+    "command": "amy patrick combat fight"
+  },
+  {
+    "description": "make Amy stop dancing",
+    "command": "amy.dance = false"
+  },
+  {
+    "description": "make Brittney close her eyes",
+    "command": "brittney emote closedeyes"
+  },
+  {
+    "description": "make Brittney open her eyes IF they are already closed",
+    "command": "brittney emote closedeyes"
+  },
+  {
+    "description": "make Brittney walk to the hot tub",
+    "command": "walkto brittney hottubseat1"
+  },
+  {
+    "description": "make Derek oh so very, very happy",
+    "command": "emote derek ecstatic 100"
+  },
+  {
+    "description": "make Derek turn around or spin to win",
+    "command": "derek sendevent turnaround"
+  },
+  {
+    "description": "make Derek turn around or spin to win",
+    "command": "derek turn around"
+  },
+  {
+    "description": "make Derek, well...a little happy",
+    "command": "emote happy derek 10"
+  },
+  {
+    "description": "make Frank overhear Patrick talking about his wine, which will also trigger the attached events",
+    "command": "patrick overhear frank dialogue 5"
+  },
+  {
+    "description": "make Frank pass out",
+    "command": "combat frank passout"
+  },
+  {
+    "description": "make Frank the punching bag for all the other characters",
+    "command": "combat all fight frank"
+  },
+  {
+    "description": "make Frank use his BGC line 8",
+    "command": "frank 8 triggerBGC"
+  },
+  {
+    "description": "make Frank walk to the bed, because we just love it when Frank's on the bed",
+    "command": "frank walkto bed"
+  },
+  {
+    "description": "make Frank's health equal Frank's love of Ashley...what a fucking sap",
+    "command": "matchvalue frank Attribute:Health frank Relationship:Ashley:Romance"
+  },
+  {
+    "description": "make Katherine turn towards the toaster instantly",
+    "command": "katherine turn toward toaster true"
+  },
+  {
+    "description": "make Katherine use her BGC line 10, but at the lowest Importance",
+    "command": "triggerbgc katherine 10 0"
+  },
+  {
+    "description": "make Madison drunk af (add 20 to drunk value)",
+    "command": "20 drunk add madison social"
+  },
+  {
+    "description": "make Madison look like she is going to pick up a beer with her right hand",
+    "command": "sendevent madison pickuprighthand nattylite1"
+  },
+  {
+    "description": "make Madison say her dialogue line #40",
+    "command": "madison dialogue trigger 40"
+  },
+  {
+    "description": "make Patrick step to his left",
+    "command": "sendevent stepleft patrick"
+  },
+  {
+    "description": "make Rachael like the player more, in a purely platonic way (add 8 friendship)",
+    "command": "social rachael friendship player 8 add"
+  },
+  {
+    "description": "make Rachael look like she is about to throw something",
+    "command": "52 rachael sendevent"
+  },
+  {
+    "description": "make Rachael turn towards the Player",
+    "command": "turn rachael toward player"
+  },
+  {
+    "description": "make Stephanie reach for one of the speakers with her left hand",
+    "command": "ikreach stephanie lefthand speaker2 on"
+  },
+  {
+    "description": "make Stephanie stop reaching for that same speaker with her left hand",
+    "command": "ikreach stephanie speaker2 off lefthand"
+  },
+  {
+    "description": "make Stephanie's default/Starting dialogue Dialogue line #6 (\"That wasn't a very nice thing to say.\")",
+    "command": "6 stephanie setstartdialogue dialogue"
+  },
+  {
+    "description": "make Vickie use her BGC line 2",
+    "command": "triggerBGC vickie 2"
+  },
+  {
+    "description": "make Vickie use her current default/Starting dialogue",
+    "command": "dialogue vickie triggerstartdialogue"
+  },
+  {
+    "description": "make all characters a default level of agro",
+    "command": "emote all 2"
+  },
+  {
+    "description": "make all characters dance",
+    "command": "characters.dance = true"
+  },
+  {
+    "description": "make all characters go absolutely nuts",
+    "command": "combat all fight"
+  },
+  {
+    "description": "make all characters pass out",
+    "command": "combat all passout"
+  },
+  {
+    "description": "make characters Brittney through her various available poses",
+    "command": "brittney pose test"
+  },
+  {
+    "description": "make everyone (or everyone nearby, at least) look at the player with varying degrees of lust, confusion, or soulless robotic fury",
+    "command": "lookat all player"
+  },
+  {
+    "description": "make everyone drunk",
+    "command": "social all drunk 25 equals"
+  },
+  {
+    "description": "make everyone walk outside",
+    "command": "walkto all outside"
+  },
+  {
+    "description": "make the crosshair 5x as big",
+    "command": "crosshair 5"
+  },
+  {
+    "description": "make the crosshair look like a traditional + shaped crosshair",
+    "command": "crosshair cross true"
+  },
+  {
+    "description": "make the crosshair red in color",
+    "command": "red crosshair"
+  },
+  {
+    "description": "make the player's OrgasmSensitivity equal Derek's mood, cause why not",
+    "command": "matchvalue player OrgasmSensitivity derek Mood"
+  },
+  {
+    "description": "mount the toaster to Ashley's face",
+    "command": "ashley mount item toaster head true"
+  },
+  {
+    "description": "open the front door",
+    "command": "frontdoor door open"
+  },
+  {
+    "description": "prevent derek from roaming to Stephanie",
+    "command": "derek prohibitlocation roaming stephanie"
+  },
+  {
+    "description": "push Frank into the air and slightly forward",
+    "command": "frank.addforce(0:80:15)"
+  },
+  {
+    "description": "push Patrick to the right and slightly up",
+    "command": "patrick.addforce(30:70:0)"
+  },
+  {
+    "description": "push the player forward a little",
+    "command": "player.addforce(0:0:15)"
+  },
+  {
+    "description": "put Amy's specific shoes on",
+    "command": "amy.change(amy_shoes) = true"
+  },
+  {
+    "description": "put Rachael in 'ModelPose2'",
+    "command": "pose rachael modelpose2 true"
+  },
+  {
+    "description": "put on Amy's top",
+    "command": "amy.change(top) = true"
+  },
+  {
+    "description": "put your entire playthrough at risk and get a head start on our future title 'Block Party'",
+    "command": "warpto all 20 0 24"
+  },
+  {
+    "description": "reduce Derek's mood value by 30",
+    "command": "social -30 mood derek add"
+  },
+  {
+    "description": "release Rachael from 'ModelPose2'",
+    "command": "modelpose2 rachael false pose"
+  },
+  {
+    "description": "remove ALL characters' clothing",
+    "command": "characters.change(all) = false"
+  },
+  {
+    "description": "remove ALL characters' tops",
+    "command": "characters.change(top) = false"
+  },
+  {
+    "description": "remove the \"AllowRoaming\" State from Amy",
+    "command": "amy.states(AllowRoaming) = false"
+  },
+  {
+    "description": "remove the \"DoesNotFightBack\" Property from Amy",
+    "command": "amy.properties(DoesNotFightBack) = false"
+  },
+  {
+    "description": "remove the Spoon from the Player's inventory",
+    "command": "spoon.inventory = false"
+  },
+  {
+    "description": "rename Katherine \"Pretentious Goddamn Nerd\"",
+    "command": "katherine item \"Pretentious Goddamn Nerd\" rename"
+  },
+  {
+    "description": "rudely end any scene you, our beloved user, are starring in",
+    "command": "cutscene EndAnySceneWithPlayer"
+  },
+  {
+    "description": "rudely end that cutscene example you just played",
+    "command": "cutscene endscene PlayerMasterBedroomSex1"
+  },
+  {
+    "description": "run the game at double-speed",
+    "command": "time.scale = 2"
+  },
+  {
+    "description": "see a list of all items with enabled item functions, and those functions",
+    "command": "item itemfunction list"
+  },
+  {
+    "description": "see a list of all the body parts that work with the 'mount' subcommand",
+    "command": "item list mount"
+  },
+  {
+    "description": "see all the places Derek can roam to and if he has roaming enabled or not",
+    "command": "roaming derek list"
+  },
+  {
+    "description": "see where Derek is, and where he may be going",
+    "command": "CharInfo derek"
+  },
+  {
+    "description": "set Rachael's romance value towards the player to 10",
+    "command": "social rachael player romance equals 10"
+  },
+  {
+    "description": "set the FOV to 80",
+    "command": "customfov 80"
+  },
+  {
+    "description": "slow down the game to half-time",
+    "command": "time.scale = .5"
+  },
+  {
+    "description": "start Rachael's \"Hunt for Red's Thermos\" quest",
+    "command": "quest start \"Hunt for Red's Thermos\""
+  },
+  {
+    "description": "start a cutscene called PlayerMasterBedroomSex1 between Amy and the player",
+    "command": "cutscene playscene PlayerMasterBedroomSex1 player amy"
+  },
+  {
+    "description": "start a random cutscene from the MasterBedroom zone between Rachael and the player (if Rachael is in the MasterBedroom)",
+    "command": "rachael cutscene player PlayRandomSceneFromCurrentLocation"
+  },
+  {
+    "description": "start a random cutscene from the MasterBedroom zone between Rachael and the player (regardless of location)",
+    "command": "playrandomscenefromlocation masterbedroomzone cutscene player rachael"
+  },
+  {
+    "description": "start the FFM MasterBedroom threesome scene with the Player, Amy, and Katherine",
+    "command": "cutscene playscene threesomeffm_masterbedroom player amy katherine"
+  },
+  {
+    "description": "stop Amy from fighting",
+    "command": "amy combat cancel"
+  },
+  {
+    "description": "stop Frank from looking like a fucking moron",
+    "command": "emote 14 frank 0"
+  },
+  {
+    "description": "stop Patrick from Roaming and just be drunk and sad in one lonely little place",
+    "command": "roaming patrick allow false"
+  },
+  {
+    "description": "stop Vickie's masturbation",
+    "command": "0 intimacy vickie 10060"
+  },
+  {
+    "description": "stop all characters from roaming to Patrick",
+    "command": "stopallcurrentroamingmotionto patrick roaming"
+  },
+  {
+    "description": "target a specific character, add the character as such",
+    "command": "characters(charactername).  For example: characters(amy)"
+  },
+  {
+    "description": "test if a Criteria Group named 'ShouldIMakeTheseExampleTextsShorter' returns true",
+    "command": "critgrp ShouldIMakeTheseExampleTextsShorter"
+  },
+  {
+    "description": "toggle Amy's top on and off",
+    "command": "amy.change(top)"
+  },
+  {
+    "description": "toggle the spoon from the Player's inventory",
+    "command": "spoon.inventory"
+  },
+  {
+    "description": "trigger Amy's 'selfie' event",
+    "command": "takeselfie performevent amy events"
+  },
+  {
+    "description": "trigger Derek's event when the player jerks off on him",
+    "command": "events derek performevent genplayerejacon"
+  },
+  {
+    "description": "trigger the UseWith interface for Frank (must have an item in your inventory)",
+    "command": "frank triggerusewithmenu item"
+  },
+  {
+    "description": "turn off all debugging features",
+    "command": "debugmode 0"
+  },
+  {
+    "description": "turn on debugging features",
+    "command": "debugmode 1"
+  },
+  {
+    "description": "turn the default FPS cap back on",
+    "command": "lockfps on"
+  },
+  {
+    "description": "unlock your FPS and allow the game to render at the highest framerates your system can manage",
+    "command": "lockfps off"
+  },
+  {
+    "description": "unlock your FPS and set a framerate limit of 144FPS",
+    "command": "lockfps off 144"
+  },
+  {
+    "description": "use, just type the command, a space, then a whole number between 45 and 90. While this gives some extra visibility, it won't count as cheating sinceTo wake Frank back up",
+    "command": "frank combat wakeup"
+  },
+  {
+    "description": "warp Frank to the bed",
+    "command": "frank warpto bedleft"
+  },
+  {
+    "description": "warp Patrick to the roof area near the gutter over .5 seconds",
+    "command": "warpovertime patrick roofneargutter 0.5"
+  },
+  {
+    "description": "warp Vickie to the player over 3 seconds",
+    "command": "warpovertime vickie player 3"
+  },
+  {
+    "description": "warp Vickie to the player",
+    "command": "warpto vickie player"
+  },
+  {
+    "description": "warp the pizza box to the front door",
+    "command": "item pizzabox warpitemto nearfrontdoor"
+  },
+  {
+    "description": "warp the player into the front yard...ish",
+    "command": "warpto player 11 0 12"
+  },
+  {
+    "description": "use them just type in everything shown AFTER the",
+    "command": "(colon), and hit the Enter/Return key.Various examples of the Walk"
+  },
+  {
+    "description": "use them just type in everything shown AFTER the",
+    "command": "(colon), and hit the Enter/Return key.Various examples of the Warp"
+  },
+  {
+    "description": "you prefer using a callback instead of awaiting the Task, you can still use a callback like this",
+    "command": "CanGoBack().ContinueWith(result => {...})\u0002\u0001\u0001ò"
+  },
+  {
+    "description": "you prefer using a callback instead of awaiting the Task, you can still use a callback like this",
+    "command": "CanGoForward().ContinueWith(result => {...})\u0002\u0001\u0001ò"
+  },
+  {
+    "description": "you prefer using a callback instead of awaiting the Task, you can still use a callback like this",
+    "command": "CaptureScreenshot().ContinueWith(result => {...})\u0002\u0001\u0001ò"
+  },
+  {
+    "description": "you prefer using a callback instead of awaiting the Task, you can still use a callback like this",
+    "command": "GetRawTextureData().ContinueWith(result => {...})\u0002\u0001\u0001ñ"
+  },
+  {
+    "description": "checked, will enable automatic dolly, which chooses a path position that is as close as possible to the Follow target.  Note",
+    "command": "this can have significant performance impact\u0001*\u0001"
+  }
+]

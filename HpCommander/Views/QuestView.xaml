@@ -4,6 +4,12 @@
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Quest" Style="{StaticResource SectionHeaderStyle}" />
+
+            <TextBlock Text="Story (quests only work in the story you're playing)"
+                       Style="{StaticResource FieldLabelStyle}" />
+            <ComboBox x:Name="StoryCombo" Width="320" HorizontalAlignment="Left"
+                      Margin="0,0,0,14" SelectionChanged="StoryCombo_SelectionChanged" />
+
             <TabControl x:Name="ModeTabs" Style="{StaticResource SegmentedTabControlStyle}"
                         SelectionChanged="ModeTabs_SelectionChanged">
 

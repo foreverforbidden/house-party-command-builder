@@ -20,9 +20,14 @@ corrections to the community guide (`Social` and `Door` are not obsolete; there 
 
 Reference data ripped from the game's own files:
 
+- [`docs/console-examples.json`](docs/console-examples.json) — **155 worked examples across 47 commands**, extracted from the game binary
 - [`docs/clothing-ids.json`](docs/clothing-ids.json) — 2,053 clothing IDs across 9 content packs
+- [`docs/locations.json`](docs/locations.json) — 270 walk/warp destinations
 - [`docs/cutscenes.json`](docs/cutscenes.json) — 137 cutscenes with zone and cast info
+- [`docs/items-from-story.json`](docs/items-from-story.json) — 353 items with display names and actions
 - [`docs/item-functions.json`](docs/item-functions.json) — 133 items, 176 item functions
+- [`docs/story-values.json`](docs/story-values.json) / [`docs/player-values.json`](docs/player-values.json) — `values` command targets
+- [`docs/achievements.json`](docs/achievements.json) — 91 achievements
 
 ## Requirements
 

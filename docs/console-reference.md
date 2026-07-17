@@ -221,6 +221,84 @@ infodump
 Dumps every event trigger for every character, with its trigger type and enabled state.
 Large output — read it from the debug log rather than the console.
 
+## The console's own example text is in the binary
+
+Every `example <command>` string the console prints is stored as plain ASCII in
+`HouseParty_Data/il2cpp_data/Metadata/global-metadata.dat`. [`console-examples.json`](console-examples.json)
+holds **155 worked examples across 47 command verbs**, extracted directly — no need to run
+anything in-game.
+
+The IL2CPP string-literal table stores offset+length externally, so entries sit *directly
+concatenated with no separator*:
+
+```
+...frank warpto bedleftTo warp Patrick to the roof area near the gutter over .5 seconds:...
+```
+
+Splitting therefore keys on the `To `/`If `/`And ` that begins the next description. The
+extraction was validated against 21 examples independently captured from the game's debug
+log — all 21 recovered verbatim.
+
+This is how the reference below was completed for commands never run manually, including
+`events`, `sendevent`, `dialogue`, `gamemsg`, `lookat`, `triggerbgc`, `crosshair`, `lockfps`,
+`critgrp`, `matchvalue`, `ikreach`, `combinevalue` and `dance`.
+
+## Traits (17)
+
+`values.set(trait:X)` accepts these, from each character's `Personality.Values` in the
+`.character` files:
+
+```
+Aggressive, Charismatic, Creative, Energetic, Exhibitionism, Happy, Humerous,
+Intelligent, Jealous, LikesMen, LikesWomen, Nice, Optimistic, Perverse,
+Serious, Shy, Sociable
+```
+
+Four non-NPCs (Babs, Murray, Podcast, Tater) have no traits — the same four that have no
+quests.
+
+## Value namespaces
+
+Story values use colon-namespacing, matching the documented console syntax verbatim:
+
+```
+Relationship:<Character>:Friendship      Attribute:Strength | Health | Speed | Stamina
+Relationship:<Character>:Romance         Combat:Skill        Dancing:Skill
+CanSee:Count                             InVicinity:Count    InOutfit:<Outfit>
+```
+
+[`story-values.json`](story-values.json) has the per-character sets (Gisella 124, Liz Katz 139,
+Rachael 57, …). [`player-values.json`](player-values.json) has the Player's own — 529 for
+Original Story, including `OrgasmSensitivity`, `Orgasm` and `OrgasmRechargeRate`.
+
+## Locations
+
+[`locations.json`](locations.json) — **270 destinations** for `walkto` / `warpto` /
+`warpovertime` / `item warpitemto`, harvested from movement events (`EventType` 100 = walk,
+210 = warp) in the story and character files.
+
+**The console normalises these**: strip everything non-alphanumeric and lowercase, so data's
+`"HotTub Seat 1"` is typed `hottubseat1`, and `"Bed (Left)"` is `bedleft`. All eight
+destinations used in the game's own examples round-trip correctly through this rule.
+
+Note the list is mixed — walk/warp targets can also be characters (`Frank`, `Player`) and
+items (`Armchair`, `Katana`), so those appear too.
+
+## Quests are per-story
+
+Four stories ship under `StreamingAssets/Mods/Stories/`:
+
+| Story | Quests |
+|---|---|
+| Original Story | 125 across 18 characters |
+| Date Night With Brittney | 11 (Brittney 9, Patrick 2) |
+| A Vickie Vixen Valentine | 3 (all Vickie) |
+| Combat Training | 0 |
+
+A quest name only works in the story you're currently playing. Note that **only Original
+Story populates the `CharacterName` field** inside quest entries; the other stories leave it
+empty, so the owning character must be taken from the `.character` filename.
+
 ## Ripped reference data
 
 `StreamingAssets` ships its game data as **plain UTF-16LE JSON** — no asset ripping needed.

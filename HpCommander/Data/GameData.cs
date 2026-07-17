@@ -50,6 +50,17 @@ public sealed class IntimacyCatalog
     [JsonPropertyName("events")] public List<IntimacyEntry> Events { get; set; } = new();
 }
 
+public sealed class GameLocation
+{
+    /// <summary>The form the console accepts, e.g. "hottubseat1".</summary>
+    [JsonPropertyName("consoleName")] public string ConsoleName { get; set; } = "";
+
+    /// <summary>How the game data spells it, e.g. "HotTub Seat 1".</summary>
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = "";
+
+    public override string ToString() => DisplayName.Length > 0 ? DisplayName : ConsoleName;
+}
+
 public sealed class SocialAction
 {
     [JsonPropertyName("name")] public string Name { get; set; } = "";
@@ -88,7 +99,12 @@ public sealed class GameData
     [JsonPropertyName("socialActions")] public List<SocialAction> SocialActions { get; set; } = new();
     [JsonPropertyName("doorActions")] public List<string> DoorActions { get; set; } = new();
     [JsonPropertyName("doors")] public List<string> Doors { get; set; } = new();
-    [JsonPropertyName("questsByCharacter")] public Dictionary<string, List<string>> QuestsByCharacter { get; set; } = new();
+    /// <summary>Quests are story-specific: story -> character -> quest names.</summary>
+    [JsonPropertyName("questsByStory")] public Dictionary<string, Dictionary<string, List<string>>> QuestsByStory { get; set; } = new();
+
+    /// <summary>Walk/warp destinations. Also includes character and item names,
+    /// since those are valid movement targets too.</summary>
+    [JsonPropertyName("locations")] public List<GameLocation> Locations { get; set; } = new();
     [JsonPropertyName("intimacy")] public IntimacyCatalog Intimacy { get; set; } = new();
 
     private static readonly JsonSerializerOptions SerializerOptions = new()

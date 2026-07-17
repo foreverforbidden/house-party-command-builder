@@ -8,6 +8,10 @@ namespace HpCommander.Views;
 
 public partial class QuestView : UserControl, ICommandCategoryView
 {
+    private const string DefaultStory = "Original Story";
+
+    private readonly GameData _data;
+
     public event EventHandler? CommandChanged;
 
     public bool NeedsGlobalTargets => false;
@@ -15,26 +19,52 @@ public partial class QuestView : UserControl, ICommandCategoryView
     public QuestView(GameData data)
     {
         InitializeComponent();
+        _data = data;
 
-        // The quest name alone identifies a quest - the character isn't part of the command,
-        // so every known name goes into one flat list.
-        var questNames = data.QuestsByCharacter
-            .SelectMany(kvp => kvp.Value)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
-            .ToList();
+        // Quests only work in the story you're currently playing, so the name
+        // lists are scoped to the selected story rather than pooled together.
+        foreach (var story in _data.QuestsByStory.Keys.OrderBy(s => s, StringComparer.OrdinalIgnoreCase))
+            StoryCombo.Items.Add(story);
+        var defaultIndex = StoryCombo.Items.IndexOf(DefaultStory);
+        StoryCombo.SelectedIndex = defaultIndex >= 0 ? defaultIndex : (StoryCombo.Items.Count > 0 ? 0 : -1);
 
-        foreach (var combo in new[] { StartQuestCombo, CompleteQuestCombo, IncrementQuestCombo, FailQuestCombo })
-        {
-            foreach (var name in questNames)
-                combo.Items.Add(name);
+        foreach (var combo in QuestCombos)
             combo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
-        }
 
-        foreach (var c in data.Characters)
+        foreach (var c in _data.Characters)
             ListCharacterCombo.Items.Add(c);
         if (ListCharacterCombo.Items.Count > 0)
             ListCharacterCombo.SelectedIndex = 0;
+
+        RepopulateQuests();
+    }
+
+    private ComboBox[] QuestCombos => new[] { StartQuestCombo, CompleteQuestCombo, IncrementQuestCombo, FailQuestCombo };
+
+    private void StoryCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        RepopulateQuests();
+        CommandChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void RepopulateQuests()
+    {
+        var names = StoryCombo.SelectedItem is string story
+                    && _data.QuestsByStory.TryGetValue(story, out var byChar)
+            ? byChar.SelectMany(kvp => kvp.Value)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
+                    .ToList()
+            : new List<string>();
+
+        foreach (var combo in QuestCombos)
+        {
+            var current = combo.Text;
+            combo.Items.Clear();
+            foreach (var n in names)
+                combo.Items.Add(n);
+            combo.Text = current;
+        }
     }
 
     private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
