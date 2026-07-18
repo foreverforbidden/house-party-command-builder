@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:HpCommander.Controls">
 
     <!-- ===================== Text ===================== -->
     <Style TargetType="TextBlock">
@@ -58,7 +59,17 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
+    <!-- WPF keys implicit styles on the exact type, so a ComboBox subclass gets none of the
+         above unless it is opted in explicitly. -->
+    <Style TargetType="{x:Type controls:FilteringComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" />
+
     <Style x:Key="CharacterComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="Width" Value="220" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="FilteringCharacterComboBoxStyle" TargetType="{x:Type controls:FilteringComboBox}"
+           BasedOn="{StaticResource {x:Type controls:FilteringComboBox}}">
         <Setter Property="Width" Value="220" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>

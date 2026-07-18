@@ -1,14 +1,15 @@
 ﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.ChangeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:hp="clr-namespace:HpCommander.Views">
+             xmlns:hp="clr-namespace:HpCommander.Views"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Change" Style="{StaticResource SectionHeaderStyle}" />
 
             <TextBlock Text="Clothing slot or item ID (per-character items follow the target selection)"
                        Style="{StaticResource FieldLabelStyle}" />
-            <ComboBox x:Name="PartCombo" IsEditable="True" Width="320" HorizontalAlignment="Left" />
+            <controls:FilteringComboBox x:Name="PartCombo" IsEditable="True" Width="320" HorizontalAlignment="Left" />
 
             <TextBlock Text="Force state" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
             <StackPanel Orientation="Horizontal">

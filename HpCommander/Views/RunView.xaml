@@ -1,13 +1,14 @@
 ﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.RunView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:hp="clr-namespace:HpCommander.Views">
+             xmlns:hp="clr-namespace:HpCommander.Views"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Run" Style="{StaticResource SectionHeaderStyle}" />
             <TextBlock Text="Function name (unbounded - type any known run function)"
                        Style="{StaticResource FieldLabelStyle}" MaxWidth="360" TextWrapping="Wrap" />
-            <ComboBox x:Name="FuncCombo" IsEditable="True" Width="340" HorizontalAlignment="Left" />
+            <controls:FilteringComboBox x:Name="FuncCombo" IsEditable="True" Width="340" HorizontalAlignment="Left" />
         </StackPanel>
     </Border>
 </hp:TargetedCommandCategoryViewBase>

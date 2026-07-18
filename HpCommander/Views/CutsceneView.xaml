@@ -1,7 +1,8 @@
 ﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.CutsceneView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:hp="clr-namespace:HpCommander.Views">
+             xmlns:hp="clr-namespace:HpCommander.Views"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Cutscene" Style="{StaticResource SectionHeaderStyle}" />
@@ -11,7 +12,7 @@
                 <TabItem Header="Play" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Scene (the label shows how many NPCs it needs)" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="PlaySceneCombo" IsEditable="True" Width="360" HorizontalAlignment="Left" />
+                        <controls:FilteringComboBox x:Name="PlaySceneCombo" IsEditable="True" Width="360" HorizontalAlignment="Left" />
                         <TextBlock Text="Star" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="StarCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="NPCs (add as many as the scene needs)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
@@ -31,7 +32,7 @@
                 <TabItem Header="End" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Scene to end" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="EndSceneCombo" IsEditable="True" Width="360" HorizontalAlignment="Left" />
+                        <controls:FilteringComboBox x:Name="EndSceneCombo" IsEditable="True" Width="360" HorizontalAlignment="Left" />
                     </StackPanel>
                 </TabItem>
 
@@ -46,7 +47,7 @@
                 <TabItem Header="Random" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Zone" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="RandomZoneCombo" IsEditable="True" Width="280" HorizontalAlignment="Left" />
+                        <controls:FilteringComboBox x:Name="RandomZoneCombo" IsEditable="True" Width="280" HorizontalAlignment="Left" />
                         <TextBlock Text="Other character (paired with the Player)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="RandomOtherCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,10,0,0"
