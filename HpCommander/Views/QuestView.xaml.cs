@@ -1,50 +1,37 @@
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class QuestView : UserControl, ICommandCategoryView
+public partial class QuestView : CommandCategoryViewBase
 {
     private const string DefaultStory = "Original Story";
 
     private readonly GameData _data;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
 
     public QuestView(GameData data)
     {
         InitializeComponent();
         _data = data;
 
-        // Quests only work in the story you're currently playing, so the name
-        // lists are scoped to the selected story rather than pooled together.
-        foreach (var story in _data.QuestsByStory.Keys.OrderBy(s => s, StringComparer.OrdinalIgnoreCase))
-            StoryCombo.Items.Add(story);
-        var defaultIndex = StoryCombo.Items.IndexOf(DefaultStory);
-        StoryCombo.SelectedIndex = defaultIndex >= 0 ? defaultIndex : (StoryCombo.Items.Count > 0 ? 0 : -1);
-
-        foreach (var combo in QuestCombos)
-            combo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
-
-        foreach (var c in _data.Characters)
-            ListCharacterCombo.Items.Add(c);
-        if (ListCharacterCombo.Items.Count > 0)
-            ListCharacterCombo.SelectedIndex = 0;
-
-        RepopulateQuests();
+        using (SuspendRecompute())
+        {
+            // Quests only work in the story you're currently playing, so the name
+            // lists are scoped to the selected story rather than pooled together.
+            var stories = _data.QuestsByStory.Keys.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList();
+            Fill(StoryCombo, stories, selectedIndex: Math.Max(0, stories.IndexOf(DefaultStory)));
+            Fill(ListCharacterCombo, _data.Characters);
+            RepopulateQuests();
+        }
     }
 
-    private ComboBox[] QuestCombos => new[] { StartQuestCombo, CompleteQuestCombo, IncrementQuestCombo, FailQuestCombo };
+    private ComboBox[] QuestCombos => [StartQuestCombo, CompleteQuestCombo, IncrementQuestCombo, FailQuestCombo];
 
     private void StoryCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         RepopulateQuests();
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        Recompute();
     }
 
     private void RepopulateQuests()
@@ -55,38 +42,33 @@ public partial class QuestView : UserControl, ICommandCategoryView
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
                     .ToList()
-            : new List<string>();
+            : [];
 
         foreach (var combo in QuestCombos)
-        {
-            var current = combo.Text;
-            combo.Items.Clear();
-            foreach (var n in names)
-                combo.Items.Add(n);
-            combo.Text = current;
-        }
+            RefillPreservingText(combo, names);
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        Recompute();
+    }
 
-    private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private static string BuildManage(string subcommand, string questName) =>
+    private static CommandResult BuildManage(string subcommand, string questName) =>
         string.IsNullOrWhiteSpace(questName)
-            ? "(type or pick a quest name)"
-            : QuestCommandBuilder.Manage(subcommand, questName.Trim());
+            ? CommandResult.NeedsInput("Type or pick a quest name")
+            : CommandResult.Ok(QuestCommandBuilder.Manage(subcommand, questName.Trim()));
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public override CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => BuildManage("start", StartQuestCombo.Text),
         1 => BuildManage("complete", CompleteQuestCombo.Text),
         2 => BuildManage("increment", IncrementQuestCombo.Text),
         3 => BuildManage("fail", FailQuestCombo.Text),
         4 => ListCharacterCombo.SelectedItem is string character
-            ? QuestCommandBuilder.List(character)
-            : "(pick a character)",
-        _ => "",
+            ? CommandResult.Ok(QuestCommandBuilder.List(character))
+            : CommandResult.NeedsInput("Pick a character"),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

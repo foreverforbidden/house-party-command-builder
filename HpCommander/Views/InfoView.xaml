@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.InfoView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.InfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <Grid>
             <Grid.RowDefinitions>
@@ -13,7 +14,7 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,4,0,10">
                 <TextBlock x:Name="InfoText" TextWrapping="Wrap" FontSize="13.5"
-                           Foreground="{StaticResource TextPrimaryBrush}" LineHeight="20" />
+                           Foreground="{DynamicResource TextPrimaryBrush}" LineHeight="20" />
             </ScrollViewer>
 
             <Button x:Name="IssueButton" Grid.Row="2" Content="Report an issue"
@@ -21,4 +22,4 @@
                     Click="IssueButton_Click" />
         </Grid>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>

@@ -1,6 +1,11 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 using HpCommander.Views;
@@ -9,44 +14,50 @@ namespace HpCommander;
 
 public partial class MainWindow : Window
 {
-    private static readonly NavEntry[] Nav =
-    {
-        NavEntry.Header("APPEARANCE"),
-        NavEntry.Item("Change", "clothing", "clothes", "top", "bottom", "underwear", "undershirt", "naked", "undress", "hair", "accessories", "glasses", "shoes", "strapon"),
-        NavEntry.Item("Outfit", "clothes", "dress", "costume", "default"),
-        NavEntry.Item("Size", "scale", "body", "head", "chest", "grow", "shrink"),
-        NavEntry.Header("CHARACTER"),
-        NavEntry.Item("Values", "trait", "relationship", "friendship", "romance", "exhibitionism", "jealous", "list", "filter"),
-        NavEntry.Item("Social", "drunk", "mood", "friendship", "romance", "sendtext", "talkto"),
-        NavEntry.Item("States", "sweating", "dance", "fire", "erect"),
-        NavEntry.Item("Properties", "bloody"),
-        NavEntry.Item("Intimacy", "sex", "sexualact", "masturbation", "act", "speed"),
-        NavEntry.Header("ACTIONS"),
-        NavEntry.Item("Movement", "walk", "walkto", "warp", "warpto", "teleport", "tp", "roam", "roaming", "turn", "location", "coordinates", "overtime"),
-        NavEntry.Item("Addforce", "push", "force", "physics", "launch"),
-        NavEntry.Item("Run", "function", "effect", "animation"),
-        NavEntry.Header("WORLD"),
-        NavEntry.Item("Inventory", "item", "give", "spawn", "beer", "nattylite", "condom", "key"),
-        NavEntry.Item("Door", "lock", "unlock", "open", "close"),
-        NavEntry.Item("Cutscene", "scene", "playscene", "sex", "play", "random", "endscene"),
-        NavEntry.Item("Quest", "story", "start", "complete", "increment", "fail", "mission"),
-        NavEntry.Item("Time", "timescale", "slow", "fast", "speed"),
-        NavEntry.Header("CONSOLE"),
-        NavEntry.Item("Misc", "achievements", "unstuck", "help", "clear"),
-        NavEntry.Item("Legacy (V1)", "enablenpc", "disablenpc", "npc", "combat", "fight", "passout", "wakeup", "setenabled", "enable", "disable"),
-        NavEntry.Item("Info", "about", "readme", "issue", "report", "bug", "version"),
-    };
-
     private readonly GameData _data;
     private readonly CharacterChipPicker _chipPicker;
-    private readonly Dictionary<string, ICommandCategoryView> _viewCache = new();
-    private ICommandCategoryView? _activeView;
+    private readonly ViewContext _context;
+    private readonly ICollectionView _navView;
+    private readonly Dictionary<string, CommandCategoryViewBase> _viewCache = new();
+    private CommandCategoryViewBase? _activeView;
     private string? _activeName;
+    private CommandResult _current;
+
+    private readonly AppSettings _settings;
+    // Trailing-edge: restarted on every change, so it fires once the command settles rather than
+    // once per keystroke.
+    private readonly DispatcherTimer _autoCopyTimer = new() { Interval = TimeSpan.FromMilliseconds(600) };
+    private readonly DispatcherTimer _copyStatusTimer = new() { Interval = TimeSpan.FromMilliseconds(1200) };
+    private CommandResult _pendingAutoCopy;
+    private string? _lastCopied;
+    private bool _suppressSettingEvents;
 
     public MainWindow()
     {
         InitializeComponent();
         _data = LoadGameData();
+
+        _settings = AppSettings.Load();
+
+        _suppressSettingEvents = true;
+        AutoCopyCheck.IsChecked = _settings.AutoCopy;
+        DarkModeCheck.IsChecked = _settings.ThemeOrDefault == AppTheme.Dark;
+        _suppressSettingEvents = false;
+        Theme.Apply(_settings.ThemeOrDefault);
+
+        _autoCopyTimer.Tick += AutoCopyTimer_Tick;
+        _copyStatusTimer.Tick += (_, _) =>
+        {
+            _copyStatusTimer.Stop();
+            CopyStatus.Opacity = 0;
+        };
+        Closing += (_, _) =>
+        {
+            // A running DispatcherTimer roots the window.
+            _autoCopyTimer.Stop();
+            _copyStatusTimer.Stop();
+            _settings.Save();
+        };
 
         _chipPicker = new CharacterChipPicker();
         _chipPicker.SetCharacters(_data.Characters);
@@ -59,9 +70,15 @@ public partial class MainWindow : Window
             }
         };
         ChipPickerHost.Content = _chipPicker;
+        _context = new ViewContext(_data, _chipPicker);
 
-        CategoryList.ItemsSource = Nav;
-        CategoryList.SelectedItem = Nav.First(n => !n.IsHeader);
+        // Filtering a view over one fixed list keeps selection identity across searches;
+        // swapping ItemsSource used to drop the selection whenever the active category was
+        // filtered out, leaving the sidebar unhighlighted while its view stayed on screen.
+        _navView = CollectionViewSource.GetDefaultView(CategoryRegistry.All);
+        _navView.Filter = NavFilter;
+        CategoryList.ItemsSource = _navView;
+        CategoryList.SelectedItem = CategoryRegistry.All.First(n => !n.IsHeader);
     }
 
     private static GameData LoadGameData()
@@ -73,7 +90,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(
-                $"Could not load Data\\commands.json ({ex.Message}). Starting with empty data - edit the JSON file and restart.",
+                $"Could not load the Data folder ({ex.Message}). Starting with empty data - fix the JSON and restart.",
                 "HP Commander", MessageBoxButton.OK, MessageBoxImage.Warning);
             return new GameData();
         }
@@ -82,26 +99,30 @@ public partial class MainWindow : Window
     private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (CategoryList.SelectedItem is NavEntry { IsHeader: false } entry)
-            ShowCategory(entry.Name);
+            ShowCategory(entry);
     }
 
-    private void ShowCategory(string name)
+    private void ShowCategory(NavEntry entry)
     {
-        if (_activeName == name)
+        if (_activeName == entry.Name)
             return;
 
         if (_activeView != null)
-            _activeView.CommandChanged -= ActiveView_CommandChanged;
-
-        if (!_viewCache.TryGetValue(name, out var view))
         {
-            view = CreateView(name);
-            _viewCache[name] = view;
+            _activeView.CommandChanged -= ActiveView_CommandChanged;
+            _activeView.CopyRequested -= ActiveView_CopyRequested;
         }
 
-        _activeName = name;
+        if (!_viewCache.TryGetValue(entry.Name, out var view))
+        {
+            view = entry.Factory!(_context);
+            _viewCache[entry.Name] = view;
+        }
+
+        _activeName = entry.Name;
         _activeView = view;
         _activeView.CommandChanged += ActiveView_CommandChanged;
+        _activeView.CopyRequested += ActiveView_CopyRequested;
         // Per-character lists follow the current target selection, so a view opened
         // after the selection changed still reflects it without a manual refresh.
         _activeView.OnTargetsChanged();
@@ -113,48 +134,42 @@ public partial class MainWindow : Window
 
     // ---------------- Sidebar search ----------------
 
+    /// <summary>A header survives the filter only while some category under it does.</summary>
+    private bool NavFilter(object obj)
+    {
+        if (obj is not NavEntry entry)
+            return true;
+
+        var query = SearchBox.Text.Trim();
+        if (query.Length == 0)
+            return true;
+
+        if (!entry.IsHeader)
+            return entry.Matches(query);
+
+        return CategoryRegistry.All
+            .SkipWhile(e => !ReferenceEquals(e, entry))
+            .Skip(1)
+            .TakeWhile(e => !e.IsHeader)
+            .Any(e => e.Matches(query));
+    }
+
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var query = SearchBox.Text.Trim();
-        List<NavEntry> visible;
+        _navView.Refresh();
 
-        if (query.Length == 0)
-        {
-            visible = Nav.ToList();
-        }
-        else
-        {
-            visible = new List<NavEntry>();
-            NavEntry? pendingHeader = null;
-            foreach (var entry in Nav)
-            {
-                if (entry.IsHeader)
-                {
-                    pendingHeader = entry;
-                }
-                else if (entry.Matches(query))
-                {
-                    if (pendingHeader != null)
-                    {
-                        visible.Add(pendingHeader);
-                        pendingHeader = null;
-                    }
-                    visible.Add(entry);
-                }
-            }
-        }
-
-        var selected = CategoryList.SelectedItem as NavEntry;
-        CategoryList.ItemsSource = visible;
-        if (selected != null && visible.Contains(selected))
-            CategoryList.SelectedItem = selected;
+        // Filtering the active category out clears the ListBox selection, and it does not come
+        // back on its own when the filter widens again - which left the sidebar showing nothing
+        // selected while its view was still on screen. Re-select as soon as it is visible again.
+        if (CategoryList.SelectedItem == null && _activeName != null)
+            CategoryList.SelectedItem = _navView.Cast<NavEntry>().FirstOrDefault(n => n.Name == _activeName);
     }
 
     private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {
-            var target = (CategoryList.ItemsSource as IEnumerable<NavEntry>)?.FirstOrDefault(n => !n.IsHeader);
+            var target = _navView.Cast<NavEntry>().FirstOrDefault(n => !n.IsHeader);
             if (target != null)
             {
                 SearchBox.Clear();
@@ -182,43 +197,15 @@ public partial class MainWindow : Window
         }
         else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control)
         {
-            CopyToClipboard(OutputBox.Text);
+            CopyToClipboard(_current);
             e.Handled = true;
         }
     }
 
-    private ICommandCategoryView CreateView(string name) => name switch
-    {
-        "Change" => new ChangeView(_data, _chipPicker),
-        "Outfit" => new OutfitView(_data, _chipPicker),
-        "Inventory" => new InventoryView(_data),
-        "Values" => new ValuesView(_data, _chipPicker),
-        "Social" => new SocialView(_data),
-        "Quest" => new QuestView(_data),
-        "Door" => new DoorView(_data),
-        "Cutscene" => new CutsceneView(_data),
-        "Info" => new InfoView(),
-        "States" => new StatesView(_data, _chipPicker),
-        "Properties" => new PropertiesView(_data, _chipPicker),
-        "Run" => new RunView(_data, _chipPicker),
-        "Movement" => new MovementView(_data),
-        "Addforce" => new AddforceView(_chipPicker),
-        "Misc" => new MiscView(_chipPicker),
-        "Legacy (V1)" => new LegacyView(_data),
-        "Intimacy" => CreateIntimacyView(),
-        "Size" => new SizeView(_data, _chipPicker),
-        "Time" => new TimeView(),
-        _ => new PlaceholderView(name),
-    };
-
-    private IntimacyView CreateIntimacyView()
-    {
-        var view = new IntimacyView(_data);
-        view.CopyRequested += (_, text) => CopyToClipboard(text);
-        return view;
-    }
-
     private void ActiveView_CommandChanged(object? sender, EventArgs e) => Recompute();
+
+    /// <summary>A double-clicked reference name is a deliberate copy, not a built command.</summary>
+    private void ActiveView_CopyRequested(object? sender, string text) => CopyToClipboard(CommandResult.Ok(text));
 
     private void Recompute()
     {
@@ -226,35 +213,146 @@ public partial class MainWindow : Window
             return;
         try
         {
-            OutputBox.Text = _activeView.BuildCommand();
+            _current = _activeView.BuildCommand();
         }
         catch (Exception ex)
         {
-            OutputBox.Text = $"({ex.Message})";
+            _current = CommandResult.Error(ex.Message);
         }
+
+        OutputBox.Text = _current.Text;
+        // Guidance and errors are styled as hint text so they can't be mistaken for output,
+        // and the Copy button disables rather than silently doing nothing.
+        OutputBox.Foreground = (Brush)FindResource(_current.IsOk ? "TextPrimaryBrush" : "TextSecondaryBrush");
+        OutputBox.FontStyle = _current.IsOk ? FontStyles.Normal : FontStyles.Italic;
+        CopyButton.IsEnabled = _current.IsOk;
+
+        MaybeAutoCopy(_current);
     }
 
-    private void CopyButton_Click(object sender, RoutedEventArgs e) => CopyToClipboard(OutputBox.Text);
+    private void CopyButton_Click(object sender, RoutedEventArgs e) => CopyToClipboard(_current);
 
-    private void CopyToClipboard(string text)
+    /// <summary>An explicit copy: it may interrupt, and it belongs in history.</summary>
+    private void CopyToClipboard(CommandResult result)
     {
-        if (string.IsNullOrWhiteSpace(text) || text.StartsWith("("))
+        if (!result.IsOk || string.IsNullOrWhiteSpace(result.Text))
             return;
+        if (TrySetClipboard(result.Text, silent: false))
+            PushHistory(result.Text);
+    }
+
+    private bool TrySetClipboard(string text, bool silent)
+    {
         try
         {
             Clipboard.SetText(text);
-            PushHistory(text);
+            _lastCopied = text;
+            return true;
         }
         catch (System.Runtime.InteropServices.COMException)
         {
-            MessageBox.Show(text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
+            // Right for a deliberate copy, catastrophic for an automatic one: a process holding
+            // the clipboard would otherwise produce a dialog every time the timer fires.
+            if (!silent)
+                MessageBox.Show(text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return false;
         }
+    }
+
+    // ---------------- auto-copy ----------------
+
+    private void AutoCopyCheck_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_suppressSettingEvents)
+            return;
+
+        if (AutoCopyCheck.IsChecked == true && !_settings.AutoCopyConsentGiven)
+        {
+            var answer = MessageBox.Show(
+                "HP Commander will replace your clipboard contents automatically, every time the " +
+                "command it builds changes - including while you are still typing.\n\n" +
+                "This only affects the clipboard on this computer; nothing is sent anywhere.\n\n" +
+                "You can turn it off again with the same checkbox.\n\n" +
+                "Turn auto-copy on?",
+                "Enable auto-copy",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            if (answer != MessageBoxResult.OK)
+            {
+                // Assigning IsChecked re-raises this handler.
+                _suppressSettingEvents = true;
+                AutoCopyCheck.IsChecked = false;
+                _suppressSettingEvents = false;
+                return;
+            }
+
+            _settings.AutoCopyConsentGiven = true;
+        }
+
+        _settings.AutoCopy = AutoCopyCheck.IsChecked == true;
+        _settings.Save();
+
+        if (!_settings.AutoCopy)
+            _autoCopyTimer.Stop();
+    }
+
+    private void DarkModeCheck_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_suppressSettingEvents)
+            return;
+
+        var theme = DarkModeCheck.IsChecked == true ? AppTheme.Dark : AppTheme.Light;
+        Theme.Apply(theme);
+        _settings.Theme = theme.ToString();
+        _settings.Save();
+    }
+
+    private void MaybeAutoCopy(CommandResult result)
+    {
+        // Guidance and errors are never copied, so a half-built command simply leaves the
+        // clipboard alone. This gate is what CommandResult bought us.
+        if (AutoCopyCheck.IsChecked != true || !result.IsOk)
+        {
+            _autoCopyTimer.Stop();
+            return;
+        }
+
+        _pendingAutoCopy = result;
+        _autoCopyTimer.Stop();
+        _autoCopyTimer.Start();
+    }
+
+    private void AutoCopyTimer_Tick(object? sender, EventArgs e)
+    {
+        _autoCopyTimer.Stop();
+
+        // Idempotent: flipping between tabs that build the same command must not re-copy.
+        if (!_pendingAutoCopy.IsOk || _pendingAutoCopy.Text == _lastCopied)
+            return;
+
+        // Deliberately does not push history. History is "things I chose to copy"; auto-copying
+        // into it would fill all ten slots with intermediate states within seconds.
+        if (TrySetClipboard(_pendingAutoCopy.Text, silent: true))
+            FlashCopyStatus();
+    }
+
+    /// <summary>Without this, auto-copy is invisible and users can't tell whether it worked.</summary>
+    private void FlashCopyStatus()
+    {
+        CopyStatus.Opacity = 1;
+        _copyStatusTimer.Stop();
+        _copyStatusTimer.Start();
     }
 
     private void PushHistory(string text)
     {
-        if (HistoryList.Items.Count > 0 && Equals(HistoryList.Items[0], text))
-            return;
+        // Move-to-front: comparing only against the newest entry left duplicates behind when
+        // copying A, B, A.
+        for (var i = HistoryList.Items.Count - 1; i >= 0; i--)
+            if (Equals(HistoryList.Items[i], text))
+                HistoryList.Items.RemoveAt(i);
+
         HistoryList.Items.Insert(0, text);
         while (HistoryList.Items.Count > 10)
             HistoryList.Items.RemoveAt(HistoryList.Items.Count - 1);
@@ -263,6 +361,6 @@ public partial class MainWindow : Window
     private void HistoryList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (HistoryList.SelectedItem is string s)
-            CopyToClipboard(s);
+            CopyToClipboard(CommandResult.Ok(s));
     }
 }

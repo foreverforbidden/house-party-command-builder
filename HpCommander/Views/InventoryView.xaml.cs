@@ -1,11 +1,10 @@
-using System.Windows;
 using System.Windows.Controls;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class InventoryView : UserControl, ICommandCategoryView
+public partial class InventoryView : CommandCategoryViewBase
 {
     private enum ItemKind { Plain, Alias, RequiresEnable, Numbered, Locked }
 
@@ -16,10 +15,6 @@ public partial class InventoryView : UserControl, ICommandCategoryView
     }
 
     private readonly GameData _data;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
 
     public InventoryView(GameData data)
     {
@@ -48,24 +43,22 @@ public partial class InventoryView : UserControl, ICommandCategoryView
             NumberStepper.Maximum = range.Max;
             NumberStepper.Value = range.Min;
         }
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        Recompute();
     }
 
-    private void NumberStepper_ValueChanged(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    public string BuildCommand()
+    public override CommandResult BuildCommand()
     {
         if (ItemCombo.SelectedItem is not ItemEntry entry)
-            return "(pick an item)";
+            return CommandResult.NeedsInput("Pick an item");
         return entry.Kind switch
         {
-            ItemKind.Locked => "(no known command for this item yet)",
-            ItemKind.Plain => InventoryCommandBuilder.BuildPlain(entry.Value),
-            ItemKind.Alias => InventoryCommandBuilder.BuildPlain(entry.Internal ?? entry.Value),
-            ItemKind.Numbered => InventoryCommandBuilder.BuildPlain(entry.Value, (int)NumberStepper.Value),
-            ItemKind.RequiresEnable => string.Join(Environment.NewLine,
+            ItemKind.Locked => CommandResult.Unavailable("No known command for this item yet"),
+            ItemKind.Plain => CommandResult.Ok(InventoryCommandBuilder.BuildPlain(entry.Value)),
+            ItemKind.Alias => CommandResult.Ok(InventoryCommandBuilder.BuildPlain(entry.Internal ?? entry.Value)),
+            ItemKind.Numbered => CommandResult.Ok(InventoryCommandBuilder.BuildPlain(entry.Value, (int)NumberStepper.Value)),
+            ItemKind.RequiresEnable => CommandResult.Ok(
                 InventoryCommandBuilder.BuildRequiresEnable(entry.Value, entry.DisplayOverride ?? entry.Value)),
-            _ => "(unhandled item kind)",
+            _ => CommandResult.Error($"Unhandled item kind {entry.Kind}"),
         };
     }
 }

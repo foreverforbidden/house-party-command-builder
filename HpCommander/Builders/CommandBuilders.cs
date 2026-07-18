@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace HpCommander.Builders;
 
 public enum BoolMode
@@ -7,17 +9,21 @@ public enum BoolMode
     ForceFalse,
 }
 
+/// <summary>Number formatting for command strings. The console is culture-invariant: on a
+/// comma-decimal locale the current culture would emit "1,5", which the game will not parse.</summary>
+public static class NumberHelper
+{
+    public static string Format(double n) => n.ToString("0.###", CultureInfo.InvariantCulture);
+}
+
 public static class TargetHelper
 {
     public const string AllCharactersTarget = "characters";
 
-    public static string Join(IEnumerable<string> targets)
-    {
-        var list = targets.ToList();
-        if (list.Count == 0)
-            throw new InvalidOperationException("At least one target must be selected.");
-        return string.Join(".", list);
-    }
+    /// <summary>Total. "No targets selected" is a UI state, checked once by
+    /// <c>TargetedCommandCategoryViewBase.WithTargets</c> before any builder is called -
+    /// not an exception thrown and caught on every keystroke.</summary>
+    public static string Join(IEnumerable<string> targets) => string.Join(".", targets);
 
     public static string BoolSuffix(BoolMode mode) => mode switch
     {
@@ -61,10 +67,10 @@ public static class InventoryCommandBuilder
 public static class ValuesCommandBuilder
 {
     public static string BuildTrait(IEnumerable<string> targets, string trait, double n) =>
-        $"{TargetHelper.Join(targets)}.values.set(trait:{trait}) = {n}";
+        $"{TargetHelper.Join(targets)}.values.set(trait:{trait}) = {NumberHelper.Format(n)}";
 
     public static string BuildRelationship(IEnumerable<string> targets, string otherCharacter, string relationshipType, double n) =>
-        $"{TargetHelper.Join(targets)}.values.set(Relationship:{otherCharacter}:{relationshipType}) = {n}";
+        $"{TargetHelper.Join(targets)}.values.set(Relationship:{otherCharacter}:{relationshipType}) = {NumberHelper.Format(n)}";
 
     public static string BuildGeneric(string objectId, string property, int boolValue) =>
         $"values.{objectId}.set({property})={boolValue}";
@@ -99,17 +105,15 @@ public static class RunCommandBuilder
 public static class SizeCommandBuilder
 {
     public static string BuildWhole(IEnumerable<string> targets, double scale) =>
-        $"{TargetHelper.Join(targets)}.size = {FormatScale(scale)}";
+        $"{TargetHelper.Join(targets)}.size = {NumberHelper.Format(scale)}";
 
     public static string BuildPart(IEnumerable<string> targets, string part, double scale) =>
-        $"{TargetHelper.Join(targets)}.size({part}) = {FormatScale(scale)}";
-
-    internal static string FormatScale(double scale) => scale.ToString("0.###");
+        $"{TargetHelper.Join(targets)}.size({part}) = {NumberHelper.Format(scale)}";
 }
 
 public static class TimeCommandBuilder
 {
-    public static string BuildScale(double scale) => $"time.scale = {SizeCommandBuilder.FormatScale(scale)}";
+    public static string BuildScale(double scale) => $"time.scale = {NumberHelper.Format(scale)}";
 }
 
 public static class AddforceCommandBuilder
@@ -193,7 +197,7 @@ public static class MovementCommandBuilder
 
     /// <summary>Mirrors `warpovertime vickie player 3`.</summary>
     public static string WarpOverTime(string character, string destination, double seconds) =>
-        $"warpovertime {character} {destination} {seconds.ToString("0.###")}";
+        $"warpovertime {character} {destination} {NumberHelper.Format(seconds)}";
 
     /// <summary>Mirrors `turn derek around`.</summary>
     public static string TurnAround(string character) =>
@@ -215,11 +219,13 @@ public static class MovementCommandBuilder
     public static string RoamingAllowLocation(string character, string destination) =>
         $"roaming {character} allowlocation {destination}";
 
-    /// <summary>Mirrors `derek prohibitlocation roaming stephanie` (verb-first form).</summary>
+    /// <summary>Mirrors `roaming derek prohibitlocation stephanie`. The game also documents the
+    /// verb-first `derek prohibitlocation roaming stephanie`; token order is not significant.</summary>
     public static string RoamingProhibitLocation(string character, string destination) =>
         $"roaming {character} prohibitlocation {destination}";
 
-    /// <summary>Mirrors `vickie roaming clearlists` (verb-first form).</summary>
+    /// <summary>Mirrors `roaming vickie clearlists`. The game also documents the verb-first
+    /// `vickie roaming clearlists`; token order is not significant.</summary>
     public static string RoamingClearLists(string character) =>
         $"roaming {character} clearlists";
 }

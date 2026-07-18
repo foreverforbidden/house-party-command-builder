@@ -5,42 +5,32 @@ using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class LegacyView : UserControl, ICommandCategoryView
+public partial class LegacyView : CommandCategoryViewBase
 {
     private const string FreeForAllTarget = "(free-for-all - no target)";
     private const string FightSubcommand = "fight";
 
-    private string _output = "(click a button)";
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
+    private CommandResult _output = CommandResult.NeedsInput("Click a button");
 
     public LegacyView(GameData data)
     {
         InitializeComponent();
 
-        foreach (var c in data.Characters)
-            EnableNpcCombo.Items.Add(c);
+        using (SuspendRecompute())
+        {
+            Fill(EnableNpcCombo, data.Characters, selectedIndex: -1);
 
-        foreach (var a in data.LegacyCombatActions)
-            CombatSubcommandCombo.Items.Add(a);
-        var passoutIndex = CombatSubcommandCombo.Items.IndexOf("passout");
-        CombatSubcommandCombo.SelectedIndex = passoutIndex >= 0 ? passoutIndex : (CombatSubcommandCombo.Items.Count > 0 ? 0 : -1);
+            var combatActions = data.LegacyCombatActions.ToList();
+            Fill(CombatSubcommandCombo, combatActions, selectedIndex: Math.Max(0, combatActions.IndexOf("passout")));
 
-        CombatCharacterCombo.Items.Add(LegacyCommandBuilder.CombatAllTarget);
-        foreach (var c in data.Characters)
-            CombatCharacterCombo.Items.Add(c);
+            FillChars(CombatCharacterCombo, data, allTarget: LegacyCommandBuilder.CombatAllTarget, selectedIndex: -1);
+            FillChars(CombatFightTargetCombo, data, allTarget: FreeForAllTarget);
 
-        CombatFightTargetCombo.Items.Add(FreeForAllTarget);
-        foreach (var c in data.Characters)
-            CombatFightTargetCombo.Items.Add(c);
-        CombatFightTargetCombo.SelectedIndex = 0;
+            UpdateFightTargetEnabled();
 
-        UpdateFightTargetEnabled();
-
-        // Safe to fire NpcToggle_Changed now that every control exists.
-        NpcEnableRadio.IsChecked = true;
+            // Safe to fire NpcToggle_Changed now that every control exists.
+            NpcEnableRadio.IsChecked = true;
+        }
     }
 
     // ---------------- Enable / Disable ----------------
@@ -54,8 +44,9 @@ public partial class LegacyView : UserControl, ICommandCategoryView
             : "Build 'DisableNPC <character>'";
 
         // Keep an already-generated NPC command in sync with the toggle instead of leaving it stale.
-        if (_output.StartsWith("EnableNPC ", StringComparison.Ordinal) ||
-            _output.StartsWith("DisableNPC ", StringComparison.Ordinal))
+        if (_output.IsOk &&
+            (_output.Text.StartsWith("EnableNPC ", StringComparison.Ordinal) ||
+             _output.Text.StartsWith("DisableNPC ", StringComparison.Ordinal)))
         {
             BuildNpcCommand();
         }
@@ -64,12 +55,12 @@ public partial class LegacyView : UserControl, ICommandCategoryView
     private void EnableNpcButton_Click(object sender, RoutedEventArgs e) => BuildNpcCommand();
 
     private void BuildNpcCommand() =>
-        SetOutput(SafeBuild(() => LegacyCommandBuilder.SetNpcEnabled(EnableNpcCombo.Text.Trim(), IsEnableSelected)));
+        SetOutput(SafeBuild(() => CommandResult.Ok(LegacyCommandBuilder.SetNpcEnabled(EnableNpcCombo.Text.Trim(), IsEnableSelected))));
 
     // ---------------- Item enable ----------------
 
     private void EnableItemButton_Click(object sender, RoutedEventArgs e) =>
-        SetOutput(SafeBuild(() => LegacyCommandBuilder.ItemSetEnabled(EnableItemBox.Text.Trim())));
+        SetOutput(SafeBuild(() => CommandResult.Ok(LegacyCommandBuilder.ItemSetEnabled(EnableItemBox.Text.Trim()))));
 
     // ---------------- Combat ----------------
 
@@ -84,44 +75,46 @@ public partial class LegacyView : UserControl, ICommandCategoryView
 
     private void CombatButton_Click(object sender, RoutedEventArgs e) => SetOutput(SafeBuild(BuildCombatCommand));
 
-    private string BuildCombatCommand()
+    private CommandResult BuildCombatCommand()
     {
         var subcommand = CombatSubcommandCombo.SelectedItem as string;
         if (string.IsNullOrWhiteSpace(subcommand))
-            return "(pick a combat subcommand)";
+            return CommandResult.NeedsInput("Pick a combat subcommand");
 
         var character = CombatCharacterCombo.Text.Trim();
         if (string.IsNullOrWhiteSpace(character))
-            return "(pick a character, or 'all')";
+            return CommandResult.NeedsInput("Pick a character, or 'all'");
 
         if (!string.Equals(subcommand, FightSubcommand, StringComparison.OrdinalIgnoreCase))
-            return LegacyCommandBuilder.Combat(character, subcommand);
+            return CommandResult.Ok(LegacyCommandBuilder.Combat(character, subcommand));
 
         var rawTarget = CombatFightTargetCombo.Text.Trim();
         var target = rawTarget == FreeForAllTarget ? "" : rawTarget;
         var attackerIsAll = character.Equals(LegacyCommandBuilder.CombatAllTarget, StringComparison.OrdinalIgnoreCase);
 
         if (string.IsNullOrWhiteSpace(target) && !attackerIsAll)
-            return "(pick a fight target, or set the attacker to 'all' for a free-for-all)";
+            return CommandResult.NeedsInput("Pick a fight target, or set the attacker to 'all' for a free-for-all");
 
-        return LegacyCommandBuilder.CombatFight(character, target);
+        return CommandResult.Ok(LegacyCommandBuilder.CombatFight(character, target));
     }
 
     // ---------------- Intimacy reference ----------------
 
-    private void IntimacyHelpButton_Click(object sender, RoutedEventArgs e) => SetOutput(LegacyCommandBuilder.HelpIntimacy);
+    private void IntimacyHelpButton_Click(object sender, RoutedEventArgs e) =>
+        SetOutput(CommandResult.Ok(LegacyCommandBuilder.HelpIntimacy));
 
-    private void IntimacyExampleButton_Click(object sender, RoutedEventArgs e) => SetOutput(LegacyCommandBuilder.ExampleIntimacy);
+    private void IntimacyExampleButton_Click(object sender, RoutedEventArgs e) =>
+        SetOutput(CommandResult.Ok(LegacyCommandBuilder.ExampleIntimacy));
 
     // ---------------- Shared ----------------
 
-    private void SetOutput(string text)
+    private void SetOutput(CommandResult result)
     {
-        _output = text;
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        _output = result;
+        Recompute();
     }
 
-    private static string SafeBuild(Func<string> build)
+    private static CommandResult SafeBuild(Func<CommandResult> build)
     {
         try
         {
@@ -129,9 +122,9 @@ public partial class LegacyView : UserControl, ICommandCategoryView
         }
         catch (Exception ex)
         {
-            return $"({ex.Message})";
+            return CommandResult.Error(ex.Message);
         }
     }
 
-    public string BuildCommand() => _output;
+    public override CommandResult BuildCommand() => _output;
 }

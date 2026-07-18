@@ -1,86 +1,128 @@
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class CutsceneView : UserControl, ICommandCategoryView
+public partial class CutsceneView : CommandCategoryViewBase
 {
     private const string NoneNpc = "(none)";
 
     // Decorated dropdown label -> raw scene name.
     private readonly Dictionary<string, string> _sceneByLabel = new(StringComparer.OrdinalIgnoreCase);
 
-    public event EventHandler? CommandChanged;
+    // Raw scene name -> its metadata, for validating the cast before the game silently refuses it.
+    private readonly Dictionary<string, Cutscene> _sceneByName = new(StringComparer.OrdinalIgnoreCase);
 
-    public bool NeedsGlobalTargets => false;
+    private enum Mode { Play, End, EndAny, Random }
 
     public CutsceneView(GameData data)
     {
         InitializeComponent();
 
-        foreach (var cs in data.Cutscenes)
+        using (SuspendRecompute())
         {
-            var label = cs.ToString();
-            _sceneByLabel[label] = cs.Name;
-            _sceneByLabel[cs.Name] = cs.Name;
-            PlaySceneCombo.Items.Add(label);
-            EndSceneCombo.Items.Add(label);
+            foreach (var cs in data.Cutscenes)
+            {
+                var label = cs.ToString();
+                _sceneByLabel[label] = cs.Name;
+                _sceneByLabel[cs.Name] = cs.Name;
+                _sceneByName[cs.Name] = cs;
+                SceneCombo.Items.Add(label);
+            }
+
+            // One character for both the star and the random-scene partner, so switching tabs
+            // no longer discards who you picked.
+            FillChars(CharCombo, data);
+
+            foreach (var combo in new[] { Npc1, Npc2, Npc3, Npc4 })
+                FillChars(combo, data, allTarget: NoneNpc);
+
+            var zones = data.Cutscenes.Select(c => c.Zone)
+                .Where(z => !string.IsNullOrEmpty(z))
+                .Distinct()
+                .OrderBy(z => z);
+            Fill(RandomZoneCombo, zones);
+
+            ApplyTabContext();
         }
-
-        foreach (var c in data.Characters) StarCombo.Items.Add(c);
-        if (StarCombo.Items.Count > 0) StarCombo.SelectedIndex = 0;
-
-        foreach (var combo in new[] { Npc1, Npc2, Npc3, Npc4 })
-        {
-            combo.Items.Add(NoneNpc);
-            foreach (var c in data.Characters) combo.Items.Add(c);
-            combo.SelectedIndex = 0;
-        }
-
-        foreach (var z in data.Cutscenes.Select(c => c.Zone).Where(z => !string.IsNullOrEmpty(z)).Distinct().OrderBy(z => z))
-            RandomZoneCombo.Items.Add(z);
-        if (RandomZoneCombo.Items.Count > 0) RandomZoneCombo.SelectedIndex = 0;
-
-        foreach (var c in data.Characters) RandomOtherCombo.Items.Add(c);
-        if (RandomOtherCombo.Items.Count > 0) RandomOtherCombo.SelectedIndex = 0;
-
-        PlaySceneCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
-        EndSceneCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
-        RandomZoneCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-    private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-    private void Field_Changed(object sender, System.Windows.RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
+    private Mode Current => (Mode)Math.Max(0, ModeTabs.SelectedIndex);
+
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        ApplyTabContext();
+        Recompute();
+    }
+
+    private void ApplyTabContext()
+    {
+        SceneLabel.Text = Current == Mode.End
+            ? "Scene to end"
+            : "Scene (the label shows how many NPCs it needs)";
+        CharLabel.Text = Current == Mode.Random
+            ? "Other character (paired with the Player)"
+            : "Star";
+
+        ScenePanel.Visibility = Current is Mode.Play or Mode.End ? Visibility.Visible : Visibility.Collapsed;
+        CharPanel.Visibility = Current is Mode.Play or Mode.Random ? Visibility.Visible : Visibility.Collapsed;
+    }
 
     private string SceneName(string typed) =>
         _sceneByLabel.TryGetValue(typed.Trim(), out var name) ? name : typed.Trim();
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public override CommandResult BuildCommand() => Current switch
     {
-        0 => BuildPlay(),
-        1 => string.IsNullOrWhiteSpace(EndSceneCombo.Text)
-            ? "(pick a scene)"
-            : CutsceneCommandBuilder.EndScene(SceneName(EndSceneCombo.Text)),
-        2 => CutsceneCommandBuilder.EndAnyWithPlayer,
-        3 => RandomOtherCombo.SelectedItem is string other && !string.IsNullOrWhiteSpace(RandomZoneCombo.Text)
-            ? CutsceneCommandBuilder.RandomFromLocation(RandomZoneCombo.Text.Trim(), other)
-            : "(pick a zone and character)",
-        _ => "",
+        Mode.Play => BuildPlay(),
+        Mode.End => string.IsNullOrWhiteSpace(SceneCombo.Text)
+            ? CommandResult.NeedsInput("Pick a scene")
+            : CommandResult.Ok(CutsceneCommandBuilder.EndScene(SceneName(SceneCombo.Text))),
+        Mode.EndAny => CommandResult.Ok(CutsceneCommandBuilder.EndAnyWithPlayer),
+        Mode.Random => string.IsNullOrWhiteSpace(CharCombo.EffectiveValue)
+            ? CommandResult.NeedsInput("Pick a character")
+            : string.IsNullOrWhiteSpace(RandomZoneCombo.Text)
+                ? CommandResult.NeedsInput("Pick a zone")
+                : CommandResult.Ok(CutsceneCommandBuilder.RandomFromLocation(
+                    RandomZoneCombo.Text.Trim(), CharCombo.EffectiveValue)),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 
-    private string BuildPlay()
+    private CommandResult BuildPlay()
     {
-        if (string.IsNullOrWhiteSpace(PlaySceneCombo.Text))
-            return "(pick a scene)";
-        if (StarCombo.SelectedItem is not string star)
-            return "(pick a star)";
+        if (string.IsNullOrWhiteSpace(SceneCombo.Text))
+            return CommandResult.NeedsInput("Pick a scene");
+        var star = CharCombo.EffectiveValue;
+        if (string.IsNullOrWhiteSpace(star))
+            return CommandResult.NeedsInput("Pick a star");
+
+        var name = SceneName(SceneCombo.Text);
         var npcs = new[] { Npc1, Npc2, Npc3, Npc4 }
             .Select(c => c.SelectedItem as string)
             .Where(s => s != null && s != NoneNpc)
-            .Cast<string>();
-        return CutsceneCommandBuilder.PlayScene(SceneName(PlaySceneCombo.Text), star, npcs);
+            .Cast<string>()
+            .ToList();
+
+        // A wrong cast count just fails silently in-game, so say so here instead.
+        if (_sceneByName.TryGetValue(name, out var scene))
+        {
+            if (npcs.Count != scene.Npcs)
+                return CommandResult.NeedsInput(
+                    $"'{scene.Name}' needs exactly {scene.Npcs} NPC{(scene.Npcs == 1 ? "" : "s")} - you have {npcs.Count}");
+
+            if (scene.StarGender.Length > 0 && !string.Equals(star, "player", StringComparison.OrdinalIgnoreCase))
+                CastNote.Text = $"This scene expects a {scene.StarGender.ToLowerInvariant()} star.";
+            else
+                CastNote.Text = "";
+        }
+        else
+        {
+            CastNote.Text = "";
+        }
+
+        return CommandResult.Ok(CutsceneCommandBuilder.PlayScene(name, star, npcs));
     }
 }

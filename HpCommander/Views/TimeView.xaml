@@ -1,13 +1,14 @@
-<UserControl x:Class="HpCommander.Views.TimeView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.TimeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views"
              xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Time" Style="{StaticResource SectionHeaderStyle}" />
             <TextBlock Text="Global timescale (1 is default, no target needed)" Style="{StaticResource FieldLabelStyle}" />
             <controls:NumericStepper x:Name="ScaleStepper" Minimum="0.1" Maximum="10" Increment="0.1"
-                                      DecimalPlaces="2" Value="2" ValueChanged="ScaleStepper_ValueChanged" />
+                                      DecimalPlaces="2" Value="2" ValueChanged="OnValueChanged" />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>

@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace HpCommander.Data;
@@ -77,9 +78,36 @@ public sealed class Cutscene
     [JsonPropertyName("name")] public string Name { get; set; } = "";
     [JsonPropertyName("npcs")] public int Npcs { get; set; }
     [JsonPropertyName("zone")] public string Zone { get; set; } = "";
+    [JsonPropertyName("pack")] public string Pack { get; set; } = "";
 
-    public override string ToString() =>
-        Zone.Length > 0 ? $"{Name}  ({Npcs} NPC, {Zone})" : $"{Name}  ({Npcs} NPC)";
+    /// <summary>Sex scenes need the Explicit Content DLC.</summary>
+    [JsonPropertyName("isSexScene")] public bool IsSexScene { get; set; }
+
+    /// <summary>Male / Female / empty when the scene doesn't care.</summary>
+    [JsonPropertyName("starGender")] public string StarGender { get; set; } = "";
+
+    public override string ToString()
+    {
+        var bits = $"{Npcs} NPC";
+        if (Zone.Length > 0) bits += $", {Zone}";
+        if (IsSexScene) bits += ", sex";
+        return $"{Name}  ({bits})";
+    }
+}
+
+/// <summary>One wearable, keyed by its console id in <c>clothingById</c>.</summary>
+public sealed class ClothingItem
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = "";
+    [JsonPropertyName("type")] public string Type { get; set; } = "";
+    [JsonPropertyName("pack")] public string Pack { get; set; } = "";
+}
+
+public sealed class ConsoleExample
+{
+    [JsonPropertyName("command")] public string Command { get; set; } = "";
+    [JsonPropertyName("description")] public string Description { get; set; } = "";
+    [JsonPropertyName("verb")] public string Verb { get; set; } = "";
 }
 
 public sealed class GameLocation
@@ -114,7 +142,26 @@ public sealed class GameData
 {
     [JsonPropertyName("characters")] public List<string> Characters { get; set; } = new();
     [JsonPropertyName("changeParts")] public List<string> ChangeParts { get; set; } = new();
-    [JsonPropertyName("changeItemsByCharacter")] public Dictionary<string, List<IdLabel>> ChangeItemsByCharacter { get; set; } = new();
+    /// <summary>Every known wearable, id -> details. Normalised: a garment worn by twenty
+    /// characters is described once here and referenced by id from each list.</summary>
+    [JsonPropertyName("clothingById")] public Dictionary<string, ClothingItem> ClothingById { get; set; } = new();
+
+    /// <summary>Character -> clothing ids. The "*" key holds items that belong to nobody in
+    /// particular (bald, angel wings) and applies to everyone.</summary>
+    [JsonPropertyName("clothingByCharacter")] public Dictionary<string, List<string>> ClothingByCharacter { get; set; } = new();
+
+    /// <summary>"heuristic" while the per-character split is inferred from id naming rather than
+    /// verified in-game, so a later verified import can supersede it unambiguously.</summary>
+    [JsonPropertyName("clothingSource")] public string ClothingSource { get; set; } = "";
+
+    [JsonPropertyName("roamingActions")] public List<string> RoamingActions { get; set; } = new();
+    [JsonPropertyName("playerValuesByStory")] public Dictionary<string, List<string>> PlayerValuesByStory { get; set; } = new();
+    [JsonPropertyName("characterValuesByStory")] public Dictionary<string, Dictionary<string, List<string>>> CharacterValuesByStory { get; set; } = new();
+
+    /// <summary>Item -> its `item &lt;name&gt; itemfunction &lt;fn&gt;` functions. Distinct from
+    /// the character-scoped run().</summary>
+    [JsonPropertyName("itemFunctions")] public Dictionary<string, List<string>> ItemFunctions { get; set; } = new();
+    [JsonPropertyName("examples")] public List<ConsoleExample> Examples { get; set; } = new();
     [JsonPropertyName("outfitsByCharacter")] public Dictionary<string, List<string>> OutfitsByCharacter { get; set; } = new();
     [JsonPropertyName("traits")] public List<string> Traits { get; set; } = new();
     [JsonPropertyName("relationshipTypes")] public List<string> RelationshipTypes { get; set; } = new();
@@ -140,20 +187,66 @@ public sealed class GameData
     [JsonPropertyName("locations")] public List<GameLocation> Locations { get; set; } = new();
     [JsonPropertyName("intimacy")] public IntimacyCatalog Intimacy { get; set; } = new();
 
+    /// <summary>Bumped when the on-disk shape changes. A mismatch is a hard error: a renamed or
+    /// mistyped key otherwise deserializes to an empty list and shows up only as an empty combo,
+    /// which is very plausibly how several sections rotted unnoticed.</summary>
+    public const int ExpectedSchemaVersion = 2;
+
+    [JsonPropertyName("schemaVersion")] public int SchemaVersion { get; set; }
+
     private static readonly JsonSerializerOptions SerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
     };
 
-    public static string DefaultPath =>
-        Path.Combine(AppContext.BaseDirectory, "Data", "commands.json");
+    public static string DefaultDirectory =>
+        Path.Combine(AppContext.BaseDirectory, "Data");
 
-    public static GameData Load(string? path = null)
+    /// <summary>
+    /// Reads every Data/*.json and merges their top-level properties into one object before
+    /// deserializing. Splitting by domain keeps diffs reviewable once the generated data is large,
+    /// and costs the views nothing: they still see a single flat GameData.
+    /// </summary>
+    public static GameData Load(string? directory = null)
     {
-        path ??= DefaultPath;
-        var json = File.ReadAllText(path);
-        var data = JsonSerializer.Deserialize<GameData>(json, SerializerOptions);
-        return data ?? new GameData();
+        directory ??= DefaultDirectory;
+
+        var merged = new JsonObject();
+        var seen = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var file in Directory.EnumerateFiles(directory, "*.json").OrderBy(f => f, StringComparer.OrdinalIgnoreCase))
+        {
+            var node = JsonNode.Parse(File.ReadAllText(file), documentOptions: new JsonDocumentOptions
+            {
+                CommentHandling = JsonCommentHandling.Skip,
+            });
+
+            if (node is not JsonObject obj)
+                throw new InvalidDataException($"{Path.GetFileName(file)}: expected a JSON object at the top level.");
+
+            foreach (var (key, value) in obj.ToList())
+            {
+                if (seen.TryGetValue(key, out var owner))
+                    throw new InvalidDataException(
+                        $"'{key}' is defined in both {owner} and {Path.GetFileName(file)}.");
+
+                seen[key] = Path.GetFileName(file);
+                obj.Remove(key);
+                merged[key] = value;
+            }
+        }
+
+        var data = JsonSerializer.Deserialize<GameData>(merged.ToJsonString(), SerializerOptions) ?? new GameData();
+
+        if (data.SchemaVersion != ExpectedSchemaVersion)
+            throw new InvalidDataException(
+                $"Data schemaVersion is {data.SchemaVersion}, expected {ExpectedSchemaVersion}. " +
+                "The Data folder is from a different version of the app.");
+
+        if (data.Characters.Count == 0)
+            throw new InvalidDataException("No characters loaded - the Data folder looks incomplete.");
+
+        return data;
     }
 }

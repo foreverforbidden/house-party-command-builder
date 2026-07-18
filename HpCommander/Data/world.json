@@ -1,0 +1,2322 @@
+{
+  "doors": [
+    {
+      "display": "Bathroom Door",
+      "console": "bathroomdoor"
+    },
+    {
+      "display": "Bedroom Closet Door (Left)",
+      "console": "bedroomclosetdoorleft"
+    },
+    {
+      "display": "Bedroom Closet Door (Right)",
+      "console": "bedroomclosetdoorright"
+    },
+    {
+      "display": "Bedroom Door",
+      "console": "bedroomdoor"
+    },
+    {
+      "display": "Dryer Door",
+      "console": "dryerdoor"
+    },
+    {
+      "display": "Front Door",
+      "console": "frontdoor"
+    },
+    {
+      "display": "Garage Door",
+      "console": "garagedoor"
+    },
+    {
+      "display": "Laundry Room Door",
+      "console": "laundryroomdoor"
+    },
+    {
+      "display": "Master Bathroom Door",
+      "console": "masterbathroomdoor"
+    },
+    {
+      "display": "Master Bedroom Door",
+      "console": "masterbedroomdoor"
+    },
+    {
+      "display": "Microwave Door",
+      "console": "microwavedoor"
+    },
+    {
+      "display": "Outdoor Toilet",
+      "console": "outdoortoilet"
+    },
+    {
+      "display": "Pantry Door (Left)",
+      "console": "pantrydoorleft"
+    },
+    {
+      "display": "Pantry Door (Right)",
+      "console": "pantrydoorright"
+    },
+    {
+      "display": "Slider Door",
+      "console": "sliderdoor"
+    },
+    {
+      "display": "Small Spare Closet Door (L)",
+      "console": "smallspareclosetdoorl"
+    },
+    {
+      "display": "Small Spare Closet Door (R)",
+      "console": "smallspareclosetdoorr"
+    },
+    {
+      "display": "Spare Room 2 Door",
+      "console": "spareroom2door"
+    },
+    {
+      "display": "Spare Room Door",
+      "console": "spareroomdoor"
+    },
+    {
+      "display": "SRClosetDoor1",
+      "console": "srclosetdoor1"
+    },
+    {
+      "display": "SRClosetDoor2",
+      "console": "srclosetdoor2"
+    },
+    {
+      "display": "SRClosetDoor3",
+      "console": "srclosetdoor3"
+    },
+    {
+      "display": "SRClosetDoor4",
+      "console": "srclosetdoor4"
+    },
+    {
+      "display": "Study Closet Door (L)",
+      "console": "studyclosetdoorl"
+    },
+    {
+      "display": "Study Closet Door (R)",
+      "console": "studyclosetdoorr"
+    },
+    {
+      "display": "Study Door",
+      "console": "studydoor"
+    },
+    {
+      "display": "Tater\u0027s Door",
+      "console": "tatersdoor"
+    },
+    {
+      "display": "Upstairs Bathroom Door",
+      "console": "upstairsbathroomdoor"
+    },
+    {
+      "display": "Utility Closet Door",
+      "console": "utilityclosetdoor"
+    }
+  ],
+  "doorActions": [
+    {
+      "name": "open",
+      "property": "IsOpen",
+      "value": 1
+    },
+    {
+      "name": "close",
+      "property": "IsOpen",
+      "value": 0
+    },
+    {
+      "name": "lock",
+      "property": "IsLocked",
+      "value": 1
+    },
+    {
+      "name": "unlock",
+      "property": "IsLocked",
+      "value": 0
+    }
+  ],
+  "locations": [
+    {
+      "consoleName": "abovecompubrah2",
+      "displayName": "AboveCompubrah2"
+    },
+    {
+      "consoleName": "abovehottub",
+      "displayName": "AboveHotTub"
+    },
+    {
+      "consoleName": "altar",
+      "displayName": "Altar"
+    },
+    {
+      "consoleName": "amala",
+      "displayName": "Amala"
+    },
+    {
+      "consoleName": "amy",
+      "displayName": "Amy"
+    },
+    {
+      "consoleName": "arin",
+      "displayName": "Arin"
+    },
+    {
+      "consoleName": "armchair",
+      "displayName": "Armchair"
+    },
+    {
+      "consoleName": "artroomcloset",
+      "displayName": "ArtRoomCloset"
+    },
+    {
+      "consoleName": "ashley",
+      "displayName": "Ashley"
+    },
+    {
+      "consoleName": "babs",
+      "displayName": "Babs"
+    },
+    {
+      "consoleName": "balloonstandspot1",
+      "displayName": "BalloonStandSpot1"
+    },
+    {
+      "consoleName": "balloonstandspot2",
+      "displayName": "BalloonStandSpot2"
+    },
+    {
+      "consoleName": "bededge",
+      "displayName": "BedEdge"
+    },
+    {
+      "consoleName": "bedleft",
+      "displayName": "Bed (Left)"
+    },
+    {
+      "consoleName": "bedright",
+      "displayName": "Bed (Right)"
+    },
+    {
+      "consoleName": "behindbushes",
+      "displayName": "BehindBushes"
+    },
+    {
+      "consoleName": "behindgazebo",
+      "displayName": "BehindGazebo"
+    },
+    {
+      "consoleName": "behindholeinfence",
+      "displayName": "BehindHoleInFence"
+    },
+    {
+      "consoleName": "behindholeinfenceright",
+      "displayName": "BehindHoleInFenceRight"
+    },
+    {
+      "consoleName": "betweenkitchenanddiningroom",
+      "displayName": "BetweenKitchenAndDiningRoom"
+    },
+    {
+      "consoleName": "brittney",
+      "displayName": "Brittney"
+    },
+    {
+      "consoleName": "cabinetleft",
+      "displayName": "CabinetLeft"
+    },
+    {
+      "consoleName": "cabinetright",
+      "displayName": "CabinetRight"
+    },
+    {
+      "consoleName": "centerofgazebo",
+      "displayName": "CenterOfGazebo"
+    },
+    {
+      "consoleName": "centerofgazeboleft",
+      "displayName": "CenterOfGazeboLeft"
+    },
+    {
+      "consoleName": "centerofhottub",
+      "displayName": "CenterOfHotTub"
+    },
+    {
+      "consoleName": "compubrah",
+      "displayName": "CompuBrah"
+    },
+    {
+      "consoleName": "compubrah2",
+      "displayName": "CompuBrah2"
+    },
+    {
+      "consoleName": "compubrahbedleft",
+      "displayName": "CompuBrah Bed (Left)"
+    },
+    {
+      "consoleName": "compubrahsex",
+      "displayName": "CompuBrahSex"
+    },
+    {
+      "consoleName": "compubrahwallsexleft",
+      "displayName": "CompuBrahWallSexLeft"
+    },
+    {
+      "consoleName": "couchleft",
+      "displayName": "Couch (Left)"
+    },
+    {
+      "consoleName": "couchmiddle",
+      "displayName": "Couch (Middle)"
+    },
+    {
+      "consoleName": "couchright",
+      "displayName": "Couch (Right)"
+    },
+    {
+      "consoleName": "dan",
+      "displayName": "Dan"
+    },
+    {
+      "consoleName": "deadsnake",
+      "displayName": "DeadSnake"
+    },
+    {
+      "consoleName": "derek",
+      "displayName": "Derek"
+    },
+    {
+      "consoleName": "diningroom",
+      "displayName": "DiningRoom"
+    },
+    {
+      "consoleName": "diningroomleftofarmchair",
+      "displayName": "DiningRoomLeftOfArmchair"
+    },
+    {
+      "consoleName": "diningroomnearfrontwindow",
+      "displayName": "DiningRoomNearFrontWindow"
+    },
+    {
+      "consoleName": "diningroomneartvmediaplayer",
+      "displayName": "DiningRoomNearTVMediaPlayer"
+    },
+    {
+      "consoleName": "disembodiedhead",
+      "displayName": "Disembodied Head"
+    },
+    {
+      "consoleName": "dojacat",
+      "displayName": "Doja Cat"
+    },
+    {
+      "consoleName": "doorbracingspot",
+      "displayName": "DoorBracingSpot"
+    },
+    {
+      "consoleName": "downstairsbathroom",
+      "displayName": "DownstairsBathroom"
+    },
+    {
+      "consoleName": "drone",
+      "displayName": "Drone"
+    },
+    {
+      "consoleName": "dryerseat",
+      "displayName": "DryerSeat"
+    },
+    {
+      "consoleName": "dryerstuckspot",
+      "displayName": "DryerStuckSpot"
+    },
+    {
+      "consoleName": "dryerstuckspotimmediate",
+      "displayName": "DryerStuckSpotImmediate"
+    },
+    {
+      "consoleName": "enterpartypoint",
+      "displayName": "EnterPartyPoint"
+    },
+    {
+      "consoleName": "firepit",
+      "displayName": "Fire Pit"
+    },
+    {
+      "consoleName": "flamingoseatleft",
+      "displayName": "FlamingoSeatLeft"
+    },
+    {
+      "consoleName": "flamingoseatright",
+      "displayName": "FlamingoSeatRight"
+    },
+    {
+      "consoleName": "forestfrankrunningescapespot",
+      "displayName": "ForestFrankRunningEscapeSpot"
+    },
+    {
+      "consoleName": "foresthottubseat3",
+      "displayName": "Forest HotTub Seat 3"
+    },
+    {
+      "consoleName": "forestlakespot",
+      "displayName": "ForestLakeSpot"
+    },
+    {
+      "consoleName": "forestmoonshinestill",
+      "displayName": "ForestMoonshineStill"
+    },
+    {
+      "consoleName": "forestmoviesetcenter",
+      "displayName": "ForestMovieSetCenter"
+    },
+    {
+      "consoleName": "forestmoviesetentrance",
+      "displayName": "ForestMovieSetEntrance"
+    },
+    {
+      "consoleName": "forestmoviesetnearaltar",
+      "displayName": "ForestMovieSetNearAltar"
+    },
+    {
+      "consoleName": "forestmoviesetnearaltar2",
+      "displayName": "ForestMovieSetNearAltar2"
+    },
+    {
+      "consoleName": "forestmoviesetnearaltar3",
+      "displayName": "ForestMovieSetNearAltar3"
+    },
+    {
+      "consoleName": "forestmoviesetnearaltar4",
+      "displayName": "ForestMovieSetNearAltar4"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositiona",
+      "displayName": "ForestMovieSetStandbyPositionA"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositionb",
+      "displayName": "ForestMovieSetStandbyPositionB"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositionc",
+      "displayName": "ForestMovieSetStandbyPositionC"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositiond",
+      "displayName": "ForestMovieSetStandbyPositionD"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositione",
+      "displayName": "ForestMovieSetStandbyPositionE"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositionf",
+      "displayName": "ForestMovieSetStandbyPositionF"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositiong",
+      "displayName": "ForestMovieSetStandbyPositionG"
+    },
+    {
+      "consoleName": "forestmoviesetstandbypositionh",
+      "displayName": "ForestMovieSetStandbyPositionH"
+    },
+    {
+      "consoleName": "forestnearcompubrahtree",
+      "displayName": "ForestNearCompubrahTree"
+    },
+    {
+      "consoleName": "forestpolicecar",
+      "displayName": "ForestPoliceCar"
+    },
+    {
+      "consoleName": "forestswampbabsspot",
+      "displayName": "ForestSwampBabsSpot"
+    },
+    {
+      "consoleName": "forestswampentrancea",
+      "displayName": "ForestSwampEntranceA"
+    },
+    {
+      "consoleName": "forestswampentranceb",
+      "displayName": "ForestSwampEntranceB"
+    },
+    {
+      "consoleName": "forestswampsearchspota",
+      "displayName": "ForestSwampSearchSpotA"
+    },
+    {
+      "consoleName": "forestswampsearchspotb",
+      "displayName": "ForestSwampSearchSpotB"
+    },
+    {
+      "consoleName": "forestswampsearchspotc",
+      "displayName": "ForestSwampSearchSpotC"
+    },
+    {
+      "consoleName": "forestswampsearchspotd",
+      "displayName": "ForestSwampSearchSpotD"
+    },
+    {
+      "consoleName": "forestswampsearchspote",
+      "displayName": "ForestSwampSearchSpotE"
+    },
+    {
+      "consoleName": "foresttatershut",
+      "displayName": "ForestTatersHut"
+    },
+    {
+      "consoleName": "foresttrailernearentrancetoarea",
+      "displayName": "ForestTrailerNearEntranceToArea"
+    },
+    {
+      "consoleName": "foresttrailernearfirepit",
+      "displayName": "ForestTrailerNearFirePit"
+    },
+    {
+      "consoleName": "foresttrailerneargisellatrailer",
+      "displayName": "ForestTrailerNearGisellaTrailer"
+    },
+    {
+      "consoleName": "foresttrailerneartoilet",
+      "displayName": "ForestTrailerNearToilet"
+    },
+    {
+      "consoleName": "forestwaterfallbridgeb",
+      "displayName": "ForestWaterfallBridgeB"
+    },
+    {
+      "consoleName": "forestwaterfallbridgec",
+      "displayName": "ForestWaterfallBridgeC"
+    },
+    {
+      "consoleName": "forestwaterfallbridgeleadupa",
+      "displayName": "ForestWaterfallBridgeLeadUpA"
+    },
+    {
+      "consoleName": "forestwaterfallbridgeleadupb",
+      "displayName": "ForestWaterfallBridgeLeadUpB"
+    },
+    {
+      "consoleName": "forestwaterfallbridgeleadupc",
+      "displayName": "ForestWaterfallBridgeLeadUpC"
+    },
+    {
+      "consoleName": "forestwaterfallbridgeleadupd",
+      "displayName": "ForestWaterfallBridgeLeadUpD"
+    },
+    {
+      "consoleName": "frank",
+      "displayName": "Frank"
+    },
+    {
+      "consoleName": "frankchair",
+      "displayName": "FrankChair"
+    },
+    {
+      "consoleName": "frankschair",
+      "displayName": "Frank\u0027s Chair"
+    },
+    {
+      "consoleName": "frontwindowbracingspot",
+      "displayName": "FrontWindowBracingSpot"
+    },
+    {
+      "consoleName": "garage",
+      "displayName": "Garage"
+    },
+    {
+      "consoleName": "garagebehindtable",
+      "displayName": "GarageBehindTable"
+    },
+    {
+      "consoleName": "garagebehindtable2",
+      "displayName": "GarageBehindTable2"
+    },
+    {
+      "consoleName": "garagenearwallvent",
+      "displayName": "GarageNearWallVent"
+    },
+    {
+      "consoleName": "garagesexsafe1",
+      "displayName": "GarageSexSafe1"
+    },
+    {
+      "consoleName": "garagesexsafe2",
+      "displayName": "GarageSexSafe2"
+    },
+    {
+      "consoleName": "garagesexsafe3",
+      "displayName": "GarageSexSafe3"
+    },
+    {
+      "consoleName": "gastronomybook",
+      "displayName": "Gastronomy Book"
+    },
+    {
+      "consoleName": "gisella",
+      "displayName": "Gisella"
+    },
+    {
+      "consoleName": "gutter",
+      "displayName": "Gutter"
+    },
+    {
+      "consoleName": "hottubseat1",
+      "displayName": "HotTub Seat 1"
+    },
+    {
+      "consoleName": "hottubseat2",
+      "displayName": "HotTub Seat 2"
+    },
+    {
+      "consoleName": "hottubseat3",
+      "displayName": "HotTub Seat 3"
+    },
+    {
+      "consoleName": "hottubseat4",
+      "displayName": "HotTub Seat 4"
+    },
+    {
+      "consoleName": "hottubseat5",
+      "displayName": "HotTub Seat 5"
+    },
+    {
+      "consoleName": "hottubsex",
+      "displayName": "HotTubSex"
+    },
+    {
+      "consoleName": "infrontofbushes",
+      "displayName": "InFrontOfBushes"
+    },
+    {
+      "consoleName": "infrontofcenterofgazebo",
+      "displayName": "InFrontOfCenterOfGazebo"
+    },
+    {
+      "consoleName": "infrontofcenterofgazeboleft",
+      "displayName": "InFrontOfCenterOfGazeboLeft"
+    },
+    {
+      "consoleName": "infrontofcenterofgazeboright",
+      "displayName": "InFrontOfCenterOfGazeboRight"
+    },
+    {
+      "consoleName": "infrontofeasel",
+      "displayName": "InFrontOfEasel"
+    },
+    {
+      "consoleName": "infrontofholeinfence",
+      "displayName": "InFrontOfHoleInFence"
+    },
+    {
+      "consoleName": "infrontoftv",
+      "displayName": "InFrontOfTV"
+    },
+    {
+      "consoleName": "insideslider",
+      "displayName": "InsideSlider"
+    },
+    {
+      "consoleName": "justinsideupstairsbathroom",
+      "displayName": "JustInsideUpstairsBathroom"
+    },
+    {
+      "consoleName": "justoutsidedownstairsbathroom",
+      "displayName": "JustOutsideDownstairsBathroom"
+    },
+    {
+      "consoleName": "justoutsidelaundryroom",
+      "displayName": "JustOutsideLaundryRoom"
+    },
+    {
+      "consoleName": "justoutsideupstairsbathroom",
+      "displayName": "JustOutsideUpstairsBathroom"
+    },
+    {
+      "consoleName": "justoutsideupstairsmasterbathroom",
+      "displayName": "JustOutsideUpstairsMasterBathroom"
+    },
+    {
+      "consoleName": "katherine",
+      "displayName": "Katherine"
+    },
+    {
+      "consoleName": "kitchen",
+      "displayName": "Kitchen"
+    },
+    {
+      "consoleName": "kitchenclosesttofridge",
+      "displayName": "KitchenClosestToFridge"
+    },
+    {
+      "consoleName": "kitcheninfrontoffridge",
+      "displayName": "KitchenInFrontOfFridge"
+    },
+    {
+      "consoleName": "kitchennearfruitandmicrowave",
+      "displayName": "KitchenNearFruitAndMicrowave"
+    },
+    {
+      "consoleName": "kitchennearsink",
+      "displayName": "KitchenNearSink"
+    },
+    {
+      "consoleName": "kitchensexsafe1",
+      "displayName": "KitchenSexSafe1"
+    },
+    {
+      "consoleName": "kitchensexsafe2",
+      "displayName": "KitchenSexSafe2"
+    },
+    {
+      "consoleName": "laptop",
+      "displayName": "Laptop"
+    },
+    {
+      "consoleName": "laundryroom",
+      "displayName": "LaundryRoom"
+    },
+    {
+      "consoleName": "laundryroominfrontofdryer",
+      "displayName": "LaundryRoomInFrontOfDryer"
+    },
+    {
+      "consoleName": "lawnchair1",
+      "displayName": "LawnChair1"
+    },
+    {
+      "consoleName": "lawnchair2",
+      "displayName": "LawnChair2"
+    },
+    {
+      "consoleName": "lawnchair3",
+      "displayName": "LawnChair3"
+    },
+    {
+      "consoleName": "lawnchair4",
+      "displayName": "LawnChair4"
+    },
+    {
+      "consoleName": "leah",
+      "displayName": "Leah"
+    },
+    {
+      "consoleName": "lety",
+      "displayName": "Lety"
+    },
+    {
+      "consoleName": "livingroom",
+      "displayName": "LivingRoom"
+    },
+    {
+      "consoleName": "livingroomcorner",
+      "displayName": "LivingRoomCorner"
+    },
+    {
+      "consoleName": "livingroomsexsafe1",
+      "displayName": "LivingRoomSexSafe1"
+    },
+    {
+      "consoleName": "livingroomsexsafe2",
+      "displayName": "LivingRoomSexSafe2"
+    },
+    {
+      "consoleName": "loadingdock",
+      "displayName": "LoadingDock"
+    },
+    {
+      "consoleName": "madison",
+      "displayName": "Madison"
+    },
+    {
+      "consoleName": "masterbathroomsexsafe",
+      "displayName": "MasterBathroomSexSafe"
+    },
+    {
+      "consoleName": "masterbathtubseat",
+      "displayName": "MasterBathTubSeat"
+    },
+    {
+      "consoleName": "masterbedroom",
+      "displayName": "MasterBedroom"
+    },
+    {
+      "consoleName": "masterbedroombedsex",
+      "displayName": "MasterBedroomBedSex"
+    },
+    {
+      "consoleName": "masterbedroomclosetarea",
+      "displayName": "MasterBedroomClosetArea"
+    },
+    {
+      "consoleName": "masterbedroomclosetdoor",
+      "displayName": "MasterBedroomClosetDoor"
+    },
+    {
+      "consoleName": "masterbedroomclosetmiddle",
+      "displayName": "MasterBedroomClosetMiddle"
+    },
+    {
+      "consoleName": "masterbedroomdoor",
+      "displayName": "Master Bedroom Door"
+    },
+    {
+      "consoleName": "masterbedroomsexsafe1",
+      "displayName": "MasterBedroomSexSafe1"
+    },
+    {
+      "consoleName": "masterbedroomsexsafe2",
+      "displayName": "MasterBedroomSexSafe2"
+    },
+    {
+      "consoleName": "merlot",
+      "displayName": "Merlot"
+    },
+    {
+      "consoleName": "microwave",
+      "displayName": "Microwave"
+    },
+    {
+      "consoleName": "mistletoeballsdecoration",
+      "displayName": "MistletoeBallsDecoration"
+    },
+    {
+      "consoleName": "nearbuglamp",
+      "displayName": "NearBugLamp"
+    },
+    {
+      "consoleName": "nearfrontdoor",
+      "displayName": "NearFrontDoor"
+    },
+    {
+      "consoleName": "nearfrontdoorthreshold",
+      "displayName": "NearFrontDoorThreshold"
+    },
+    {
+      "consoleName": "neargaragedoor1",
+      "displayName": "NearGarageDoor1"
+    },
+    {
+      "consoleName": "neargaragedoor2",
+      "displayName": "NearGarageDoor2"
+    },
+    {
+      "consoleName": "officechair",
+      "displayName": "Office Chair"
+    },
+    {
+      "consoleName": "openbriefcase",
+      "displayName": "Open Briefcase"
+    },
+    {
+      "consoleName": "organizingbriefcasespot",
+      "displayName": "OrganizingBriefcaseSpot"
+    },
+    {
+      "consoleName": "outdoortoilet",
+      "displayName": "Outdoor Toilet"
+    },
+    {
+      "consoleName": "outside",
+      "displayName": "Outside"
+    },
+    {
+      "consoleName": "outsideartroomwindow",
+      "displayName": "OutsideArtRoomWindow"
+    },
+    {
+      "consoleName": "outsidebetweenhtubfpit",
+      "displayName": "OutsideBetweenHTubFPit"
+    },
+    {
+      "consoleName": "outsidebetweenpaths",
+      "displayName": "OutsideBetweenPaths"
+    },
+    {
+      "consoleName": "outsidebyfirepit",
+      "displayName": "OutsideByFirePit"
+    },
+    {
+      "consoleName": "outsidebyfirepit2",
+      "displayName": "OutsideByFirePit2"
+    },
+    {
+      "consoleName": "outsidebyfirepit3",
+      "displayName": "OutsideByFirePit3"
+    },
+    {
+      "consoleName": "outsidebyfirepit4",
+      "displayName": "OutsideByFirePit4"
+    },
+    {
+      "consoleName": "outsidebyfirepitfiretrailstart",
+      "displayName": "OutsideByFirePitFireTrailStart"
+    },
+    {
+      "consoleName": "outsidebygarden",
+      "displayName": "OutsideByGarden"
+    },
+    {
+      "consoleName": "outsidebytree1",
+      "displayName": "OutsideByTree1"
+    },
+    {
+      "consoleName": "outsidebytree2",
+      "displayName": "OutsideByTree2"
+    },
+    {
+      "consoleName": "outsidebytree3",
+      "displayName": "OutsideByTree3"
+    },
+    {
+      "consoleName": "outsidedarkcornerleft",
+      "displayName": "OutsideDarkCornerLeft"
+    },
+    {
+      "consoleName": "outsidedarkcornerleft2",
+      "displayName": "OutsideDarkCornerLeft2"
+    },
+    {
+      "consoleName": "outsidedarkcornerleft3",
+      "displayName": "OutsideDarkCornerLeft3"
+    },
+    {
+      "consoleName": "outsidedarkcornerleft4",
+      "displayName": "OutsideDarkCornerLeft4"
+    },
+    {
+      "consoleName": "outsidedarkcornerright",
+      "displayName": "OutsideDarkCornerRight"
+    },
+    {
+      "consoleName": "outsidedarkcornerright2",
+      "displayName": "OutsideDarkCornerRight2"
+    },
+    {
+      "consoleName": "outsidedarkcornerright3",
+      "displayName": "OutsideDarkCornerRight3"
+    },
+    {
+      "consoleName": "outsidedarkrearcornerleft1",
+      "displayName": "OutsideDarkRearCornerLeft1"
+    },
+    {
+      "consoleName": "outsidedarkrearcornerleft2",
+      "displayName": "OutsideDarkRearCornerLeft2"
+    },
+    {
+      "consoleName": "outsidediningroomwindow",
+      "displayName": "OutsideDiningRoomWindow"
+    },
+    {
+      "consoleName": "outsidefenceleftbushes",
+      "displayName": "OutsideFenceLeftBushes"
+    },
+    {
+      "consoleName": "outsidefencerightbushes",
+      "displayName": "OutsideFenceRightBushes"
+    },
+    {
+      "consoleName": "outsidefencerightbushes2",
+      "displayName": "OutsideFenceRightBushes2"
+    },
+    {
+      "consoleName": "outsidefrontdoor",
+      "displayName": "OutsideFrontDoor"
+    },
+    {
+      "consoleName": "outsidefrontofhtub",
+      "displayName": "OutsideFrontOfHTub"
+    },
+    {
+      "consoleName": "outsidegazeboleft1",
+      "displayName": "OutsideGazeboLeft1"
+    },
+    {
+      "consoleName": "outsidegazeboleft2",
+      "displayName": "OutsideGazeboLeft2"
+    },
+    {
+      "consoleName": "outsideinfrontofescapehatch",
+      "displayName": "OutsideInFrontOfEscapeHatch"
+    },
+    {
+      "consoleName": "outsideinfrontofescapehatch2",
+      "displayName": "OutsideInFrontOfEscapeHatch2"
+    },
+    {
+      "consoleName": "outsideinfrontofescapehatch3",
+      "displayName": "OutsideInFrontOfEscapeHatch3"
+    },
+    {
+      "consoleName": "outsideinfrontofescapehatch4",
+      "displayName": "OutsideInFrontOfEscapeHatch4"
+    },
+    {
+      "consoleName": "outsideinfrontofescapehatch5",
+      "displayName": "OutsideInFrontOfEscapeHatch5"
+    },
+    {
+      "consoleName": "outsideinfrontofgutter",
+      "displayName": "OutsideInFrontOfGutter"
+    },
+    {
+      "consoleName": "outsideleftofhtub",
+      "displayName": "OutsideLeftOfHTub"
+    },
+    {
+      "consoleName": "outsidenearairconditioner",
+      "displayName": "OutsideNearAirConditioner"
+    },
+    {
+      "consoleName": "outsidenearairconditioner2",
+      "displayName": "OutsideNearAirConditioner2"
+    },
+    {
+      "consoleName": "outsidenearairconditioner3",
+      "displayName": "OutsideNearAirConditioner3"
+    },
+    {
+      "consoleName": "outsidepastescapehatch",
+      "displayName": "OutsidePastEscapeHatch"
+    },
+    {
+      "consoleName": "outsiderightofhtub1",
+      "displayName": "OutsideRightOfHTub1"
+    },
+    {
+      "consoleName": "outsiderightofhtub2",
+      "displayName": "OutsideRightOfHTub2"
+    },
+    {
+      "consoleName": "outsideslider",
+      "displayName": "OutsideSlider"
+    },
+    {
+      "consoleName": "outsidesliderpositiona",
+      "displayName": "OutsideSliderPositionA"
+    },
+    {
+      "consoleName": "outsidesliderpositionb",
+      "displayName": "OutsideSliderPositionB"
+    },
+    {
+      "consoleName": "outsidesliderpositionc",
+      "displayName": "OutsideSliderPositionC"
+    },
+    {
+      "consoleName": "outsidesliderpositiond",
+      "displayName": "OutsideSliderPositionD"
+    },
+    {
+      "consoleName": "outsideslidersexsafe1",
+      "displayName": "OutsideSliderSexSafe1"
+    },
+    {
+      "consoleName": "outsidesofa1left",
+      "displayName": "Outside Sofa 1 Left"
+    },
+    {
+      "consoleName": "outsidesofa1middle",
+      "displayName": "Outside Sofa 1 Middle"
+    },
+    {
+      "consoleName": "outsidesofa1right",
+      "displayName": "Outside Sofa 1 Right"
+    },
+    {
+      "consoleName": "outsidesofa2left",
+      "displayName": "Outside Sofa 2 Left"
+    },
+    {
+      "consoleName": "outsidesofa2middle",
+      "displayName": "Outside Sofa 2 Middle"
+    },
+    {
+      "consoleName": "outsidesofa2right",
+      "displayName": "Outside Sofa 2 Right"
+    },
+    {
+      "consoleName": "patioarmchair",
+      "displayName": "Patio Armchair"
+    },
+    {
+      "consoleName": "patioarmchair2",
+      "displayName": "Patio Armchair 2"
+    },
+    {
+      "consoleName": "patrick",
+      "displayName": "Patrick"
+    },
+    {
+      "consoleName": "pencil",
+      "displayName": "Pencil"
+    },
+    {
+      "consoleName": "phone4",
+      "displayName": "Phone4"
+    },
+    {
+      "consoleName": "player",
+      "displayName": "Player"
+    },
+    {
+      "consoleName": "pouf",
+      "displayName": "Pouf"
+    },
+    {
+      "consoleName": "rachael",
+      "displayName": "Rachael"
+    },
+    {
+      "consoleName": "roofneargutter",
+      "displayName": "RoofNearGutter"
+    },
+    {
+      "consoleName": "roofseatleft",
+      "displayName": "RoofSeatLeft"
+    },
+    {
+      "consoleName": "sofaleft",
+      "displayName": "Sofa (Left)"
+    },
+    {
+      "consoleName": "sofaright",
+      "displayName": "Sofa (Right)"
+    },
+    {
+      "consoleName": "sparebedroom",
+      "displayName": "SpareBedroom"
+    },
+    {
+      "consoleName": "spareroom",
+      "displayName": "SpareRoom"
+    },
+    {
+      "consoleName": "spareroom2",
+      "displayName": "SpareRoom2"
+    },
+    {
+      "consoleName": "spareroom2nearclosetdoorr",
+      "displayName": "SpareRoom2NearClosetDoorR"
+    },
+    {
+      "consoleName": "spareroomclosetarea",
+      "displayName": "SpareRoomClosetArea"
+    },
+    {
+      "consoleName": "spareroommiddlenearwall",
+      "displayName": "SpareRoomMiddleNearWall"
+    },
+    {
+      "consoleName": "spareroomsofaleft",
+      "displayName": "SpareRoomSofaLeft"
+    },
+    {
+      "consoleName": "spareroomsofamiddle",
+      "displayName": "SpareRoomSofaMiddle"
+    },
+    {
+      "consoleName": "spareroomsofaright",
+      "displayName": "SpareRoomSofaRight"
+    },
+    {
+      "consoleName": "speaker1",
+      "displayName": "Speaker1"
+    },
+    {
+      "consoleName": "speaker2",
+      "displayName": "Speaker2"
+    },
+    {
+      "consoleName": "stephanie",
+      "displayName": "Stephanie"
+    },
+    {
+      "consoleName": "stepstool",
+      "displayName": "Stepstool"
+    },
+    {
+      "consoleName": "stepstoolstandspot",
+      "displayName": "StepstoolStandSpot"
+    },
+    {
+      "consoleName": "stove",
+      "displayName": "Stove"
+    },
+    {
+      "consoleName": "study",
+      "displayName": "Study"
+    },
+    {
+      "consoleName": "studylaptoptypingspot",
+      "displayName": "StudyLaptopTypingSpot"
+    },
+    {
+      "consoleName": "upstairsbathroom",
+      "displayName": "UpstairsBathroom"
+    },
+    {
+      "consoleName": "upstairsbathtubseat",
+      "displayName": "UpstairsBathTubSeat"
+    },
+    {
+      "consoleName": "upstairshallbannister",
+      "displayName": "UpstairsHallBannister"
+    },
+    {
+      "consoleName": "upstairshallway",
+      "displayName": "UpstairsHallway"
+    },
+    {
+      "consoleName": "upstairshallwaynearlaundryroom",
+      "displayName": "UpstairsHallwayNearLaundryRoom"
+    },
+    {
+      "consoleName": "upstairsmasterbathroom",
+      "displayName": "UpstairsMasterBathroom"
+    },
+    {
+      "consoleName": "vanitychair",
+      "displayName": "Vanity Chair"
+    },
+    {
+      "consoleName": "vickie",
+      "displayName": "Vickie"
+    },
+    {
+      "consoleName": "wallsexspotfence3",
+      "displayName": "WallSexSpotFence3"
+    },
+    {
+      "consoleName": "wallsexspotmasterbedroom2",
+      "displayName": "WallSexSpotMasterBedroom2"
+    },
+    {
+      "consoleName": "wallsexspotoffice",
+      "displayName": "WallSexSpotOffice"
+    },
+    {
+      "consoleName": "wallsexspotslideroutside",
+      "displayName": "WallSexSpotSliderOutside"
+    },
+    {
+      "consoleName": "washerseat",
+      "displayName": "WasherSeat"
+    },
+    {
+      "consoleName": "watchtvspot1",
+      "displayName": "WatchTVSpot1"
+    },
+    {
+      "consoleName": "watchtvspot2",
+      "displayName": "WatchTVSpot2"
+    },
+    {
+      "consoleName": "winerack",
+      "displayName": "Wine Rack"
+    }
+  ],
+  "cutscenes": [
+    {
+      "name": "ACExplosion_A",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "ACExplosion_M",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "ACExplosion_MA",
+      "npcs": 3,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "AmyPlayerBedroomSex",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "AshleyFinale",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "AshleyFinale_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "AshleySupporter",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "AshleySupporter_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Supporter",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "BabsSpecial",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "BabsSpecial_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DC_FenceEvent",
+      "npcs": 1,
+      "zone": "ArtRoomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DC_FenceEvent_Trailer",
+      "npcs": 3,
+      "zone": "ArtRoomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DerekFinale",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DerekFinale_c",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DerekSupporter",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DerekSupporter_c",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Supporter",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaFinale",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformanceCompleteFail",
+      "npcs": 3,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformanceDroneFail",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformanceGood",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformanceHotTubFail",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformanceLive",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "DojaPerformancePatFail",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_AmyBrittney_AshleyRoom_Voyeur",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_AmyBrittney_AshleyRoom_Voyeur_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_AshleyFinale",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_AshleyFinale_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_AshleySupporter",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_AshleySupporter_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Supporter",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_BabsSpecial",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_BabsSpecial_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_BrittneyFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_BrittneyFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_DerekFinale",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_DerekFinale_c",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_DerekSupporter",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_DerekSupporter_c",
+      "npcs": 1,
+      "zone": "LaundryRoomZone",
+      "pack": "Supporter",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_DojaFinale",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Doja Cat",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_FrankFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_FrankFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_FridgeReveal",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_GisellaFinaleHero",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_GisellaFinaleHero_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_GisellaFinaleVillain",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_GisellaFinaleVillain_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_KatherineFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_KatherineFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizFinale",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizFinale_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizVR",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizVR_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizWashroom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_LizWashroom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ModernGisellaFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ModernGisellaFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_MP3Reach",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_PatrickFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_PatrickFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_PlayerGarageSex",
+      "npcs": 1,
+      "zone": "GarageZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerGarageSex_c",
+      "npcs": 1,
+      "zone": "GarageZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerMasterBedroomSex1",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerMasterBedroomSex1_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerMasterBedroomSex_Straight",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerMasterBedroomSex_Straight 1",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_PlayerMasterBedroomSex_Straight_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Female"
+    },
+    {
+      "name": "F_RachaelFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_RachaelFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_TentacleMastSeat1",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_TentacleMastSeat2",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_TentacleMastSeat3",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_TentacleMastSeat4",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ThreesomeFFF_AshleyRoom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ThreesomeFFF_AshleyRoom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ThreesomeFFM_MasterBedroom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_ThreesomeFFM_MasterBedroom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_VickieFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "F_VickieFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "FinalConfrontation",
+      "npcs": 5,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "FinalConfrontationNoMadison",
+      "npcs": 4,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "FrankBlowjob",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "FrankBlowjob_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "FrankFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "FrankFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "FridgeReveal",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "GenericSpareRoom",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleHero",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleHero_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleVickie",
+      "npcs": 2,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleVickie_c",
+      "npcs": 2,
+      "zone": "SpareRoomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleVillain",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "GisellaFinaleVillain_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "HotTubTimeTravel",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "Intro_F",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "Intro_M",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "KatherineFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "KatherineFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizChanging",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizChanging_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizEntry",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizFinale",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizFinale_c",
+      "npcs": 1,
+      "zone": "SpareRoomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizTentacle",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizTentacle_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizVR",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizVR_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizWashroom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "LizWashroom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ModernGisellaFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ModernGisellaFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Nocturnal Temptations",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "MP3Reach",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "Patjump",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "PlayerGarageSex",
+      "npcs": 1,
+      "zone": "GarageZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "PlayerGarageSex_c",
+      "npcs": 1,
+      "zone": "GarageZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "PlayerMasterBedroomSex1",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "PlayerMasterBedroomSex1_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "RachaelFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "RachaelFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "TentacleMastSeat1",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "TentacleMastSeat2",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "TentacleMastSeat3",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "TentacleMastSeat4",
+      "npcs": 0,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "TentacleReveal",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_AshleyRoom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_AshleyRoom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_EasterEgg",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_EasterEgg_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_Gazebo",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_Gazebo_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_MasterBedroom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeFFM_MasterBedroom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeMMF_1_Gazebo",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeMMF_1_Gazebo_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeMMF_ArtRoom",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "ThreesomeMMF_ArtRoom_c",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "VentRelease",
+      "npcs": 2,
+      "zone": "MasterBedroomZone",
+      "pack": "Liz Katz",
+      "isSexScene": false,
+      "starGender": "Male"
+    },
+    {
+      "name": "VickieFinale",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Explicit Content",
+      "isSexScene": true,
+      "starGender": "Male"
+    },
+    {
+      "name": "VickieFinale_c",
+      "npcs": 1,
+      "zone": "MasterBedroomZone",
+      "pack": "Base",
+      "isSexScene": true,
+      "starGender": "Male"
+    }
+  ]
+}

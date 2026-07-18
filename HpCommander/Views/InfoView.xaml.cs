@@ -1,21 +1,15 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
+using HpCommander.Builders;
 
 namespace HpCommander.Views;
 
-public partial class InfoView : UserControl, ICommandCategoryView
+public partial class InfoView : CommandCategoryViewBase
 {
     private const string IssuesUrl = "https://github.com/foreverforbidden/house-party-command-builder/issues";
 
     private static string InfoPath => Path.Combine(AppContext.BaseDirectory, "Data", "info.txt");
-
-#pragma warning disable CS0067 // Info builds no command; the output bar stays empty for this view.
-    public event EventHandler? CommandChanged;
-#pragma warning restore CS0067
-
-    public bool NeedsGlobalTargets => false;
 
     public InfoView()
     {
@@ -42,6 +36,7 @@ public partial class InfoView : UserControl, ICommandCategoryView
         }
     }
 
-    // Info isn't a command builder; the output bar shows nothing for this view.
-    public string BuildCommand() => "";
+    // Info isn't a command builder; there is nothing for the output bar to copy.
+    public override CommandResult BuildCommand() =>
+        CommandResult.Unavailable("Info is reference only - nothing to copy");
 }

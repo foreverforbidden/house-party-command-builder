@@ -1,89 +1,113 @@
+using System.Windows;
 using System.Windows.Controls;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class SocialView : UserControl, ICommandCategoryView
+public partial class SocialView : CommandCategoryViewBase
 {
-    public event EventHandler? CommandChanged;
+    private const string All = SocialCommandBuilder.AllTarget;
 
-    public bool NeedsGlobalTargets => false;
+    private enum Mode { Value, Relationship, Action }
 
     public SocialView(GameData data)
     {
         InitializeComponent();
 
-        // 'all' is valid for the value form (`social all drunk 25 equals`).
-        ValueCharCombo.Items.Add(SocialCommandBuilder.AllTarget);
-        foreach (var c in data.Characters) ValueCharCombo.Items.Add(c);
-        ValueCharCombo.SelectedIndex = 0;
+        using (SuspendRecompute())
+        {
+            // One subject and one target for all three tabs. Previously five character combos,
+            // each with its own default, so every tab switch meant re-picking the cast.
+            FillChars(CharCombo, data, allTarget: All, selectedIndex: 1);
+            FillChars(TargetCombo, data, selectedIndex: 1);
+            Fill(ModifierCombo, data.SocialModifiers);
 
-        Fill(ValueCombo, data.SocialValues);
-        Fill(ValueModifierCombo, data.SocialModifiers);
+            Fill(ValueCombo, data.SocialValues);
+            Fill(RelTypeCombo, data.SocialRelationships);
+            Fill(ActionCombo, data.SocialActions);
 
-        foreach (var c in data.Characters) RelCharCombo.Items.Add(c);
-        if (RelCharCombo.Items.Count > 0) RelCharCombo.SelectedIndex = 0;
-        foreach (var c in data.Characters) RelTargetCombo.Items.Add(c);
-        if (RelTargetCombo.Items.Count > 1) RelTargetCombo.SelectedIndex = 1;
-        Fill(RelTypeCombo, data.SocialRelationships);
-        Fill(RelModifierCombo, data.SocialModifiers);
-
-        foreach (var c in data.Characters) ActionCharCombo.Items.Add(c);
-        if (ActionCharCombo.Items.Count > 0) ActionCharCombo.SelectedIndex = 0;
-        foreach (var a in data.SocialActions) ActionCombo.Items.Add(a);
-        if (ActionCombo.Items.Count > 0) ActionCombo.SelectedIndex = 0;
-        foreach (var c in data.Characters) ActionTargetCombo.Items.Add(c);
-        if (ActionTargetCombo.Items.Count > 1) ActionTargetCombo.SelectedIndex = 1;
-
-        UpdateActionTargetEnabled();
+            ApplyTabContext();
+        }
     }
 
-    private static void Fill(ComboBox combo, IEnumerable<string> values)
+    private Mode Current => (Mode)Math.Max(0, ModeTabs.SelectedIndex);
+
+    /// <summary>Only the drunk/mood form documents "all" as a subject.</summary>
+    private bool CurrentTabAcceptsAll => Current == Mode.Value;
+
+    private bool ActionNeedsTarget => (ActionCombo.SelectedItem as SocialAction)?.NeedsTarget == true;
+
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        foreach (var v in values) combo.Items.Add(v);
-        if (combo.Items.Count > 0) combo.SelectedIndex = 0;
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        ApplyTabContext();
+        Recompute();
     }
-
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Field_Changed(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
     private void ActionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        UpdateActionTargetEnabled();
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        ApplyTabContext();
+        Recompute();
     }
 
-    private void UpdateActionTargetEnabled()
+    /// <summary>Points the shared header at what the current tab means by it.</summary>
+    private void ApplyTabContext()
     {
-        var needsTarget = (ActionCombo.SelectedItem as SocialAction)?.NeedsTarget == true;
-        ActionTargetCombo.IsEnabled = needsTarget;
-        ActionTargetLabel.Opacity = needsTarget ? 1.0 : 0.5;
+        CharLabel.Text = Current switch
+        {
+            Mode.Value => "Character (or 'all')",
+            Mode.Relationship => "Character (whose feelings change)",
+            _ => "Character",
+        };
+
+        TargetLabel.Text = Current == Mode.Relationship ? "Toward" : "Target";
+
+        var showTarget = Current switch
+        {
+            Mode.Relationship => true,
+            Mode.Action => ActionNeedsTarget,
+            _ => false,
+        };
+        TargetPanel.Visibility = showTarget ? Visibility.Visible : Visibility.Collapsed;
+
+        // The action form takes no modifier.
+        ModifierPanel.Visibility = Current == Mode.Action ? Visibility.Collapsed : Visibility.Visible;
     }
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public override CommandResult BuildCommand()
     {
-        0 => ValueCharCombo.SelectedItem is string c && ValueCombo.SelectedItem is string v
-             && ValueModifierCombo.SelectedItem is string m
-            ? SocialCommandBuilder.Value(c, v, (int)ValueAmount.Value, m)
-            : "(pick a character, value and modifier)",
+        var character = CharCombo.EffectiveValue;
+        if (string.IsNullOrWhiteSpace(character))
+            return CommandResult.NeedsInput("Pick a character");
+        if (string.Equals(character, All, StringComparison.OrdinalIgnoreCase) && !CurrentTabAcceptsAll)
+            return CommandResult.NeedsInput($"'{All}' is not accepted here - pick a single character");
 
-        1 => RelCharCombo.SelectedItem is string rc && RelTargetCombo.SelectedItem is string rt
-             && RelTypeCombo.SelectedItem is string rel && RelModifierCombo.SelectedItem is string rm
-            ? SocialCommandBuilder.Relationship(rc, rt, rel, rm, (int)RelAmount.Value)
-            : "(pick both characters, a relationship and modifier)",
+        var target = TargetCombo.EffectiveValue;
+        var modifier = ModifierCombo.SelectedItem as string;
 
-        2 => ActionCharCombo.SelectedItem is string ac && ActionCombo.SelectedItem is SocialAction act
-            ? (act.NeedsTarget
-                ? ActionTargetCombo.SelectedItem is string at
-                    ? SocialCommandBuilder.ActionWithTarget(ac, at, act.Name)
-                    : "(pick a target)"
-                : SocialCommandBuilder.Action(ac, act.Name))
-            : "(pick a character and action)",
+        return Current switch
+        {
+            Mode.Value => ValueCombo.SelectedItem is string v && modifier is not null
+                ? CommandResult.Ok(SocialCommandBuilder.Value(character, v, (int)ValueAmount.Value, modifier))
+                : CommandResult.NeedsInput("Pick a value and modifier"),
 
-        _ => "",
-    };
+            Mode.Relationship => RelTypeCombo.SelectedItem is string rel && modifier is not null
+                ? string.IsNullOrWhiteSpace(target)
+                    ? CommandResult.NeedsInput("Pick who the feelings are toward")
+                    : CommandResult.Ok(SocialCommandBuilder.Relationship(character, target, rel, modifier, (int)RelAmount.Value))
+                : CommandResult.NeedsInput("Pick a relationship and modifier"),
+
+            Mode.Action => ActionCombo.SelectedItem is SocialAction act
+                ? act.NeedsTarget
+                    ? string.IsNullOrWhiteSpace(target)
+                        ? CommandResult.NeedsInput("Pick a target")
+                        : CommandResult.Ok(SocialCommandBuilder.ActionWithTarget(character, target, act.Name))
+                    : CommandResult.Ok(SocialCommandBuilder.Action(character, act.Name))
+                : CommandResult.NeedsInput("Pick an action"),
+
+            _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
+        };
+    }
 }

@@ -1,4 +1,3 @@
-using System.Windows;
 using System.Windows.Controls;
 using HpCommander.Builders;
 using HpCommander.Controls;
@@ -6,60 +5,42 @@ using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class ValuesView : UserControl, ICommandCategoryView
+public partial class ValuesView : TargetedCommandCategoryViewBase
 {
-    private readonly CharacterChipPicker _targets;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public ValuesView(GameData data, CharacterChipPicker targets)
+    public ValuesView(GameData data, CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
-        _targets = targets;
 
-        foreach (var t in data.Traits)
-            TraitCombo.Items.Add(t);
-        if (TraitCombo.Items.Count > 0)
-            TraitCombo.SelectedIndex = 0;
-
-        foreach (var c in data.Characters)
-            RelOtherCombo.Items.Add(c);
-        if (RelOtherCombo.Items.Count > 0)
-            RelOtherCombo.SelectedIndex = 0;
-
-        foreach (var t in data.RelationshipTypes)
-            RelTypeCombo.Items.Add(t);
-        if (RelTypeCombo.Items.Count > 0)
-            RelTypeCombo.SelectedIndex = 0;
-
-        foreach (var g in data.GenericValues)
-            GenCombo.Items.Add(g);
-        if (GenCombo.Items.Count > 0)
-            GenCombo.SelectedIndex = 0;
+        using (SuspendRecompute())
+        {
+            Fill(TraitCombo, data.Traits);
+            Fill(RelOtherCombo, data.Characters);
+            Fill(RelTypeCombo, data.RelationshipTypes);
+            Fill(GenCombo, data.GenericValues);
+        }
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Field_Changed(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    private void Field_ChangedRouted(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        0 => TraitCombo.SelectedItem is string trait
-            ? ValuesCommandBuilder.BuildTrait(_targets.GetSelectedTargets(), trait, (double)TraitValueStepper.Value)
-            : "(pick a trait)",
-        1 => RelOtherCombo.SelectedItem is string other && RelTypeCombo.SelectedItem is string relType
-            ? ValuesCommandBuilder.BuildRelationship(_targets.GetSelectedTargets(), other, relType, (double)RelValueStepper.Value)
-            : "(pick other character and type)",
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        Recompute();
+    }
+
+    public override CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
+    {
+        // EffectiveValue, not SelectedItem: filtering drops the selection to null mid-word, so
+        // reading SelectedItem would flicker the output back to guidance as the user types.
+        0 => TraitCombo.EffectiveValue is { Length: > 0 } trait
+            ? WithTargets(t => ValuesCommandBuilder.BuildTrait(t, trait, (double)TraitValueStepper.Value))
+            : CommandResult.NeedsInput("Pick a trait"),
+        1 => RelOtherCombo.EffectiveValue is { Length: > 0 } other && RelTypeCombo.SelectedItem is string relType
+            ? WithTargets(t => ValuesCommandBuilder.BuildRelationship(t, other, relType, (double)RelValueStepper.Value))
+            : CommandResult.NeedsInput("Pick the other character and a relationship type"),
         2 => GenCombo.SelectedItem is GenericValue gv
-            ? ValuesCommandBuilder.BuildGeneric(gv.Id, gv.Property, GenCheckBox.IsChecked == true ? 1 : 0)
-            : "(pick an object value)",
-        3 => ValuesCommandBuilder.BuildList(_targets.GetSelectedTargets(), FilterBox.Text),
-        _ => "",
+            ? CommandResult.Ok(ValuesCommandBuilder.BuildGeneric(gv.Id, gv.Property, GenCheckBox.IsChecked == true ? 1 : 0))
+            : CommandResult.NeedsInput("Pick an object value"),
+        3 => WithTargets(t => ValuesCommandBuilder.BuildList(t, FilterBox.Text)),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

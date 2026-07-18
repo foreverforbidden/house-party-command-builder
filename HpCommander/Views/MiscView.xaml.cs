@@ -1,40 +1,33 @@
 using System.Windows;
-using System.Windows.Controls;
 using HpCommander.Builders;
 using HpCommander.Controls;
 
 namespace HpCommander.Views;
 
-public partial class MiscView : UserControl, ICommandCategoryView
+public partial class MiscView : TargetedCommandCategoryViewBase
 {
-    private readonly CharacterChipPicker _targets;
-    private string _output = "(click a button)";
+    private CommandResult _output = CommandResult.NeedsInput("Click a button");
 
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public MiscView(CharacterChipPicker targets)
+    public MiscView(CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
-        _targets = targets;
     }
 
     private void AchButton_Click(object sender, RoutedEventArgs e) => SetOutput(SimpleCommandBuilder.AchievementsClear);
 
     private void UnstuckButton_Click(object sender, RoutedEventArgs e)
     {
-        var target = _targets.GetSelectedTargets().FirstOrDefault(t => t != TargetHelper.AllCharactersTarget) ?? "Player";
+        var target = Targets.GetSelectedTargets().FirstOrDefault(t => t != TargetHelper.AllCharactersTarget) ?? "Player";
         SetOutput(SimpleCommandBuilder.Unstuck(target));
     }
 
     private void HelpButton_Click(object sender, RoutedEventArgs e) => SetOutput(SimpleCommandBuilder.HelpV2);
 
-    private void SetOutput(string text)
+    private void SetOutput(string command)
     {
-        _output = text;
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        _output = CommandResult.Ok(command);
+        Recompute();
     }
 
-    public string BuildCommand() => _output;
+    public override CommandResult BuildCommand() => _output;
 }

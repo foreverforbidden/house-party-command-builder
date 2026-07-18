@@ -1,13 +1,15 @@
-<UserControl x:Class="HpCommander.Views.PropertiesView"
+﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.PropertiesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views"
+             xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Properties" Style="{StaticResource SectionHeaderStyle}" />
             <TextBlock Text="Property" Style="{StaticResource FieldLabelStyle}" />
-            <ComboBox x:Name="PropCombo" IsEditable="True" Width="300" HorizontalAlignment="Left" />
+            <controls:FilteringComboBox x:Name="PropCombo" IsEditable="True" Width="300" HorizontalAlignment="Left" />
             <Button x:Name="ListButton" Content="Build properties.list command instead"
                     HorizontalAlignment="Left" Click="ListButton_Click" />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:TargetedCommandCategoryViewBase>

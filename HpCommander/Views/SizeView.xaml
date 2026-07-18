@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.SizeView"
+﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.SizeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views"
              xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
@@ -12,20 +13,20 @@
                         <TextBlock Text="Scale (1 is default; tip: check 'All Characters' to scale everyone)"
                                    Style="{StaticResource FieldLabelStyle}" MaxWidth="360" TextWrapping="Wrap" />
                         <controls:NumericStepper x:Name="WholeScaleStepper" Minimum="0.1" Maximum="10" Increment="0.1"
-                                                  DecimalPlaces="2" Value="1.5" ValueChanged="Field_Changed" />
+                                                  DecimalPlaces="2" Value="1.5" ValueChanged="OnValueChanged" />
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Body Part" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Body part" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="PartCombo" Width="200" HorizontalAlignment="Left"
-                                  SelectionChanged="PartCombo_SelectionChanged" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Scale (1 is default)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <controls:NumericStepper x:Name="PartScaleStepper" Minimum="0.1" Maximum="10" Increment="0.1"
-                                                  DecimalPlaces="2" Value="1.5" ValueChanged="Field_Changed" />
+                                                  DecimalPlaces="2" Value="1.5" ValueChanged="OnValueChanged" />
                     </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>
     </Border>
-</UserControl>
+</hp:TargetedCommandCategoryViewBase>

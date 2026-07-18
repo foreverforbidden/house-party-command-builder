@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.IntimacyView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.IntimacyView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Intimacy" Style="{StaticResource SectionHeaderStyle}" />
@@ -10,37 +11,37 @@
                 <TabItem Header="Start (2 chars)" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character 1 (the one performing/starting)" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="Char1Combo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="Char1Combo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Character 2" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="Char2Combo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="Char2Combo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="IntimacyEvent" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="TwoEventCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="TwoEventCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="Start (1 char)" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="OneCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="OneCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="IntimacyEvent (confirmed working for StartMasturbation)"
                                    Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" TextWrapping="Wrap" MaxWidth="320" />
-                        <ComboBox x:Name="OneEventCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="OneEventCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="End" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character to stop any ongoing act for" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="EndCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="EndCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="Action Speed" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character currently performing the act" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="SpeedCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="SpeedCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Direction" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="SpeedSubCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="SpeedSubCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
 
@@ -49,7 +50,7 @@
                         <TextBlock Style="{StaticResource WarningTextStyle}" MaxWidth="360"
                                    Text="No confirmed 'example intimacy' output covers reset. This is a best guess by analogy to the confirmed Action Speed pattern - verify carefully in-game." />
                         <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="ResetCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="ResetCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
 
@@ -86,4 +87,4 @@
             </TabControl>
         </StackPanel>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>
