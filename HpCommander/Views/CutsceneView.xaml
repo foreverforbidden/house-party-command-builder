@@ -37,7 +37,8 @@
                             <ComboBox x:Name="Npc3" Width="150" Margin="0,0,8,0" SelectionChanged="OnSelectionChanged" />
                             <ComboBox x:Name="Npc4" Width="150" SelectionChanged="OnSelectionChanged" />
                         </StackPanel>
-                        <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,10,0,0"
+                        <TextBlock x:Name="CastNote" Style="{StaticResource WarningTextStyle}" MaxWidth="440" Margin="0,10,0,0" />
+                        <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,4,0,0"
                                    Text="The cast is the star plus each NPC, in order. A scene needs its exact NPC count to play. Sex scenes require the Explicit Content DLC." />
                     </StackPanel>
                 </TabItem>
