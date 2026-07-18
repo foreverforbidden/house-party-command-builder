@@ -11,7 +11,7 @@
                 <TabItem Header="Trait" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Trait (case-sensitive - pick from list)" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="TraitCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="OnSelectionChanged" />
+                        <controls:FilteringComboBox x:Name="TraitCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Value" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <controls:NumericStepper x:Name="TraitValueStepper" Minimum="-1000" Maximum="1000" Increment="1"
                                                   DecimalPlaces="0" Value="100" ValueChanged="OnValueChanged" />
@@ -20,7 +20,7 @@
                 <TabItem Header="Relationship" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Other character (Player is in the list too)" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="RelOtherCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="OnSelectionChanged" />
+                        <controls:FilteringComboBox x:Name="RelOtherCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Relationship type" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="RelTypeCombo" Width="300" HorizontalAlignment="Left" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Value" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />

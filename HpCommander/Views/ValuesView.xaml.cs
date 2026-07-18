@@ -29,10 +29,12 @@ public partial class ValuesView : TargetedCommandCategoryViewBase
 
     public override CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
-        0 => TraitCombo.SelectedItem is string trait
+        // EffectiveValue, not SelectedItem: filtering drops the selection to null mid-word, so
+        // reading SelectedItem would flicker the output back to guidance as the user types.
+        0 => TraitCombo.EffectiveValue is { Length: > 0 } trait
             ? WithTargets(t => ValuesCommandBuilder.BuildTrait(t, trait, (double)TraitValueStepper.Value))
             : CommandResult.NeedsInput("Pick a trait"),
-        1 => RelOtherCombo.SelectedItem is string other && RelTypeCombo.SelectedItem is string relType
+        1 => RelOtherCombo.EffectiveValue is { Length: > 0 } other && RelTypeCombo.SelectedItem is string relType
             ? WithTargets(t => ValuesCommandBuilder.BuildRelationship(t, other, relType, (double)RelValueStepper.Value))
             : CommandResult.NeedsInput("Pick the other character and a relationship type"),
         2 => GenCombo.SelectedItem is GenericValue gv
