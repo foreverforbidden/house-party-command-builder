@@ -9,7 +9,11 @@
 
             <TextBlock Text="Clothing slot or item ID (per-character items follow the target selection)"
                        Style="{StaticResource FieldLabelStyle}" />
-            <controls:FilteringComboBox x:Name="PartCombo" IsEditable="True" Width="320" HorizontalAlignment="Left" />
+            <controls:FilteringComboBox x:Name="PartCombo" IsEditable="True" Width="420" HorizontalAlignment="Left" />
+
+            <CheckBox x:Name="ShowAllClothingCheck" Content="Show all clothing (ignore who it's filed under)"
+                      Margin="0,2,0,0" Checked="ShowAll_Changed" Unchecked="ShowAll_Changed" />
+            <TextBlock x:Name="ClothingSourceNote" Style="{StaticResource NoteTextStyle}" MaxWidth="420" />
 
             <TextBlock Text="Force state" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
             <StackPanel Orientation="Horizontal">

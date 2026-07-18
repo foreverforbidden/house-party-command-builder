@@ -345,5 +345,12 @@
       "Vickie Valentine DLC",
       "Vickie Winter DLC"
     ]
-  }
+  },
+  "roamingActions": [
+    "list",
+    "allow",
+    "allowlocation",
+    "prohibitlocation",
+    "clearlists"
+  ]
 }

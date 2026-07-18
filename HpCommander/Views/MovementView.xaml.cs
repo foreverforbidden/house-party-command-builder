@@ -9,9 +9,6 @@ public partial class MovementView : CommandCategoryViewBase
 {
     private const string All = MovementCommandBuilder.AllTarget;
 
-    private static readonly string[] RoamActions =
-        ["list", "allow", "allowlocation", "prohibitlocation", "clearlists"];
-
     private enum Mode { Warp, Walk, OverTime, Turn, Roaming }
 
     public MovementView(GameData data)
@@ -26,7 +23,7 @@ public partial class MovementView : CommandCategoryViewBase
             // Index 1 is the first real character: defaulting to "all" is what made that bite.
             FillChars(CharCombo, data, allTarget: All, selectedIndex: 1);
             Fill(DestCombo, data.Locations.Select(l => l.ConsoleName), selectedIndex: -1);
-            Fill(RoamActionCombo, RoamActions);
+            Fill(RoamActionCombo, data.RoamingActions);
 
             // Set default radio states here, not in XAML: an IsChecked="True" in XAML fires
             // the Checked handler during InitializeComponent, before the panels it toggles exist.
