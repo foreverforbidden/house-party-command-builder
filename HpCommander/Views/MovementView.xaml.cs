@@ -63,7 +63,15 @@ public partial class MovementView : UserControl, ICommandCategoryView
         foreach (var i in items) combo.Items.Add(i);
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => Recompute();
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // SelectionChanged bubbles: without this guard, every child ComboBox selection also
+        // arrives here, and anything the tab handler does beyond recomputing would run at
+        // the wrong time.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        Recompute();
+    }
+
     private void Selector_Changed(object sender, SelectionChangedEventArgs e) => Recompute();
     private void Field_Changed(object? sender, EventArgs e) => Recompute();
     private void Field_ChangedRouted(object sender, RoutedEventArgs e) => Recompute();

@@ -40,7 +40,12 @@ public partial class ValuesView : UserControl, ICommandCategoryView
             GenCombo.SelectedIndex = 0;
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        CommandChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 

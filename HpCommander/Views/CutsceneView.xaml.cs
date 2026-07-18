@@ -51,7 +51,12 @@ public partial class CutsceneView : UserControl, ICommandCategoryView
         RandomZoneCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
     }
 
-    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
+    private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // SelectionChanged bubbles; only react to the tab strip itself.
+        if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
+        CommandChanged?.Invoke(this, EventArgs.Empty);
+    }
     private void Selector_Changed(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
     private void Field_Changed(object sender, System.Windows.RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
