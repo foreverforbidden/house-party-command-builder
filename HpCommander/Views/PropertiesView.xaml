@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.PropertiesView"
+﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.PropertiesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Properties" Style="{StaticResource SectionHeaderStyle}" />
@@ -10,4 +11,4 @@
                     HorizontalAlignment="Left" Click="ListButton_Click" />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:TargetedCommandCategoryViewBase>

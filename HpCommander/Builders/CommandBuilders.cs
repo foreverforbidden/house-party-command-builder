@@ -20,16 +20,10 @@ public static class TargetHelper
 {
     public const string AllCharactersTarget = "characters";
 
-    // Still throws while some targeted views build their own targets directly. Becomes total
-    // once every one of them goes through TargetedCommandCategoryViewBase.WithTargets, which
-    // checks emptiness as a state rather than an exception per keystroke.
-    public static string Join(IEnumerable<string> targets)
-    {
-        var list = targets.ToList();
-        if (list.Count == 0)
-            throw new InvalidOperationException("At least one target must be selected.");
-        return string.Join(".", list);
-    }
+    /// <summary>Total. "No targets selected" is a UI state, checked once by
+    /// <c>TargetedCommandCategoryViewBase.WithTargets</c> before any builder is called -
+    /// not an exception thrown and caught on every keystroke.</summary>
+    public static string Join(IEnumerable<string> targets) => string.Join(".", targets);
 
     public static string BoolSuffix(BoolMode mode) => mode switch
     {

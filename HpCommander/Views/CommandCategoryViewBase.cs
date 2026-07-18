@@ -80,14 +80,17 @@ public abstract class CommandCategoryViewBase : UserControl, ICommandCategoryVie
     // correctly, but it is a subtle rule to rely on across 19 XAML files and it fails with
     // confusing errors when it doesn't.
 
-    protected void OnSelectionChanged(object sender, SelectionChangedEventArgs e) => Recompute();
+    // Virtual so a view can react to input beyond recomputing - e.g. clearing a "show the list
+    // instead" flag that a button set.
 
-    protected void OnToggleChanged(object sender, RoutedEventArgs e) => Recompute();
+    protected virtual void OnSelectionChanged(object sender, SelectionChangedEventArgs e) => Recompute();
 
-    protected void OnTextChanged(object sender, TextChangedEventArgs e) => Recompute();
+    protected virtual void OnToggleChanged(object sender, RoutedEventArgs e) => Recompute();
+
+    protected virtual void OnTextChanged(object sender, TextChangedEventArgs e) => Recompute();
 
     /// <summary>For NumericStepper, whose ValueChanged is a plain CLR event.</summary>
-    protected void OnValueChanged(object? sender, EventArgs e) => Recompute();
+    protected virtual void OnValueChanged(object? sender, EventArgs e) => Recompute();
 
     // ---------------- combo population ----------------
 

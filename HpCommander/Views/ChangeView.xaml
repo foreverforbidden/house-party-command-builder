@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.ChangeView"
+﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.ChangeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Change" Style="{StaticResource SectionHeaderStyle}" />
@@ -12,13 +13,13 @@
             <TextBlock Text="Force state" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="ToggleRadio" Content="Toggle (no suffix)" GroupName="ChangeBool"
-                             IsChecked="True" Checked="Field_Changed" />
-                <RadioButton x:Name="TrueRadio" Content="Force On" GroupName="ChangeBool" Checked="Field_Changed" />
-                <RadioButton x:Name="FalseRadio" Content="Force Off" GroupName="ChangeBool" Checked="Field_Changed" />
+                             IsChecked="True" Checked="OnToggleChanged" />
+                <RadioButton x:Name="TrueRadio" Content="Force On" GroupName="ChangeBool" Checked="OnToggleChanged" />
+                <RadioButton x:Name="FalseRadio" Content="Force Off" GroupName="ChangeBool" Checked="OnToggleChanged" />
             </StackPanel>
 
             <Button x:Name="ListButton" Content="Build change.list command instead"
                     HorizontalAlignment="Left" Click="ListButton_Click" />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:TargetedCommandCategoryViewBase>

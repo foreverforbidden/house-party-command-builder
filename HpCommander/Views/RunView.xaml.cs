@@ -1,31 +1,19 @@
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class RunView : UserControl, ICommandCategoryView
+public partial class RunView : TargetedCommandCategoryViewBase
 {
-    private readonly CharacterChipPicker _targets;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public RunView(GameData data, CharacterChipPicker targets)
+    public RunView(GameData data, CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
-        _targets = targets;
-
-        foreach (var f in data.RunFunctions)
-            FuncCombo.Items.Add(f);
-        FuncCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler((_, _) => CommandChanged?.Invoke(this, EventArgs.Empty)));
+        Fill(FuncCombo, data.RunFunctions, selectedIndex: -1);
     }
 
-    public CommandResult BuildCommand() =>
+    public override CommandResult BuildCommand() =>
         string.IsNullOrWhiteSpace(FuncCombo.Text)
             ? CommandResult.NeedsInput("Type a run function name")
-            : CommandResult.Ok(RunCommandBuilder.Build(_targets.GetSelectedTargets(), FuncCombo.Text.Trim()));
+            : WithTargets(t => RunCommandBuilder.Build(t, FuncCombo.Text.Trim()));
 }

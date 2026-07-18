@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.OutfitView"
+﻿<hp:TargetedCommandCategoryViewBase x:Class="HpCommander.Views.OutfitView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Outfit" Style="{StaticResource SectionHeaderStyle}" />
@@ -12,4 +13,4 @@
                        Text="Note: outfit has no false/undo form - to remove pieces afterward use the Change tab per-item." />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:TargetedCommandCategoryViewBase>

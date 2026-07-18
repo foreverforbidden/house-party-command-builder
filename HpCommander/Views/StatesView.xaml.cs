@@ -1,31 +1,19 @@
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class StatesView : UserControl, ICommandCategoryView
+public partial class StatesView : TargetedCommandCategoryViewBase
 {
-    private readonly CharacterChipPicker _targets;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public StatesView(GameData data, CharacterChipPicker targets)
+    public StatesView(GameData data, CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
-        _targets = targets;
-
-        foreach (var s in data.States)
-            StateCombo.Items.Add(s);
-        StateCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler((_, _) => CommandChanged?.Invoke(this, EventArgs.Empty)));
+        Fill(StateCombo, data.States, selectedIndex: -1);
     }
 
-    public CommandResult BuildCommand() =>
+    public override CommandResult BuildCommand() =>
         string.IsNullOrWhiteSpace(StateCombo.Text)
             ? CommandResult.NeedsInput("Pick or type a state")
-            : CommandResult.Ok(StatesCommandBuilder.Build(_targets.GetSelectedTargets(), StateCombo.Text.Trim()));
+            : WithTargets(t => StatesCommandBuilder.Build(t, StateCombo.Text.Trim()));
 }

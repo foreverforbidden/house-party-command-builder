@@ -1,63 +1,50 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class ChangeView : UserControl, ICommandCategoryView
+public partial class ChangeView : TargetedCommandCategoryViewBase
 {
     private readonly GameData _data;
-    private readonly CharacterChipPicker _targets;
     private bool _showList;
 
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public ChangeView(GameData data, CharacterChipPicker targets)
+    public ChangeView(GameData data, CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
         _data = data;
-        _targets = targets;
-
-        PartCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
-        RefreshItems();
+        OnTargetsChanged();
     }
 
-    public void OnTargetsChanged() => RefreshItems();
-
-    private void RefreshItems()
+    public override void OnTargetsChanged()
     {
-        var current = PartCombo.Text;
-        PartCombo.Items.Clear();
-        foreach (var p in _data.ChangeParts)
-            PartCombo.Items.Add(p);
-        var character = _targets.GetSingleSelectedCharacter();
-        if (character != null && _data.ChangeItemsByCharacter.TryGetValue(character, out var items))
-            foreach (var item in items)
-                PartCombo.Items.Add(item.Id);
-        PartCombo.Text = current;
+        // Slot keywords first, then whatever the selected character can wear.
+        var character = Targets.GetSingleSelectedCharacter();
+        var items = character != null && _data.ChangeItemsByCharacter.TryGetValue(character, out var byChar)
+            ? byChar.Select(i => i.Id)
+            : [];
+        RefillPreservingText(PartCombo, _data.ChangeParts.Concat(items));
     }
 
-    private void Field_Changed(object sender, RoutedEventArgs e)
+    /// <summary>Typing a slot or item means the user is done looking at the list.</summary>
+    protected override void OnTextChanged(object sender, TextChangedEventArgs e)
     {
         _showList = false;
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        base.OnTextChanged(sender, e);
     }
 
     private void ListButton_Click(object sender, RoutedEventArgs e)
     {
         _showList = true;
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        Recompute();
     }
 
-    public CommandResult BuildCommand()
+    public override CommandResult BuildCommand()
     {
         if (_showList)
-            return CommandResult.Ok(ChangeCommandBuilder.BuildList(_targets.GetSelectedTargets()));
+            return WithTargets(ChangeCommandBuilder.BuildList);
 
         if (string.IsNullOrWhiteSpace(PartCombo.Text))
             return CommandResult.NeedsInput("Pick a clothing slot or item ID");
@@ -65,6 +52,6 @@ public partial class ChangeView : UserControl, ICommandCategoryView
         var mode = TrueRadio.IsChecked == true ? BoolMode.ForceTrue
             : FalseRadio.IsChecked == true ? BoolMode.ForceFalse
             : BoolMode.Toggle;
-        return CommandResult.Ok(ChangeCommandBuilder.Build(_targets.GetSelectedTargets(), PartCombo.Text.Trim(), mode));
+        return WithTargets(t => ChangeCommandBuilder.Build(t, PartCombo.Text.Trim(), mode));
     }
 }

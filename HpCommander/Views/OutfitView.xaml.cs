@@ -1,48 +1,31 @@
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class OutfitView : UserControl, ICommandCategoryView
+public partial class OutfitView : TargetedCommandCategoryViewBase
 {
     private readonly GameData _data;
-    private readonly CharacterChipPicker _targets;
 
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => true;
-
-    public OutfitView(GameData data, CharacterChipPicker targets)
+    public OutfitView(GameData data, CharacterChipPicker targets) : base(targets)
     {
         InitializeComponent();
         _data = data;
-        _targets = targets;
-
-        OutfitCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_Changed));
         OnTargetsChanged();
     }
 
-    public void OnTargetsChanged()
+    public override void OnTargetsChanged()
     {
-        var current = OutfitCombo.Text;
-        OutfitCombo.Items.Clear();
-        var character = _targets.GetSingleSelectedCharacter();
-        if (character != null && _data.OutfitsByCharacter.TryGetValue(character, out var outfits))
-            foreach (var o in outfits)
-                OutfitCombo.Items.Add(o);
-        OutfitCombo.Text = current;
+        var character = Targets.GetSingleSelectedCharacter();
+        var outfits = character != null && _data.OutfitsByCharacter.TryGetValue(character, out var o)
+            ? o
+            : [];
+        RefillPreservingText(OutfitCombo, outfits);
     }
 
-    private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    public CommandResult BuildCommand()
-    {
-        if (string.IsNullOrWhiteSpace(OutfitCombo.Text))
-            return CommandResult.NeedsInput("Pick or type an outfit ID");
-        return CommandResult.Ok(OutfitCommandBuilder.Build(_targets.GetSelectedTargets(), OutfitCombo.Text.Trim()));
-    }
+    public override CommandResult BuildCommand() =>
+        string.IsNullOrWhiteSpace(OutfitCombo.Text)
+            ? CommandResult.NeedsInput("Pick or type an outfit ID")
+            : WithTargets(t => OutfitCommandBuilder.Build(t, OutfitCombo.Text.Trim()));
 }
