@@ -8,7 +8,9 @@ House Party's built-in developer console supports both a legacy space-separated 
 
 - Character/target picker with search, multi-select, and an "All Characters" mode
 - Builders for Change, Outfit, Inventory, Values (traits/relationships/object values), States, Properties, Run, Addforce, Size, Time, Misc, Intimacy, and legacy V1 commands
-- All game-specific data (characters, items, traits, states, etc.) lives in an editable `Data/commands.json` — extend it as you discover more without recompiling
+- All game-specific data (characters, clothing, values, items, world, social, quests) lives in editable `Data/*.json` files — extend it as you discover more without recompiling
+- Dark mode with live switching, no restart required
+- Optional auto-copy: builds a command and copies it to the clipboard automatically once you stop typing (opt-in, asks for consent first)
 - Clipboard copy with a short history of recently built commands
 
 ## Console reference
@@ -54,7 +56,7 @@ Produces a single self-contained `.exe` (no .NET runtime required on the target 
 dotnet publish HpCommander/HpCommander.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
 ```
 
-`Data/commands.json` is copied next to the executable and can be hand-edited afterward.
+`Data/*.json` is copied next to the executable and can be hand-edited afterward. Each file covers one domain (`characters.json`, `clothing.json`, `values.json`, `items.json`, `world.json`, `social.json`, `quests.json`); `tools/import-data.cs` regenerates them from the `docs/` reference dumps if you want to refresh from source instead (`dotnet run tools/import-data.cs`).
 
 ## Notes
 
