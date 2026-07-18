@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>HpCommander</AssemblyName>
     <RootNamespace>HpCommander</RootNamespace>
-    <ApplicationIcon></ApplicationIcon>
+    <ApplicationIcon>HP-Commander.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +20,9 @@
     </None>
     <ApplicationDefinition Remove="App.xaml" />
     <Page Include="App.xaml" />
+    <!-- ApplicationIcon sets the exe icon; WPF needs it as a Resource for the window's
+         title-bar/taskbar icon at runtime. -->
+    <Resource Include="HP-Commander.ico" />
   </ItemGroup>
 
 </Project>

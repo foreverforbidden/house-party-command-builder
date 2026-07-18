@@ -39,10 +39,12 @@ public partial class DoorView : UserControl, ICommandCategoryView
         var typed = DoorCombo.Text.Trim();
         if (string.IsNullOrWhiteSpace(typed))
             return "(pick or type a door)";
-        if (ActionCombo.SelectedItem is not string action)
+        if (ActionCombo.SelectedItem is not DoorAction action)
             return "(pick an action)";
-        // Prefer the proven console form for a known door; otherwise pass the typed text through.
-        var door = _consoleByDisplay.TryGetValue(typed, out var console) ? console : typed;
-        return DoorCommandBuilder.Build(door, action);
+        // A picked door resolves to its console form; a free-typed name is normalised the same way.
+        var door = _consoleByDisplay.TryGetValue(typed, out var console)
+            ? console
+            : DoorCommandBuilder.Normalise(typed);
+        return DoorCommandBuilder.Build(door, action.Property, action.Value);
     }
 }

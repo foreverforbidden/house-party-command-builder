@@ -13,9 +13,7 @@
                       SelectionChanged="Selector_Changed" />
 
             <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,8,0,0"
-                       Text="Picking a door from the list emits the game's normalised form (e.g. 'frontdoor'), which is the form the console proves works. Typing a name with spaces quotes it as a fallback." />
-            <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440"
-                       Text="The community guide says door locking moved to values.spareroomdoor.set(IsLocked)=1. The game documents this command directly, so both appear to work." />
+                       Text="Doors use the V2 values syntax, e.g. values.frontdoor.set(IsLocked)=1. Lock/unlock set IsLocked; open/close set IsOpen. Picking a door uses its normalised name; a free-typed name is normalised the same way." />
         </StackPanel>
     </Border>
 </UserControl>

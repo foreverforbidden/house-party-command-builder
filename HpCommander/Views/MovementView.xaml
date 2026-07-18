@@ -20,15 +20,15 @@
                         <ComboBox x:Name="WarpDestCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
                         <StackPanel x:Name="WarpCoordPanel" Orientation="Horizontal" Visibility="Collapsed">
                             <StackPanel Margin="0,0,12,0">
-                                <TextBlock Text="X (right/left)" Style="{StaticResource FieldLabelStyle}" />
+                                <TextBlock Text="X — Fireplace ↔ Gazebo" Style="{StaticResource FieldLabelStyle}" />
                                 <controls:NumericStepper x:Name="WarpX" Minimum="-500" Maximum="500" Increment="1" Value="0" ValueChanged="Field_Changed" />
                             </StackPanel>
                             <StackPanel Margin="0,0,12,0">
-                                <TextBlock Text="Y (up/down)" Style="{StaticResource FieldLabelStyle}" />
+                                <TextBlock Text="Y — up / down" Style="{StaticResource FieldLabelStyle}" />
                                 <controls:NumericStepper x:Name="WarpY" Minimum="-500" Maximum="500" Increment="1" Value="0" ValueChanged="Field_Changed" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Text="Z (fwd/back)" Style="{StaticResource FieldLabelStyle}" />
+                                <TextBlock Text="Z — Front Door ↔ Hot Tub" Style="{StaticResource FieldLabelStyle}" />
                                 <controls:NumericStepper x:Name="WarpZ" Minimum="-500" Maximum="500" Increment="1" Value="0" ValueChanged="Field_Changed" />
                             </StackPanel>
                         </StackPanel>

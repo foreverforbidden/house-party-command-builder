@@ -437,7 +437,12 @@
     { "name": "talkto", "needsTarget": true, "label": "Talk to (must be nearby)" }
   ],
 
-  "doorActions": [ "open", "close", "lock", "unlock" ],
+  "doorActions": [
+    { "name": "open",   "property": "IsOpen",   "value": 1 },
+    { "name": "close",  "property": "IsOpen",   "value": 0 },
+    { "name": "lock",   "property": "IsLocked", "value": 1 },
+    { "name": "unlock", "property": "IsLocked", "value": 0 }
+  ],
   "doors": [
     { "display": "Bathroom Door", "console": "bathroomdoor" },
     { "display": "Bedroom Closet Door (Left)", "console": "bedroomclosetdoorleft" },

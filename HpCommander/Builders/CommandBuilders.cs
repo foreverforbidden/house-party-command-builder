@@ -247,14 +247,15 @@ public static class SocialCommandBuilder
 
 public static class DoorCommandBuilder
 {
-    /// <summary>open | close | lock | unlock. The door name is emitted in the console-normalised
-    /// form (`frontdoor`) that the game accepts unquoted - the proven form from `example door`
-    /// (`frontdoor door open`). Free-typed names with spaces are quoted as a fallback.</summary>
-    public static string Build(string door, string action)
-    {
-        var name = door.Contains(' ') ? $"\"{door}\"" : door;
-        return $"door {name} {action}";
-    }
+    /// <summary>Doors are V2 (per the game devs, issue #2): `values.{door}.set(IsLocked)=1/0`
+    /// for lock/unlock and `IsOpen` for open/close. The door id is the console-normalised
+    /// name, e.g. "frontdoor".</summary>
+    public static string Build(string doorConsole, string property, int value) =>
+        $"values.{doorConsole}.set({property})={value}";
+
+    /// <summary>Normalise a free-typed door name to the console form: "Front Door" -> "frontdoor".</summary>
+    public static string Normalise(string name) =>
+        System.Text.RegularExpressions.Regex.Replace(name.ToLowerInvariant(), "[^a-z0-9]", "");
 }
 
 public static class CutsceneCommandBuilder

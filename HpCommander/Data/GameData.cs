@@ -54,10 +54,22 @@ public sealed class GameDoor
 {
     [JsonPropertyName("display")] public string Display { get; set; } = "";
 
-    /// <summary>The console-normalised form, e.g. "frontdoor", which the game accepts unquoted.</summary>
+    /// <summary>The console-normalised form, e.g. "frontdoor", used as the value-object name.</summary>
     [JsonPropertyName("console")] public string Console { get; set; } = "";
 
     public override string ToString() => Display.Length > 0 ? Display : Console;
+}
+
+public sealed class DoorAction
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = "";
+
+    /// <summary>The V2 door value property: IsOpen (open/close) or IsLocked (lock/unlock).</summary>
+    [JsonPropertyName("property")] public string Property { get; set; } = "";
+
+    [JsonPropertyName("value")] public int Value { get; set; }
+
+    public override string ToString() => Name;
 }
 
 public sealed class Cutscene
@@ -117,7 +129,7 @@ public sealed class GameData
     [JsonPropertyName("socialRelationships")] public List<string> SocialRelationships { get; set; } = new();
     [JsonPropertyName("socialModifiers")] public List<string> SocialModifiers { get; set; } = new();
     [JsonPropertyName("socialActions")] public List<SocialAction> SocialActions { get; set; } = new();
-    [JsonPropertyName("doorActions")] public List<string> DoorActions { get; set; } = new();
+    [JsonPropertyName("doorActions")] public List<DoorAction> DoorActions { get; set; } = new();
     [JsonPropertyName("doors")] public List<GameDoor> Doors { get; set; } = new();
     [JsonPropertyName("cutscenes")] public List<Cutscene> Cutscenes { get; set; } = new();
     /// <summary>Quests are story-specific: story -> character -> quest names.</summary>
