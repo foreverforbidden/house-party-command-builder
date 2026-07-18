@@ -12,7 +12,7 @@ namespace HpCommander.Views;
 /// handlers, combo population, and automatic wiring of editable combos. Views subclass this
 /// instead of re-declaring the same dozen lines each.
 /// </summary>
-public abstract class CommandCategoryViewBase : UserControl, ICommandCategoryView
+public abstract class CommandCategoryViewBase : UserControl
 {
     private bool _inputsWired;
     private int _suspendDepth;

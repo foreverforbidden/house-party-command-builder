@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.SocialView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.SocialView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views"
              xmlns:controls="clr-namespace:HpCommander.Controls">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
@@ -12,16 +13,16 @@
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character (or 'all')" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="ValueCharCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Value" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="ValueCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Modifier" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="ValueModifierCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Amount (negative values reduce)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <controls:NumericStepper x:Name="ValueAmount" Minimum="-1000" Maximum="1000"
-                                                  Increment="5" DecimalPlaces="0" Value="25" ValueChanged="Field_Changed" />
+                                                  Increment="5" DecimalPlaces="0" Value="25" ValueChanged="OnValueChanged" />
                     </StackPanel>
                 </TabItem>
 
@@ -29,19 +30,19 @@
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character (whose feelings change)" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="RelCharCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Toward" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="RelTargetCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Relationship" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="RelTypeCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Modifier" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="RelModifierCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Amount" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <controls:NumericStepper x:Name="RelAmount" Minimum="-1000" Maximum="1000"
-                                                  Increment="1" DecimalPlaces="0" Value="10" ValueChanged="Field_Changed" />
+                                                  Increment="1" DecimalPlaces="0" Value="10" ValueChanged="OnValueChanged" />
                     </StackPanel>
                 </TabItem>
 
@@ -49,13 +50,13 @@
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="ActionCharCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="Action" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="ActionCombo" Style="{StaticResource CharacterComboBoxStyle}"
                                   SelectionChanged="ActionCombo_SelectionChanged" />
                         <TextBlock x:Name="ActionTargetLabel" Text="Target" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <ComboBox x:Name="ActionTargetCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
             </TabControl>
@@ -64,4 +65,4 @@
                        Text="The community guide claims this command is obsolete and that these values moved to 'values.set(...)'. The game's own 'example social' documents these forms, so both appear to work." />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>

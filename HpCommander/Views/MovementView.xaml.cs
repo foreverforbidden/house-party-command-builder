@@ -1,80 +1,51 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class MovementView : UserControl, ICommandCategoryView
+public partial class MovementView : CommandCategoryViewBase
 {
     private const string All = MovementCommandBuilder.AllTarget;
 
     private static readonly string[] RoamActions =
-        { "list", "allow", "allowlocation", "prohibitlocation", "clearlists" };
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
+        ["list", "allow", "allowlocation", "prohibitlocation", "clearlists"];
 
     public MovementView(GameData data)
     {
         InitializeComponent();
 
-        var destinations = data.Locations.Select(l => l.ConsoleName).ToList();
+        using (SuspendRecompute())
+        {
+            var destinations = data.Locations.Select(l => l.ConsoleName).ToList();
 
-        // Movers: real characters, plus "all" where the command supports it.
-        FillChars(WarpCharCombo, data, includeAll: true);
-        FillChars(WalkCharCombo, data, includeAll: true);
-        FillChars(OverCharCombo, data, includeAll: false);
-        FillChars(TurnCharCombo, data, includeAll: false);
-        FillChars(RoamCharCombo, data, includeAll: true);
+            // Movers: real characters, plus "all" where the command supports it.
+            FillChars(WarpCharCombo, data, allTarget: All);
+            FillChars(WalkCharCombo, data, allTarget: All);
+            FillChars(OverCharCombo, data);
+            FillChars(TurnCharCombo, data);
+            FillChars(RoamCharCombo, data, allTarget: All);
 
-        FillList(WarpDestCombo, destinations);
-        FillList(WalkDestCombo, destinations);
-        FillList(OverDestCombo, destinations);
-        FillList(TurnTargetCombo, destinations);
-        FillList(RoamDestCombo, destinations);
+            foreach (var combo in new[] { WarpDestCombo, WalkDestCombo, OverDestCombo, TurnTargetCombo, RoamDestCombo })
+                Fill(combo, destinations, selectedIndex: -1);
 
-        foreach (var a in RoamActions) RoamActionCombo.Items.Add(a);
-        RoamActionCombo.SelectedIndex = 0;
+            Fill(RoamActionCombo, RoamActions);
+            UpdateRoamPanels();
 
-        // Editable combos recompute on typing, not just selection.
-        foreach (var c in new[] { WarpDestCombo, WalkDestCombo, OverDestCombo, TurnTargetCombo, RoamDestCombo })
-            c.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(Field_ChangedRouted));
-
-        UpdateRoamPanels();
-
-        // Set default radio states here, not in XAML: an IsChecked="True" in XAML fires
-        // the Checked handler during InitializeComponent, before the panels it toggles exist.
-        WarpDestRadio.IsChecked = true;
-        TurnAroundRadio.IsChecked = true;
-    }
-
-    private static void FillChars(ComboBox combo, GameData data, bool includeAll)
-    {
-        if (includeAll) combo.Items.Add(All);
-        foreach (var c in data.Characters) combo.Items.Add(c);
-        if (combo.Items.Count > 0) combo.SelectedIndex = 0;
-    }
-
-    private static void FillList(ComboBox combo, IEnumerable<string> items)
-    {
-        foreach (var i in items) combo.Items.Add(i);
+            // Set default radio states here, not in XAML: an IsChecked="True" in XAML fires
+            // the Checked handler during InitializeComponent, before the panels it toggles exist.
+            WarpDestRadio.IsChecked = true;
+            TurnAroundRadio.IsChecked = true;
+        }
     }
 
     private void ModeTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        // SelectionChanged bubbles: without this guard, every child ComboBox selection also
-        // arrives here, and anything the tab handler does beyond recomputing would run at
-        // the wrong time.
+        // SelectionChanged bubbles; only react to the tab strip itself.
         if (!ReferenceEquals(e.OriginalSource, ModeTabs)) return;
         Recompute();
     }
-
-    private void Selector_Changed(object sender, SelectionChangedEventArgs e) => Recompute();
-    private void Field_Changed(object? sender, EventArgs e) => Recompute();
-    private void Field_ChangedRouted(object sender, RoutedEventArgs e) => Recompute();
 
     private void WarpMode_Changed(object sender, RoutedEventArgs e)
     {
@@ -104,9 +75,7 @@ public partial class MovementView : UserControl, ICommandCategoryView
         RoamLocationPanel.Visibility = isLocation ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private void Recompute() => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
+    public override CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => BuildWarp(),
         1 => WalkCharCombo.SelectedItem is string wc

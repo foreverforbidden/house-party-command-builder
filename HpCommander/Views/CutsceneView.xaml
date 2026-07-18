@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.CutsceneView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.CutsceneView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Cutscene" Style="{StaticResource SectionHeaderStyle}" />
@@ -12,15 +13,15 @@
                         <TextBlock Text="Scene (the label shows how many NPCs it needs)" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="PlaySceneCombo" IsEditable="True" Width="360" HorizontalAlignment="Left" />
                         <TextBlock Text="Star" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="StarCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="StarCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Text="NPCs (add as many as the scene needs)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="Npc1" Width="150" Margin="0,0,8,0" SelectionChanged="Selector_Changed" />
-                            <ComboBox x:Name="Npc2" Width="150" Margin="0,0,8,0" SelectionChanged="Selector_Changed" />
+                            <ComboBox x:Name="Npc1" Width="150" Margin="0,0,8,0" SelectionChanged="OnSelectionChanged" />
+                            <ComboBox x:Name="Npc2" Width="150" Margin="0,0,8,0" SelectionChanged="OnSelectionChanged" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                            <ComboBox x:Name="Npc3" Width="150" Margin="0,0,8,0" SelectionChanged="Selector_Changed" />
-                            <ComboBox x:Name="Npc4" Width="150" SelectionChanged="Selector_Changed" />
+                            <ComboBox x:Name="Npc3" Width="150" Margin="0,0,8,0" SelectionChanged="OnSelectionChanged" />
+                            <ComboBox x:Name="Npc4" Width="150" SelectionChanged="OnSelectionChanged" />
                         </StackPanel>
                         <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,10,0,0"
                                    Text="The cast is the star plus each NPC, in order. A scene needs its exact NPC count to play. Sex scenes require the Explicit Content DLC." />
@@ -47,7 +48,7 @@
                         <TextBlock Text="Zone" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="RandomZoneCombo" IsEditable="True" Width="280" HorizontalAlignment="Left" />
                         <TextBlock Text="Other character (paired with the Player)" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="RandomOtherCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="Selector_Changed" />
+                        <ComboBox x:Name="RandomOtherCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
                         <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440" Margin="0,10,0,0"
                                    Text="Plays a random scene from the given zone between the Player and the chosen character." />
                     </StackPanel>
@@ -55,4 +56,4 @@
             </TabControl>
         </StackPanel>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>
