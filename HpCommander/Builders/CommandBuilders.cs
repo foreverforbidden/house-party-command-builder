@@ -20,6 +20,9 @@ public static class TargetHelper
 {
     public const string AllCharactersTarget = "characters";
 
+    // Still throws while some targeted views build their own targets directly. Becomes total
+    // once every one of them goes through TargetedCommandCategoryViewBase.WithTargets, which
+    // checks emptiness as a state rather than an exception per keystroke.
     public static string Join(IEnumerable<string> targets)
     {
         var list = targets.ToList();
