@@ -16,5 +16,6 @@ public partial class TimeView : UserControl, ICommandCategoryView
 
     private void ScaleStepper_ValueChanged(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand() => TimeCommandBuilder.BuildScale((double)ScaleStepper.Value);
+    public CommandResult BuildCommand() =>
+        CommandResult.Ok(TimeCommandBuilder.BuildScale((double)ScaleStepper.Value));
 }

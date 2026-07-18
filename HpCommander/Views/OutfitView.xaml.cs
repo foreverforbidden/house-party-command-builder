@@ -39,10 +39,10 @@ public partial class OutfitView : UserControl, ICommandCategoryView
 
     private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand()
+    public CommandResult BuildCommand()
     {
         if (string.IsNullOrWhiteSpace(OutfitCombo.Text))
-            return "(pick or type an outfit ID)";
-        return OutfitCommandBuilder.Build(_targets.GetSelectedTargets(), OutfitCombo.Text.Trim());
+            return CommandResult.NeedsInput("Pick or type an outfit ID");
+        return CommandResult.Ok(OutfitCommandBuilder.Build(_targets.GetSelectedTargets(), OutfitCombo.Text.Trim()));
     }
 }

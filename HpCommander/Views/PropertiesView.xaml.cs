@@ -38,12 +38,12 @@ public partial class PropertiesView : UserControl, ICommandCategoryView
         CommandChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public string BuildCommand()
+    public CommandResult BuildCommand()
     {
         if (_showList)
-            return PropertiesCommandBuilder.BuildList(_targets.GetSelectedTargets());
+            return CommandResult.Ok(PropertiesCommandBuilder.BuildList(_targets.GetSelectedTargets()));
         return string.IsNullOrWhiteSpace(PropCombo.Text)
-            ? "(pick or type a property)"
-            : PropertiesCommandBuilder.Build(_targets.GetSelectedTargets(), PropCombo.Text.Trim());
+            ? CommandResult.NeedsInput("Pick or type a property")
+            : CommandResult.Ok(PropertiesCommandBuilder.Build(_targets.GetSelectedTargets(), PropCombo.Text.Trim()));
     }
 }

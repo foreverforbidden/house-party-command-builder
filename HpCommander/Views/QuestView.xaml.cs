@@ -78,20 +78,20 @@ public partial class QuestView : UserControl, ICommandCategoryView
 
     private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    private static string BuildManage(string subcommand, string questName) =>
+    private static CommandResult BuildManage(string subcommand, string questName) =>
         string.IsNullOrWhiteSpace(questName)
-            ? "(type or pick a quest name)"
-            : QuestCommandBuilder.Manage(subcommand, questName.Trim());
+            ? CommandResult.NeedsInput("Type or pick a quest name")
+            : CommandResult.Ok(QuestCommandBuilder.Manage(subcommand, questName.Trim()));
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => BuildManage("start", StartQuestCombo.Text),
         1 => BuildManage("complete", CompleteQuestCombo.Text),
         2 => BuildManage("increment", IncrementQuestCombo.Text),
         3 => BuildManage("fail", FailQuestCombo.Text),
         4 => ListCharacterCombo.SelectedItem is string character
-            ? QuestCommandBuilder.List(character)
-            : "(pick a character)",
-        _ => "",
+            ? CommandResult.Ok(QuestCommandBuilder.List(character))
+            : CommandResult.NeedsInput("Pick a character"),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

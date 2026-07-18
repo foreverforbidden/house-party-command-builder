@@ -1,6 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
 using HpCommander.Views;
@@ -42,6 +44,7 @@ public partial class MainWindow : Window
     private readonly Dictionary<string, ICommandCategoryView> _viewCache = new();
     private ICommandCategoryView? _activeView;
     private string? _activeName;
+    private CommandResult _current;
 
     public MainWindow()
     {
@@ -182,7 +185,7 @@ public partial class MainWindow : Window
         }
         else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control)
         {
-            CopyToClipboard(OutputBox.Text);
+            CopyToClipboard(_current);
             e.Handled = true;
         }
     }
@@ -214,7 +217,8 @@ public partial class MainWindow : Window
     private IntimacyView CreateIntimacyView()
     {
         var view = new IntimacyView(_data);
-        view.CopyRequested += (_, text) => CopyToClipboard(text);
+        // A double-clicked reference name is a deliberate copy, not a built command.
+        view.CopyRequested += (_, text) => CopyToClipboard(CommandResult.Ok(text));
         return view;
     }
 
@@ -226,28 +230,35 @@ public partial class MainWindow : Window
             return;
         try
         {
-            OutputBox.Text = _activeView.BuildCommand();
+            _current = _activeView.BuildCommand();
         }
         catch (Exception ex)
         {
-            OutputBox.Text = $"({ex.Message})";
+            _current = CommandResult.Error(ex.Message);
         }
+
+        OutputBox.Text = _current.Text;
+        // Guidance and errors are styled as hint text so they can't be mistaken for output,
+        // and the Copy button disables rather than silently doing nothing.
+        OutputBox.Foreground = (Brush)FindResource(_current.IsOk ? "TextPrimaryBrush" : "TextSecondaryBrush");
+        OutputBox.FontStyle = _current.IsOk ? FontStyles.Normal : FontStyles.Italic;
+        CopyButton.IsEnabled = _current.IsOk;
     }
 
-    private void CopyButton_Click(object sender, RoutedEventArgs e) => CopyToClipboard(OutputBox.Text);
+    private void CopyButton_Click(object sender, RoutedEventArgs e) => CopyToClipboard(_current);
 
-    private void CopyToClipboard(string text)
+    private void CopyToClipboard(CommandResult result)
     {
-        if (string.IsNullOrWhiteSpace(text) || text.StartsWith("("))
+        if (!result.IsOk || string.IsNullOrWhiteSpace(result.Text))
             return;
         try
         {
-            Clipboard.SetText(text);
-            PushHistory(text);
+            Clipboard.SetText(result.Text);
+            PushHistory(result.Text);
         }
         catch (System.Runtime.InteropServices.COMException)
         {
-            MessageBox.Show(text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(result.Text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 
@@ -263,6 +274,6 @@ public partial class MainWindow : Window
     private void HistoryList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (HistoryList.SelectedItem is string s)
-            CopyToClipboard(s);
+            CopyToClipboard(CommandResult.Ok(s));
     }
 }

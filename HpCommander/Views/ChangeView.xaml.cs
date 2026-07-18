@@ -54,17 +54,17 @@ public partial class ChangeView : UserControl, ICommandCategoryView
         CommandChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public string BuildCommand()
+    public CommandResult BuildCommand()
     {
         if (_showList)
-            return ChangeCommandBuilder.BuildList(_targets.GetSelectedTargets());
+            return CommandResult.Ok(ChangeCommandBuilder.BuildList(_targets.GetSelectedTargets()));
 
         if (string.IsNullOrWhiteSpace(PartCombo.Text))
-            return "(pick a clothing slot or item ID)";
+            return CommandResult.NeedsInput("Pick a clothing slot or item ID");
 
         var mode = TrueRadio.IsChecked == true ? BoolMode.ForceTrue
             : FalseRadio.IsChecked == true ? BoolMode.ForceFalse
             : BoolMode.Toggle;
-        return ChangeCommandBuilder.Build(_targets.GetSelectedTargets(), PartCombo.Text.Trim(), mode);
+        return CommandResult.Ok(ChangeCommandBuilder.Build(_targets.GetSelectedTargets(), PartCombo.Text.Trim(), mode));
     }
 }

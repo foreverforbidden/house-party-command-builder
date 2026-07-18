@@ -24,8 +24,8 @@ public partial class RunView : UserControl, ICommandCategoryView
         FuncCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler((_, _) => CommandChanged?.Invoke(this, EventArgs.Empty)));
     }
 
-    public string BuildCommand() =>
+    public CommandResult BuildCommand() =>
         string.IsNullOrWhiteSpace(FuncCombo.Text)
-            ? "(type a run function name)"
-            : RunCommandBuilder.Build(_targets.GetSelectedTargets(), FuncCombo.Text.Trim());
+            ? CommandResult.NeedsInput("Type a run function name")
+            : CommandResult.Ok(RunCommandBuilder.Build(_targets.GetSelectedTargets(), FuncCombo.Text.Trim()));
 }

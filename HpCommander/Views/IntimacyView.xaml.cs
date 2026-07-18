@@ -76,24 +76,24 @@ public partial class IntimacyView : UserControl, ICommandCategoryView
             CopyRequested?.Invoke(this, row.Name);
     }
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => Char1Combo.SelectedItem is string c1 && Char2Combo.SelectedItem is string c2 && TwoEventCombo.SelectedItem is string ev
-            ? IntimacyCommandBuilder.StartTwoCharacterAct(c1, c2, ev)
-            : "(pick both characters and an event)",
+            ? CommandResult.Ok(IntimacyCommandBuilder.StartTwoCharacterAct(c1, c2, ev))
+            : CommandResult.NeedsInput("Pick both characters and an event"),
         1 => OneCharCombo.SelectedItem is string oc && OneEventCombo.SelectedItem is string oe
-            ? IntimacyCommandBuilder.StartSingleCharacterAct(oc, oe)
-            : "(pick a character and an event)",
+            ? CommandResult.Ok(IntimacyCommandBuilder.StartSingleCharacterAct(oc, oe))
+            : CommandResult.NeedsInput("Pick a character and an event"),
         2 => EndCharCombo.SelectedItem is string ec
-            ? IntimacyCommandBuilder.EndAct(ec)
-            : "(pick a character)",
+            ? CommandResult.Ok(IntimacyCommandBuilder.EndAct(ec))
+            : CommandResult.NeedsInput("Pick a character"),
         3 => SpeedCharCombo.SelectedItem is string sc && SpeedSubCombo.SelectedItem is string ss
-            ? IntimacyCommandBuilder.ActionSpeed(sc, ss)
-            : "(pick a character and direction)",
+            ? CommandResult.Ok(IntimacyCommandBuilder.ActionSpeed(sc, ss))
+            : CommandResult.NeedsInput("Pick a character and a direction"),
         4 => ResetCharCombo.SelectedItem is string rc
-            ? IntimacyCommandBuilder.ResetGuess(rc)
-            : "(pick a character)",
-        5 => "(reference lookup only - double-click a row to copy a name)",
-        _ => "",
+            ? CommandResult.Ok(IntimacyCommandBuilder.ResetGuess(rc))
+            : CommandResult.NeedsInput("Pick a character"),
+        5 => CommandResult.Unavailable("Reference lookup only - double-click a row to copy a name"),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

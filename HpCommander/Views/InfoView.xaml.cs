@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using HpCommander.Builders;
 
 namespace HpCommander.Views;
 
@@ -42,6 +43,6 @@ public partial class InfoView : UserControl, ICommandCategoryView
         }
     }
 
-    // Info isn't a command builder; the output bar shows nothing for this view.
-    public string BuildCommand() => "";
+    // Info isn't a command builder; there is nothing for the output bar to copy.
+    public CommandResult BuildCommand() => CommandResult.Unavailable("Info is reference only - nothing to copy");
 }

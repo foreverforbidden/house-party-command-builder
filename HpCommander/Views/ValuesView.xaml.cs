@@ -53,18 +53,18 @@ public partial class ValuesView : UserControl, ICommandCategoryView
 
     private void Field_ChangedRouted(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => TraitCombo.SelectedItem is string trait
-            ? ValuesCommandBuilder.BuildTrait(_targets.GetSelectedTargets(), trait, (double)TraitValueStepper.Value)
-            : "(pick a trait)",
+            ? CommandResult.Ok(ValuesCommandBuilder.BuildTrait(_targets.GetSelectedTargets(), trait, (double)TraitValueStepper.Value))
+            : CommandResult.NeedsInput("Pick a trait"),
         1 => RelOtherCombo.SelectedItem is string other && RelTypeCombo.SelectedItem is string relType
-            ? ValuesCommandBuilder.BuildRelationship(_targets.GetSelectedTargets(), other, relType, (double)RelValueStepper.Value)
-            : "(pick other character and type)",
+            ? CommandResult.Ok(ValuesCommandBuilder.BuildRelationship(_targets.GetSelectedTargets(), other, relType, (double)RelValueStepper.Value))
+            : CommandResult.NeedsInput("Pick the other character and a relationship type"),
         2 => GenCombo.SelectedItem is GenericValue gv
-            ? ValuesCommandBuilder.BuildGeneric(gv.Id, gv.Property, GenCheckBox.IsChecked == true ? 1 : 0)
-            : "(pick an object value)",
-        3 => ValuesCommandBuilder.BuildList(_targets.GetSelectedTargets(), FilterBox.Text),
-        _ => "",
+            ? CommandResult.Ok(ValuesCommandBuilder.BuildGeneric(gv.Id, gv.Property, GenCheckBox.IsChecked == true ? 1 : 0))
+            : CommandResult.NeedsInput("Pick an object value"),
+        3 => CommandResult.Ok(ValuesCommandBuilder.BuildList(_targets.GetSelectedTargets(), FilterBox.Text)),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

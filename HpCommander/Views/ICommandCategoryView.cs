@@ -1,10 +1,12 @@
+using HpCommander.Builders;
+
 namespace HpCommander.Views;
 
 public interface ICommandCategoryView
 {
     event EventHandler? CommandChanged;
 
-    string BuildCommand();
+    CommandResult BuildCommand();
 
     bool NeedsGlobalTargets { get; }
 

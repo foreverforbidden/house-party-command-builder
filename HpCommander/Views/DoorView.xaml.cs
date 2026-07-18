@@ -34,17 +34,17 @@ public partial class DoorView : UserControl, ICommandCategoryView
 
     private void Field_Changed(object sender, RoutedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand()
+    public CommandResult BuildCommand()
     {
         var typed = DoorCombo.Text.Trim();
         if (string.IsNullOrWhiteSpace(typed))
-            return "(pick or type a door)";
+            return CommandResult.NeedsInput("Pick or type a door");
         if (ActionCombo.SelectedItem is not DoorAction action)
-            return "(pick an action)";
+            return CommandResult.NeedsInput("Pick an action");
         // A picked door resolves to its console form; a free-typed name is normalised the same way.
         var door = _consoleByDisplay.TryGetValue(typed, out var console)
             ? console
             : DoorCommandBuilder.Normalise(typed);
-        return DoorCommandBuilder.Build(door, action.Property, action.Value);
+        return CommandResult.Ok(DoorCommandBuilder.Build(door, action.Property, action.Value));
     }
 }

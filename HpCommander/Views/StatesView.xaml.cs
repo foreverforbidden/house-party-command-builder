@@ -24,8 +24,8 @@ public partial class StatesView : UserControl, ICommandCategoryView
         StateCombo.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler((_, _) => CommandChanged?.Invoke(this, EventArgs.Empty)));
     }
 
-    public string BuildCommand() =>
+    public CommandResult BuildCommand() =>
         string.IsNullOrWhiteSpace(StateCombo.Text)
-            ? "(pick or type a state)"
-            : StatesCommandBuilder.Build(_targets.GetSelectedTargets(), StateCombo.Text.Trim());
+            ? CommandResult.NeedsInput("Pick or type a state")
+            : CommandResult.Ok(StatesCommandBuilder.Build(_targets.GetSelectedTargets(), StateCombo.Text.Trim()));
 }

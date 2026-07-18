@@ -63,29 +63,29 @@ public partial class CutsceneView : UserControl, ICommandCategoryView
     private string SceneName(string typed) =>
         _sceneByLabel.TryGetValue(typed.Trim(), out var name) ? name : typed.Trim();
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => BuildPlay(),
         1 => string.IsNullOrWhiteSpace(EndSceneCombo.Text)
-            ? "(pick a scene)"
-            : CutsceneCommandBuilder.EndScene(SceneName(EndSceneCombo.Text)),
-        2 => CutsceneCommandBuilder.EndAnyWithPlayer,
+            ? CommandResult.NeedsInput("Pick a scene")
+            : CommandResult.Ok(CutsceneCommandBuilder.EndScene(SceneName(EndSceneCombo.Text))),
+        2 => CommandResult.Ok(CutsceneCommandBuilder.EndAnyWithPlayer),
         3 => RandomOtherCombo.SelectedItem is string other && !string.IsNullOrWhiteSpace(RandomZoneCombo.Text)
-            ? CutsceneCommandBuilder.RandomFromLocation(RandomZoneCombo.Text.Trim(), other)
-            : "(pick a zone and character)",
-        _ => "",
+            ? CommandResult.Ok(CutsceneCommandBuilder.RandomFromLocation(RandomZoneCombo.Text.Trim(), other))
+            : CommandResult.NeedsInput("Pick a zone and a character"),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 
-    private string BuildPlay()
+    private CommandResult BuildPlay()
     {
         if (string.IsNullOrWhiteSpace(PlaySceneCombo.Text))
-            return "(pick a scene)";
+            return CommandResult.NeedsInput("Pick a scene");
         if (StarCombo.SelectedItem is not string star)
-            return "(pick a star)";
+            return CommandResult.NeedsInput("Pick a star");
         var npcs = new[] { Npc1, Npc2, Npc3, Npc4 }
             .Select(c => c.SelectedItem as string)
             .Where(s => s != null && s != NoneNpc)
             .Cast<string>();
-        return CutsceneCommandBuilder.PlayScene(SceneName(PlaySceneCombo.Text), star, npcs);
+        return CommandResult.Ok(CutsceneCommandBuilder.PlayScene(SceneName(PlaySceneCombo.Text), star, npcs));
     }
 }

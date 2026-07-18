@@ -8,7 +8,7 @@ namespace HpCommander.Views;
 public partial class MiscView : UserControl, ICommandCategoryView
 {
     private readonly CharacterChipPicker _targets;
-    private string _output = "(click a button)";
+    private CommandResult _output = CommandResult.NeedsInput("Click a button");
 
     public event EventHandler? CommandChanged;
 
@@ -30,11 +30,11 @@ public partial class MiscView : UserControl, ICommandCategoryView
 
     private void HelpButton_Click(object sender, RoutedEventArgs e) => SetOutput(SimpleCommandBuilder.HelpV2);
 
-    private void SetOutput(string text)
+    private void SetOutput(string command)
     {
-        _output = text;
+        _output = CommandResult.Ok(command);
         CommandChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public string BuildCommand() => _output;
+    public CommandResult BuildCommand() => _output;
 }

@@ -69,26 +69,26 @@ public partial class SocialView : UserControl, ICommandCategoryView
         ActionTargetLabel.Opacity = needsTarget ? 1.0 : 0.5;
     }
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => ValueCharCombo.SelectedItem is string c && ValueCombo.SelectedItem is string v
              && ValueModifierCombo.SelectedItem is string m
-            ? SocialCommandBuilder.Value(c, v, (int)ValueAmount.Value, m)
-            : "(pick a character, value and modifier)",
+            ? CommandResult.Ok(SocialCommandBuilder.Value(c, v, (int)ValueAmount.Value, m))
+            : CommandResult.NeedsInput("Pick a character, value and modifier"),
 
         1 => RelCharCombo.SelectedItem is string rc && RelTargetCombo.SelectedItem is string rt
              && RelTypeCombo.SelectedItem is string rel && RelModifierCombo.SelectedItem is string rm
-            ? SocialCommandBuilder.Relationship(rc, rt, rel, rm, (int)RelAmount.Value)
-            : "(pick both characters, a relationship and modifier)",
+            ? CommandResult.Ok(SocialCommandBuilder.Relationship(rc, rt, rel, rm, (int)RelAmount.Value))
+            : CommandResult.NeedsInput("Pick both characters, a relationship and a modifier"),
 
         2 => ActionCharCombo.SelectedItem is string ac && ActionCombo.SelectedItem is SocialAction act
             ? (act.NeedsTarget
                 ? ActionTargetCombo.SelectedItem is string at
-                    ? SocialCommandBuilder.ActionWithTarget(ac, at, act.Name)
-                    : "(pick a target)"
-                : SocialCommandBuilder.Action(ac, act.Name))
-            : "(pick a character and action)",
+                    ? CommandResult.Ok(SocialCommandBuilder.ActionWithTarget(ac, at, act.Name))
+                    : CommandResult.NeedsInput("Pick a target")
+                : CommandResult.Ok(SocialCommandBuilder.Action(ac, act.Name)))
+            : CommandResult.NeedsInput("Pick a character and an action"),
 
-        _ => "",
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

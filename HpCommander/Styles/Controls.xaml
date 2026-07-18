@@ -115,6 +115,12 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentPressedBrush}" />
                         </Trigger>
+                        <!-- Copy is disabled whenever the output is guidance rather than a command.
+                             Without this the button still reads as clickable and the click just no-ops. -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource SecondaryButtonBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -35,12 +35,12 @@ public partial class SizeView : UserControl, ICommandCategoryView
 
     private void PartCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
-        0 => SizeCommandBuilder.BuildWhole(_targets.GetSelectedTargets(), (double)WholeScaleStepper.Value),
+        0 => CommandResult.Ok(SizeCommandBuilder.BuildWhole(_targets.GetSelectedTargets(), (double)WholeScaleStepper.Value)),
         1 => PartCombo.SelectedItem is string part
-            ? SizeCommandBuilder.BuildPart(_targets.GetSelectedTargets(), part, (double)PartScaleStepper.Value)
-            : "(pick a body part)",
-        _ => "",
+            ? CommandResult.Ok(SizeCommandBuilder.BuildPart(_targets.GetSelectedTargets(), part, (double)PartScaleStepper.Value))
+            : CommandResult.NeedsInput("Pick a body part"),
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 }

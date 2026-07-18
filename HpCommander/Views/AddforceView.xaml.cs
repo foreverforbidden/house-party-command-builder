@@ -20,6 +20,6 @@ public partial class AddforceView : UserControl, ICommandCategoryView
 
     private void Field_Changed(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand() => AddforceCommandBuilder.Build(
-        _targets.GetSelectedTargets(), (int)RightStepper.Value, (int)UpStepper.Value, (int)ForwardStepper.Value);
+    public CommandResult BuildCommand() => CommandResult.Ok(AddforceCommandBuilder.Build(
+        _targets.GetSelectedTargets(), (int)RightStepper.Value, (int)UpStepper.Value, (int)ForwardStepper.Value));
 }

@@ -1,4 +1,5 @@
 using System.Windows.Controls;
+using HpCommander.Builders;
 
 namespace HpCommander.Views;
 
@@ -23,5 +24,5 @@ public sealed class PlaceholderView : UserControl, ICommandCategoryView
         };
     }
 
-    public string BuildCommand() => $"({_name} not yet ported)";
+    public CommandResult BuildCommand() => CommandResult.Unavailable($"{_name} not yet ported");
 }

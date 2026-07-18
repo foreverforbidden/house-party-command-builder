@@ -106,62 +106,62 @@ public partial class MovementView : UserControl, ICommandCategoryView
 
     private void Recompute() => CommandChanged?.Invoke(this, EventArgs.Empty);
 
-    public string BuildCommand() => ModeTabs.SelectedIndex switch
+    public CommandResult BuildCommand() => ModeTabs.SelectedIndex switch
     {
         0 => BuildWarp(),
         1 => WalkCharCombo.SelectedItem is string wc
             ? (string.IsNullOrWhiteSpace(WalkDestCombo.Text)
-                ? "(pick a destination)"
-                : MovementCommandBuilder.WalkTo(wc, WalkDestCombo.Text.Trim(), WalkCancelCheck.IsChecked == true))
-            : "(pick a character)",
+                ? CommandResult.NeedsInput("Pick a destination")
+                : CommandResult.Ok(MovementCommandBuilder.WalkTo(wc, WalkDestCombo.Text.Trim(), WalkCancelCheck.IsChecked == true)))
+            : CommandResult.NeedsInput("Pick a character"),
         2 => OverCharCombo.SelectedItem is string oc
             ? (string.IsNullOrWhiteSpace(OverDestCombo.Text)
-                ? "(pick a destination)"
-                : MovementCommandBuilder.WarpOverTime(oc, OverDestCombo.Text.Trim(), (double)OverSeconds.Value))
-            : "(pick a character)",
+                ? CommandResult.NeedsInput("Pick a destination")
+                : CommandResult.Ok(MovementCommandBuilder.WarpOverTime(oc, OverDestCombo.Text.Trim(), (double)OverSeconds.Value)))
+            : CommandResult.NeedsInput("Pick a character"),
         3 => BuildTurn(),
         4 => BuildRoaming(),
-        _ => "",
+        _ => CommandResult.Error($"Unhandled tab index {ModeTabs.SelectedIndex}"),
     };
 
-    private string BuildWarp()
+    private CommandResult BuildWarp()
     {
         if (WarpCharCombo.SelectedItem is not string c)
-            return "(pick a character)";
+            return CommandResult.NeedsInput("Pick a character");
         if (WarpCoordRadio.IsChecked == true)
-            return MovementCommandBuilder.WarpToCoords(c, (int)WarpX.Value, (int)WarpY.Value, (int)WarpZ.Value);
+            return CommandResult.Ok(MovementCommandBuilder.WarpToCoords(c, (int)WarpX.Value, (int)WarpY.Value, (int)WarpZ.Value));
         return string.IsNullOrWhiteSpace(WarpDestCombo.Text)
-            ? "(pick a destination)"
-            : MovementCommandBuilder.WarpTo(c, WarpDestCombo.Text.Trim());
+            ? CommandResult.NeedsInput("Pick a destination")
+            : CommandResult.Ok(MovementCommandBuilder.WarpTo(c, WarpDestCombo.Text.Trim()));
     }
 
-    private string BuildTurn()
+    private CommandResult BuildTurn()
     {
         if (TurnCharCombo.SelectedItem is not string c)
-            return "(pick a character)";
+            return CommandResult.NeedsInput("Pick a character");
         if (TurnAroundRadio.IsChecked == true)
-            return MovementCommandBuilder.TurnAround(c);
+            return CommandResult.Ok(MovementCommandBuilder.TurnAround(c));
         return string.IsNullOrWhiteSpace(TurnTargetCombo.Text)
-            ? "(pick who to turn toward)"
-            : MovementCommandBuilder.TurnToward(c, TurnTargetCombo.Text.Trim(), TurnInstantCheck.IsChecked == true);
+            ? CommandResult.NeedsInput("Pick who to turn toward")
+            : CommandResult.Ok(MovementCommandBuilder.TurnToward(c, TurnTargetCombo.Text.Trim(), TurnInstantCheck.IsChecked == true));
     }
 
-    private string BuildRoaming()
+    private CommandResult BuildRoaming()
     {
         if (RoamCharCombo.SelectedItem is not string c)
-            return "(pick a character)";
+            return CommandResult.NeedsInput("Pick a character");
         return (RoamActionCombo.SelectedItem as string) switch
         {
-            "list" => MovementCommandBuilder.RoamingList(c),
-            "allow" => MovementCommandBuilder.RoamingAllow(c, RoamAllowTrue.IsChecked == true),
+            "list" => CommandResult.Ok(MovementCommandBuilder.RoamingList(c)),
+            "allow" => CommandResult.Ok(MovementCommandBuilder.RoamingAllow(c, RoamAllowTrue.IsChecked == true)),
             "allowlocation" => string.IsNullOrWhiteSpace(RoamDestCombo.Text)
-                ? "(pick a location)"
-                : MovementCommandBuilder.RoamingAllowLocation(c, RoamDestCombo.Text.Trim()),
+                ? CommandResult.NeedsInput("Pick a location")
+                : CommandResult.Ok(MovementCommandBuilder.RoamingAllowLocation(c, RoamDestCombo.Text.Trim())),
             "prohibitlocation" => string.IsNullOrWhiteSpace(RoamDestCombo.Text)
-                ? "(pick a location or character)"
-                : MovementCommandBuilder.RoamingProhibitLocation(c, RoamDestCombo.Text.Trim()),
-            "clearlists" => MovementCommandBuilder.RoamingClearLists(c),
-            _ => "(pick an action)",
+                ? CommandResult.NeedsInput("Pick a location or character")
+                : CommandResult.Ok(MovementCommandBuilder.RoamingProhibitLocation(c, RoamDestCombo.Text.Trim())),
+            "clearlists" => CommandResult.Ok(MovementCommandBuilder.RoamingClearLists(c)),
+            _ => CommandResult.NeedsInput("Pick an action"),
         };
     }
 }
