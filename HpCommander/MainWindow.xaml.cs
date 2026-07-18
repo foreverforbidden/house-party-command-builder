@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
@@ -22,10 +23,38 @@ public partial class MainWindow : Window
     private string? _activeName;
     private CommandResult _current;
 
+    private readonly AppSettings _settings;
+    // Trailing-edge: restarted on every change, so it fires once the command settles rather than
+    // once per keystroke.
+    private readonly DispatcherTimer _autoCopyTimer = new() { Interval = TimeSpan.FromMilliseconds(600) };
+    private readonly DispatcherTimer _copyStatusTimer = new() { Interval = TimeSpan.FromMilliseconds(1200) };
+    private CommandResult _pendingAutoCopy;
+    private string? _lastCopied;
+    private bool _suppressAutoCopyEvent;
+
     public MainWindow()
     {
         InitializeComponent();
         _data = LoadGameData();
+
+        _settings = AppSettings.Load();
+        _suppressAutoCopyEvent = true;
+        AutoCopyCheck.IsChecked = _settings.AutoCopy;
+        _suppressAutoCopyEvent = false;
+
+        _autoCopyTimer.Tick += AutoCopyTimer_Tick;
+        _copyStatusTimer.Tick += (_, _) =>
+        {
+            _copyStatusTimer.Stop();
+            CopyStatus.Opacity = 0;
+        };
+        Closing += (_, _) =>
+        {
+            // A running DispatcherTimer roots the window.
+            _autoCopyTimer.Stop();
+            _copyStatusTimer.Stop();
+            _settings.Save();
+        };
 
         _chipPicker = new CharacterChipPicker();
         _chipPicker.SetCharacters(_data.Characters);
@@ -194,29 +223,122 @@ public partial class MainWindow : Window
         OutputBox.Foreground = (Brush)FindResource(_current.IsOk ? "TextPrimaryBrush" : "TextSecondaryBrush");
         OutputBox.FontStyle = _current.IsOk ? FontStyles.Normal : FontStyles.Italic;
         CopyButton.IsEnabled = _current.IsOk;
+
+        MaybeAutoCopy(_current);
     }
 
     private void CopyButton_Click(object sender, RoutedEventArgs e) => CopyToClipboard(_current);
 
+    /// <summary>An explicit copy: it may interrupt, and it belongs in history.</summary>
     private void CopyToClipboard(CommandResult result)
     {
         if (!result.IsOk || string.IsNullOrWhiteSpace(result.Text))
             return;
+        if (TrySetClipboard(result.Text, silent: false))
+            PushHistory(result.Text);
+    }
+
+    private bool TrySetClipboard(string text, bool silent)
+    {
         try
         {
-            Clipboard.SetText(result.Text);
-            PushHistory(result.Text);
+            Clipboard.SetText(text);
+            _lastCopied = text;
+            return true;
         }
         catch (System.Runtime.InteropServices.COMException)
         {
-            MessageBox.Show(result.Text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
+            // Right for a deliberate copy, catastrophic for an automatic one: a process holding
+            // the clipboard would otherwise produce a dialog every time the timer fires.
+            if (!silent)
+                MessageBox.Show(text, "Clipboard busy - copy manually", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return false;
         }
+    }
+
+    // ---------------- auto-copy ----------------
+
+    private void AutoCopyCheck_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_suppressAutoCopyEvent)
+            return;
+
+        if (AutoCopyCheck.IsChecked == true && !_settings.AutoCopyConsentGiven)
+        {
+            var answer = MessageBox.Show(
+                "HP Commander will replace your clipboard contents automatically, every time the " +
+                "command it builds changes - including while you are still typing.\n\n" +
+                "This only affects the clipboard on this computer; nothing is sent anywhere.\n\n" +
+                "You can turn it off again with the same checkbox.\n\n" +
+                "Turn auto-copy on?",
+                "Enable auto-copy",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            if (answer != MessageBoxResult.OK)
+            {
+                // Assigning IsChecked re-raises this handler.
+                _suppressAutoCopyEvent = true;
+                AutoCopyCheck.IsChecked = false;
+                _suppressAutoCopyEvent = false;
+                return;
+            }
+
+            _settings.AutoCopyConsentGiven = true;
+        }
+
+        _settings.AutoCopy = AutoCopyCheck.IsChecked == true;
+        _settings.Save();
+
+        if (!_settings.AutoCopy)
+            _autoCopyTimer.Stop();
+    }
+
+    private void MaybeAutoCopy(CommandResult result)
+    {
+        // Guidance and errors are never copied, so a half-built command simply leaves the
+        // clipboard alone. This gate is what CommandResult bought us.
+        if (AutoCopyCheck.IsChecked != true || !result.IsOk)
+        {
+            _autoCopyTimer.Stop();
+            return;
+        }
+
+        _pendingAutoCopy = result;
+        _autoCopyTimer.Stop();
+        _autoCopyTimer.Start();
+    }
+
+    private void AutoCopyTimer_Tick(object? sender, EventArgs e)
+    {
+        _autoCopyTimer.Stop();
+
+        // Idempotent: flipping between tabs that build the same command must not re-copy.
+        if (!_pendingAutoCopy.IsOk || _pendingAutoCopy.Text == _lastCopied)
+            return;
+
+        // Deliberately does not push history. History is "things I chose to copy"; auto-copying
+        // into it would fill all ten slots with intermediate states within seconds.
+        if (TrySetClipboard(_pendingAutoCopy.Text, silent: true))
+            FlashCopyStatus();
+    }
+
+    /// <summary>Without this, auto-copy is invisible and users can't tell whether it worked.</summary>
+    private void FlashCopyStatus()
+    {
+        CopyStatus.Opacity = 1;
+        _copyStatusTimer.Stop();
+        _copyStatusTimer.Start();
     }
 
     private void PushHistory(string text)
     {
-        if (HistoryList.Items.Count > 0 && Equals(HistoryList.Items[0], text))
-            return;
+        // Move-to-front: comparing only against the newest entry left duplicates behind when
+        // copying A, B, A.
+        for (var i = HistoryList.Items.Count - 1; i >= 0; i--)
+            if (Equals(HistoryList.Items[i], text))
+                HistoryList.Items.RemoveAt(i);
+
         HistoryList.Items.Insert(0, text);
         while (HistoryList.Items.Count > 10)
             HistoryList.Items.RemoveAt(HistoryList.Items.Count - 1);
