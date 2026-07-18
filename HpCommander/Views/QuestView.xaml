@@ -1,6 +1,7 @@
-<UserControl x:Class="HpCommander.Views.QuestView"
+﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.QuestView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hp="clr-namespace:HpCommander.Views">
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Quest" Style="{StaticResource SectionHeaderStyle}" />
@@ -51,7 +52,7 @@
                                    Text="Lists every quest for this character in the story you're currently playing. Run this in-game for each character to discover quest names, then add them to Data\commands.json under 'questsByCharacter' so they show up in the dropdowns above." />
                         <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="ListCharacterCombo" Style="{StaticResource CharacterComboBoxStyle}"
-                                  SelectionChanged="Selector_Changed" />
+                                  SelectionChanged="OnSelectionChanged" />
                     </StackPanel>
                 </TabItem>
             </TabControl>
@@ -60,4 +61,4 @@
                        Text="Quest names are not case-sensitive, but there is very limited typo-protection - a wrong name may silently do nothing. Names must come from the story you're currently playing." />
         </StackPanel>
     </Border>
-</UserControl>
+</hp:CommandCategoryViewBase>

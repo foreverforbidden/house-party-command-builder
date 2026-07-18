@@ -1,11 +1,10 @@
-using System.Windows;
 using System.Windows.Controls;
 using HpCommander.Builders;
 using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class InventoryView : UserControl, ICommandCategoryView
+public partial class InventoryView : CommandCategoryViewBase
 {
     private enum ItemKind { Plain, Alias, RequiresEnable, Numbered, Locked }
 
@@ -16,10 +15,6 @@ public partial class InventoryView : UserControl, ICommandCategoryView
     }
 
     private readonly GameData _data;
-
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
 
     public InventoryView(GameData data)
     {
@@ -48,12 +43,10 @@ public partial class InventoryView : UserControl, ICommandCategoryView
             NumberStepper.Maximum = range.Max;
             NumberStepper.Value = range.Min;
         }
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        Recompute();
     }
 
-    private void NumberStepper_ValueChanged(object? sender, EventArgs e) => CommandChanged?.Invoke(this, EventArgs.Empty);
-
-    public CommandResult BuildCommand()
+    public override CommandResult BuildCommand()
     {
         if (ItemCombo.SelectedItem is not ItemEntry entry)
             return CommandResult.NeedsInput("Pick an item");

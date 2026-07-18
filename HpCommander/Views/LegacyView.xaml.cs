@@ -5,42 +5,32 @@ using HpCommander.Data;
 
 namespace HpCommander.Views;
 
-public partial class LegacyView : UserControl, ICommandCategoryView
+public partial class LegacyView : CommandCategoryViewBase
 {
     private const string FreeForAllTarget = "(free-for-all - no target)";
     private const string FightSubcommand = "fight";
 
     private CommandResult _output = CommandResult.NeedsInput("Click a button");
 
-    public event EventHandler? CommandChanged;
-
-    public bool NeedsGlobalTargets => false;
-
     public LegacyView(GameData data)
     {
         InitializeComponent();
 
-        foreach (var c in data.Characters)
-            EnableNpcCombo.Items.Add(c);
+        using (SuspendRecompute())
+        {
+            Fill(EnableNpcCombo, data.Characters, selectedIndex: -1);
 
-        foreach (var a in data.LegacyCombatActions)
-            CombatSubcommandCombo.Items.Add(a);
-        var passoutIndex = CombatSubcommandCombo.Items.IndexOf("passout");
-        CombatSubcommandCombo.SelectedIndex = passoutIndex >= 0 ? passoutIndex : (CombatSubcommandCombo.Items.Count > 0 ? 0 : -1);
+            var combatActions = data.LegacyCombatActions.ToList();
+            Fill(CombatSubcommandCombo, combatActions, selectedIndex: Math.Max(0, combatActions.IndexOf("passout")));
 
-        CombatCharacterCombo.Items.Add(LegacyCommandBuilder.CombatAllTarget);
-        foreach (var c in data.Characters)
-            CombatCharacterCombo.Items.Add(c);
+            FillChars(CombatCharacterCombo, data, allTarget: LegacyCommandBuilder.CombatAllTarget, selectedIndex: -1);
+            FillChars(CombatFightTargetCombo, data, allTarget: FreeForAllTarget);
 
-        CombatFightTargetCombo.Items.Add(FreeForAllTarget);
-        foreach (var c in data.Characters)
-            CombatFightTargetCombo.Items.Add(c);
-        CombatFightTargetCombo.SelectedIndex = 0;
+            UpdateFightTargetEnabled();
 
-        UpdateFightTargetEnabled();
-
-        // Safe to fire NpcToggle_Changed now that every control exists.
-        NpcEnableRadio.IsChecked = true;
+            // Safe to fire NpcToggle_Changed now that every control exists.
+            NpcEnableRadio.IsChecked = true;
+        }
     }
 
     // ---------------- Enable / Disable ----------------
@@ -121,7 +111,7 @@ public partial class LegacyView : UserControl, ICommandCategoryView
     private void SetOutput(CommandResult result)
     {
         _output = result;
-        CommandChanged?.Invoke(this, EventArgs.Empty);
+        Recompute();
     }
 
     private static CommandResult SafeBuild(Func<CommandResult> build)
@@ -136,5 +126,5 @@ public partial class LegacyView : UserControl, ICommandCategoryView
         }
     }
 
-    public CommandResult BuildCommand() => _output;
+    public override CommandResult BuildCommand() => _output;
 }
