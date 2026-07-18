@@ -1,4 +1,4 @@
-﻿<hp:CommandCategoryViewBase x:Class="HpCommander.Views.MovementView"
+<hp:CommandCategoryViewBase x:Class="HpCommander.Views.MovementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hp="clr-namespace:HpCommander.Views"
@@ -6,19 +6,32 @@
     <Border Style="{StaticResource CardStyle}">
         <StackPanel>
             <TextBlock Text="Movement" Style="{StaticResource SectionHeaderStyle}" />
+
+            <!-- Shared across every tab below. Previously each tab declared its own character and
+                 destination combo, so switching tabs silently reverted the mover to 'all'. -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                <StackPanel Margin="0,0,16,0">
+                    <TextBlock x:Name="CharLabel" Text="Character" Style="{StaticResource FieldLabelStyle}" />
+                    <controls:FilteringComboBox x:Name="CharCombo"
+                                                Style="{StaticResource FilteringCharacterComboBoxStyle}"
+                                                SelectionChanged="OnSelectionChanged" />
+                </StackPanel>
+                <StackPanel x:Name="DestPanel">
+                    <TextBlock x:Name="DestLabel" Text="Destination" Style="{StaticResource FieldLabelStyle}" />
+                    <controls:FilteringComboBox x:Name="DestCombo" Width="260" HorizontalAlignment="Left" />
+                </StackPanel>
+            </StackPanel>
+
             <TabControl x:Name="ModeTabs" Style="{StaticResource SegmentedTabControlStyle}"
                         SelectionChanged="ModeTabs_SelectionChanged">
 
                 <TabItem Header="Warp" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
-                        <TextBlock Text="Character (or 'all')" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="WarpCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
-                        <StackPanel Orientation="Horizontal" Margin="0,10,0,4">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <RadioButton x:Name="WarpDestRadio" Content="To character / location" GroupName="WarpMode"
                                          Checked="WarpMode_Changed" />
                             <RadioButton x:Name="WarpCoordRadio" Content="To coordinates" GroupName="WarpMode" Checked="WarpMode_Changed" />
                         </StackPanel>
-                        <ComboBox x:Name="WarpDestCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
                         <StackPanel x:Name="WarpCoordPanel" Orientation="Horizontal" Visibility="Collapsed">
                             <StackPanel Margin="0,0,12,0">
                                 <TextBlock Text="X — Fireplace ↔ Gazebo" Style="{StaticResource FieldLabelStyle}" />
@@ -40,54 +53,40 @@
 
                 <TabItem Header="Walk" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
-                        <TextBlock Text="Character (or 'all')" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="WalkCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
-                        <TextBlock Text="Destination" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="WalkDestCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
-                        <CheckBox x:Name="WalkCancelCheck" Content="Cancel movement instead" Margin="0,10,0,0" Checked="OnToggleChanged" Unchecked="OnToggleChanged" />
+                        <CheckBox x:Name="WalkCancelCheck" Content="Cancel movement instead" Checked="OnToggleChanged" Unchecked="OnToggleChanged" />
+                        <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="380" Margin="0,10,0,0"
+                                   Text="Walks the character there on foot instead of teleporting. 'Cancel' stops a walk already in progress." />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="Over Time" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
-                        <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="OverCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
-                        <TextBlock Text="Destination" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
-                        <ComboBox x:Name="OverDestCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
-                        <TextBlock Text="Seconds" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                        <TextBlock Text="Seconds" Style="{StaticResource FieldLabelStyle}" />
                         <controls:NumericStepper x:Name="OverSeconds" Minimum="0.1" Maximum="60" Increment="0.5" DecimalPlaces="1" Value="3" ValueChanged="OnValueChanged" />
+                        <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="380" Margin="0,10,0,0"
+                                   Text="Glides the character to the destination over the given number of seconds. 'all' is not accepted here." />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="Turn" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
-                        <TextBlock Text="Character" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="TurnCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
-                        <StackPanel Orientation="Horizontal" Margin="0,10,0,4">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <RadioButton x:Name="TurnAroundRadio" Content="Around" GroupName="TurnMode" Checked="TurnMode_Changed" />
                             <RadioButton x:Name="TurnTowardRadio" Content="Toward" GroupName="TurnMode" Checked="TurnMode_Changed" />
                         </StackPanel>
-                        <StackPanel x:Name="TurnTowardPanel" Visibility="Collapsed">
-                            <TextBlock Text="Toward (character or item)" Style="{StaticResource FieldLabelStyle}" />
-                            <ComboBox x:Name="TurnTargetCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
-                            <CheckBox x:Name="TurnInstantCheck" Content="Turn instantly" Margin="0,10,0,0" Checked="OnToggleChanged" Unchecked="OnToggleChanged" />
-                        </StackPanel>
+                        <CheckBox x:Name="TurnInstantCheck" Content="Turn instantly" Checked="OnToggleChanged" Unchecked="OnToggleChanged" />
+                        <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="380" Margin="0,10,0,0"
+                                   Text="'Around' spins the character 180°. 'Toward' faces them at the target above — a character or an item." />
                     </StackPanel>
                 </TabItem>
 
                 <TabItem Header="Roaming" Style="{StaticResource SegmentedTabItemStyle}">
                     <StackPanel Margin="0,8,0,0">
-                        <TextBlock Text="Character (or 'all')" Style="{StaticResource FieldLabelStyle}" />
-                        <ComboBox x:Name="RoamCharCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="OnSelectionChanged" />
-                        <TextBlock Text="Action" Style="{StaticResource FieldLabelStyle}" Margin="0,10,0,4" />
+                        <TextBlock Text="Action" Style="{StaticResource FieldLabelStyle}" />
                         <ComboBox x:Name="RoamActionCombo" Style="{StaticResource CharacterComboBoxStyle}" SelectionChanged="RoamAction_Changed" />
-                        <StackPanel x:Name="RoamAllowPanel" Orientation="Horizontal" Margin="0,10,0,0" Visibility="Collapsed">
+                        <StackPanel x:Name="RoamAllowPanel" Orientation="Horizontal" Visibility="Collapsed">
                             <RadioButton x:Name="RoamAllowTrue" Content="Allow" GroupName="RoamAllow" IsChecked="True" Checked="OnToggleChanged" />
                             <RadioButton x:Name="RoamAllowFalse" Content="Disallow" GroupName="RoamAllow" Checked="OnToggleChanged" />
-                        </StackPanel>
-                        <StackPanel x:Name="RoamLocationPanel" Margin="0,10,0,0" Visibility="Collapsed">
-                            <TextBlock x:Name="RoamLocationLabel" Text="Location / character" Style="{StaticResource FieldLabelStyle}" />
-                            <ComboBox x:Name="RoamDestCombo" IsEditable="True" Width="260" HorizontalAlignment="Left" />
                         </StackPanel>
                         <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="380" Margin="0,10,0,0"
                                    Text="'list' shows a character's allowed/prohibited roam locations. 'clearlists' resets them, letting them roam anywhere (if roaming is enabled)." />
