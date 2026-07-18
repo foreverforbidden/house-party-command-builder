@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HpCommander;
 
@@ -16,6 +17,14 @@ public sealed class AppSettings
     /// <summary>Records that the one-time explanation has been shown, so turning auto-copy off
     /// and on again doesn't re-prompt.</summary>
     public bool AutoCopyConsentGiven { get; set; }
+
+    /// <summary>Light or Dark. Unparseable values fall back to Light rather than failing to load.</summary>
+    public string Theme { get; set; } = nameof(AppTheme.Light);
+
+    /// <summary>Derived, so it must not be written back into the file.</summary>
+    [JsonIgnore]
+    public AppTheme ThemeOrDefault =>
+        Enum.TryParse<AppTheme>(Theme, ignoreCase: true, out var parsed) ? parsed : AppTheme.Light;
 
     // Not AppContext.BaseDirectory: an install under Program Files isn't writable.
     private static string FilePath => Path.Combine(

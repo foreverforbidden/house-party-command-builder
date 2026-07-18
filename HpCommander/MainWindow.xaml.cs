@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     private readonly DispatcherTimer _copyStatusTimer = new() { Interval = TimeSpan.FromMilliseconds(1200) };
     private CommandResult _pendingAutoCopy;
     private string? _lastCopied;
-    private bool _suppressAutoCopyEvent;
+    private bool _suppressSettingEvents;
 
     public MainWindow()
     {
@@ -38,9 +38,12 @@ public partial class MainWindow : Window
         _data = LoadGameData();
 
         _settings = AppSettings.Load();
-        _suppressAutoCopyEvent = true;
+
+        _suppressSettingEvents = true;
         AutoCopyCheck.IsChecked = _settings.AutoCopy;
-        _suppressAutoCopyEvent = false;
+        DarkModeCheck.IsChecked = _settings.ThemeOrDefault == AppTheme.Dark;
+        _suppressSettingEvents = false;
+        Theme.Apply(_settings.ThemeOrDefault);
 
         _autoCopyTimer.Tick += AutoCopyTimer_Tick;
         _copyStatusTimer.Tick += (_, _) =>
@@ -260,7 +263,7 @@ public partial class MainWindow : Window
 
     private void AutoCopyCheck_Changed(object sender, RoutedEventArgs e)
     {
-        if (_suppressAutoCopyEvent)
+        if (_suppressSettingEvents)
             return;
 
         if (AutoCopyCheck.IsChecked == true && !_settings.AutoCopyConsentGiven)
@@ -278,9 +281,9 @@ public partial class MainWindow : Window
             if (answer != MessageBoxResult.OK)
             {
                 // Assigning IsChecked re-raises this handler.
-                _suppressAutoCopyEvent = true;
+                _suppressSettingEvents = true;
                 AutoCopyCheck.IsChecked = false;
-                _suppressAutoCopyEvent = false;
+                _suppressSettingEvents = false;
                 return;
             }
 
@@ -292,6 +295,17 @@ public partial class MainWindow : Window
 
         if (!_settings.AutoCopy)
             _autoCopyTimer.Stop();
+    }
+
+    private void DarkModeCheck_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_suppressSettingEvents)
+            return;
+
+        var theme = DarkModeCheck.IsChecked == true ? AppTheme.Dark : AppTheme.Light;
+        Theme.Apply(theme);
+        _settings.Theme = theme.ToString();
+        _settings.Save();
     }
 
     private void MaybeAutoCopy(CommandResult result)
