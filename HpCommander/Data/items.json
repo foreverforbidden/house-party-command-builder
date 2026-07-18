@@ -1,0 +1,251 @@
+{
+  "items": {
+    "requiresEnable": [
+      {
+        "display": "Ashley's Top",
+        "enableName": "ashleytop"
+      },
+      {
+        "display": "Ashley's Panties",
+        "enableName": "ashleypanties"
+      },
+      {
+        "display": "Ashley's Clothes",
+        "enableName": "clothes"
+      },
+      {
+        "display": "Collar",
+        "enableName": "collarbloody"
+      },
+      {
+        "display": "Condom",
+        "enableName": "condom"
+      },
+      {
+        "display": "Dark Long Sleeve Women's Top",
+        "enableName": "darklongsleevewomenstop"
+      },
+      {
+        "display": "Derek's Shirt",
+        "enableName": "derekclothes"
+      },
+      {
+        "display": "Drone",
+        "enableName": "drone"
+      },
+      {
+        "display": "El Escorpion Mezcal",
+        "enableName": "scorpiontequila"
+      },
+      {
+        "display": "Fifty Dollars",
+        "enableName": "50dollars"
+      },
+      {
+        "display": "Film Camera",
+        "enableName": "filmcamera"
+      },
+      {
+        "display": "Goodbye Kitty Underwear",
+        "enableName": "pinkunderwear"
+      },
+      {
+        "display": "Joint",
+        "enableName": "joint"
+      },
+      {
+        "display": "Mama Chupacabra's",
+        "enableName": "chilipeppers"
+      },
+      {
+        "display": "Marijuana",
+        "enableName": "marijuana"
+      },
+      {
+        "display": "Money Makers Monthly",
+        "enableName": "moneymakersmonthly"
+      },
+      {
+        "display": "Nerdy Taped Glasses",
+        "enableName": "nerdytapedglasses"
+      },
+      {
+        "display": "Patrick's Phone",
+        "enableName": "phone3"
+      },
+      {
+        "display": "Petition",
+        "enableName": "petition"
+      },
+      {
+        "display": "Ripped Whale Poster",
+        "enableName": "rippedwhaleposter"
+      },
+      {
+        "display": "Spray Paint",
+        "enableName": "spraypaintcan"
+      },
+      {
+        "display": "Starbomb Box",
+        "enableName": "starbombbox"
+      },
+      {
+        "display": "Sweeties",
+        "enableName": "sweeties"
+      },
+      {
+        "display": "Vape",
+        "enableName": "vape"
+      },
+      {
+        "display": "Wizbanger Poppers",
+        "enableName": "popperbox"
+      },
+      {
+        "display": "Bike Lock Key",
+        "enableName": "bikelockkey"
+      }
+    ],
+    "aliasNames": [
+      {
+        "display": "Bathroom Skeleton Key",
+        "internal": "Key"
+      },
+      {
+        "display": "Chocolate Syrup",
+        "internal": "Choclate Syrup"
+      },
+      {
+        "display": "Chocolate Bar",
+        "internal": "ChocolateBar"
+      },
+      {
+        "display": "Empty Vodka Bottle",
+        "internal": "Vodka"
+      },
+      {
+        "display": "Fast Food Bag",
+        "internal": "Paper Bag"
+      },
+      {
+        "display": "Hot Tub Cover",
+        "internal": "HotTubCoverFolded"
+      },
+      {
+        "display": "Katherine's Phone",
+        "internal": "Phone2"
+      },
+      {
+        "display": "Laxatives",
+        "internal": "Clear Eyes"
+      },
+      {
+        "display": "Madison's Diary",
+        "internal": "Diary"
+      },
+      {
+        "display": "Madison's Phone",
+        "internal": "A Phone"
+      },
+      {
+        "display": "Mysterious Key",
+        "internal": "Key2"
+      },
+      {
+        "display": "Penguin",
+        "internal": "Dusty Penguin"
+      },
+      {
+        "display": "Sleeping Mask",
+        "internal": "SleepingMaskFolded"
+      },
+      {
+        "display": "Speaker",
+        "internal": "Speaker2"
+      },
+      {
+        "display": "TV Remote",
+        "internal": "Remote Control"
+      },
+      {
+        "display": "Vibratron 3000",
+        "internal": "Vibrator"
+      },
+      {
+        "display": "Weird Dinosaur Suit",
+        "internal": "DLiciousOutfit"
+      },
+      {
+        "display": "Whack Spankiel's",
+        "internal": "Jack Daniel's"
+      },
+      {
+        "display": "Wood Planks",
+        "internal": "PlankPileInYard"
+      }
+    ],
+    "plain": [
+      "Battery Pack",
+      "Blue Hair Dye",
+      "Box of Nails",
+      "Broom",
+      "Cabernet",
+      "Camera",
+      "Cell Phone Jammer",
+      "Chardonnay",
+      "Chicken",
+      "Chicken Nuggets",
+      "Closed Briefcase",
+      "Coffee",
+      "Credit Card",
+      "Cucumber",
+      "Duct Tape",
+      "Eggs",
+      "Empty Cup",
+      "Flask",
+      "Flower",
+      "Foam Finger",
+      "Gut Grip",
+      "Hammer",
+      "Kettle",
+      "Mayonnaise",
+      "Merlot",
+      "Motor Oil",
+      "MP3 Player",
+      "Mug",
+      "Painkillers",
+      "Paper",
+      "Pencil",
+      "PlexiglassStacked",
+      "Popcorn",
+      "Potatoes",
+      "Rum",
+      "Salami",
+      "Salmon",
+      "SD Card",
+      "Soda",
+      "Spoon",
+      "Sundress",
+      "Sunglasses",
+      "Tablet",
+      "Thermos",
+      "Towel",
+      "Towel2",
+      "Towel3",
+      "USB Stick",
+      "Whipped Cream"
+    ],
+    "numberedRange": [
+      {
+        "baseName": "nattylite",
+        "label": "Natty Lite",
+        "min": 1,
+        "max": 14
+      }
+    ],
+    "locked": [
+      "Doja Cat's MP3 Player",
+      "Vickie's Panties"
+    ]
+  }
+}

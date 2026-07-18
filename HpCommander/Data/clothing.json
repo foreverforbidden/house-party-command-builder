@@ -1,0 +1,20 @@
+{
+  "changeItemsByCharacter": {
+    "Amy": [
+      {
+        "id": "arin_hair_amy",
+        "label": "Arin's Hair"
+      }
+    ],
+    "Katherine": [
+      {
+        "id": "Katherine_glasses",
+        "label": "Glasses (toggle)"
+      },
+      {
+        "id": "Katherine_glasses_ThinRimGlasses",
+        "label": "Thin Rim Glasses"
+      }
+    ]
+  }
+}

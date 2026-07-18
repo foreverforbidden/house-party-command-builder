@@ -90,7 +90,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(
-                $"Could not load Data\\commands.json ({ex.Message}). Starting with empty data - edit the JSON file and restart.",
+                $"Could not load the Data folder ({ex.Message}). Starting with empty data - fix the JSON and restart.",
                 "HP Commander", MessageBoxButton.OK, MessageBoxImage.Warning);
             return new GameData();
         }

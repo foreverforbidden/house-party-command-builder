@@ -1,0 +1,115 @@
+{
+  "socialValues": [
+    "drunk",
+    "mood"
+  ],
+  "socialRelationships": [
+    "friendship",
+    "romance"
+  ],
+  "socialModifiers": [
+    "add",
+    "equals"
+  ],
+  "socialActions": [
+    {
+      "name": "sendtext",
+      "needsTarget": false,
+      "label": "Send a text"
+    },
+    {
+      "name": "talkto",
+      "needsTarget": true,
+      "label": "Talk to (must be nearby)"
+    }
+  ],
+  "legacyCombatActions": [
+    "fight",
+    "passout",
+    "wakeup",
+    "cancel"
+  ],
+  "intimacy": {
+    "note": "Confirmed patterns from 'example intimacy' (in-game console tokens do NOT appear to be order-sensitive): two-char start = 'sexualact intimacy {char1} {char2} {event}'; single-char start = 'sexualact {char1} {event} intimacy'; end = 'sexualact intimacy {char1} end'; action speed = 'intimacy {char1} {increaseactionspeed|decreaseactionspeed}'. The 'reset' subcommand has NO confirmed example - its command below is a best-guess by analogy to action speed, unverified.",
+    "subcommands": [
+      {
+        "name": "SexualAct",
+        "id": 0
+      },
+      {
+        "name": "IncreaseActionSpeed",
+        "id": 10
+      },
+      {
+        "name": "DecreaseActionSpeed",
+        "id": 11
+      },
+      {
+        "name": "reset",
+        "id": null
+      }
+    ],
+    "events": [
+      {
+        "name": "StartFingering",
+        "id": 7000
+      },
+      {
+        "name": "StartScissoring",
+        "id": 8000
+      },
+      {
+        "name": "StartMakingOut",
+        "id": 9000
+      },
+      {
+        "name": "StartBlowjob",
+        "id": 10000
+      },
+      {
+        "name": "StartHotTubHandJob",
+        "id": 10011
+      },
+      {
+        "name": "StartMissionary",
+        "id": 10030
+      },
+      {
+        "name": "StartDoggieStyle",
+        "id": 10050
+      },
+      {
+        "name": "StartMasturbation",
+        "id": 10051
+      },
+      {
+        "name": "StartCowGirl",
+        "id": 10052
+      },
+      {
+        "name": "StartCunnilingus",
+        "id": 10053
+      },
+      {
+        "name": "StartSixtyNine",
+        "id": 10054
+      },
+      {
+        "name": "StartWallSex",
+        "id": 10055
+      },
+      {
+        "name": "StartWallSex2",
+        "id": 10056
+      },
+      {
+        "name": "StartWallSex3",
+        "id": 10057
+      },
+      {
+        "name": "End",
+        "id": 10060
+      }
+    ]
+  }
+}

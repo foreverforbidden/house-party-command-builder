@@ -1,0 +1,49 @@
+{
+  "traits": [
+    "Aggressive",
+    "Charismatic",
+    "Creative",
+    "Energetic",
+    "Exhibitionism",
+    "Happy",
+    "Humerous",
+    "Intelligent",
+    "Jealous",
+    "LikesMen",
+    "LikesWomen",
+    "Nice",
+    "Optimistic",
+    "Perverse",
+    "Serious",
+    "Shy",
+    "Sociable"
+  ],
+  "relationshipTypes": [
+    "Friendship",
+    "Romance"
+  ],
+  "genericValues": [
+    {
+      "id": "spareroomdoor",
+      "property": "IsLocked",
+      "type": "bool01",
+      "label": "Spare Bedroom Door Lock"
+    }
+  ],
+  "states": [
+    "sweating",
+    "ForcedToDance",
+    "IndefinitelyErect",
+    "IsOnFire",
+    "RunWhenCloseToTarget",
+    "UnableToPlayVoicedAudioTriggers"
+  ],
+  "properties": [
+    "IsBloody"
+  ],
+  "runFunctions": [
+    "EnableFaceAndChestSpermEffect",
+    "untieshirt",
+    "fixshirt"
+  ]
+}

@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace HpCommander.Data;
@@ -140,20 +141,66 @@ public sealed class GameData
     [JsonPropertyName("locations")] public List<GameLocation> Locations { get; set; } = new();
     [JsonPropertyName("intimacy")] public IntimacyCatalog Intimacy { get; set; } = new();
 
+    /// <summary>Bumped when the on-disk shape changes. A mismatch is a hard error: a renamed or
+    /// mistyped key otherwise deserializes to an empty list and shows up only as an empty combo,
+    /// which is very plausibly how several sections rotted unnoticed.</summary>
+    public const int ExpectedSchemaVersion = 2;
+
+    [JsonPropertyName("schemaVersion")] public int SchemaVersion { get; set; }
+
     private static readonly JsonSerializerOptions SerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
     };
 
-    public static string DefaultPath =>
-        Path.Combine(AppContext.BaseDirectory, "Data", "commands.json");
+    public static string DefaultDirectory =>
+        Path.Combine(AppContext.BaseDirectory, "Data");
 
-    public static GameData Load(string? path = null)
+    /// <summary>
+    /// Reads every Data/*.json and merges their top-level properties into one object before
+    /// deserializing. Splitting by domain keeps diffs reviewable once the generated data is large,
+    /// and costs the views nothing: they still see a single flat GameData.
+    /// </summary>
+    public static GameData Load(string? directory = null)
     {
-        path ??= DefaultPath;
-        var json = File.ReadAllText(path);
-        var data = JsonSerializer.Deserialize<GameData>(json, SerializerOptions);
-        return data ?? new GameData();
+        directory ??= DefaultDirectory;
+
+        var merged = new JsonObject();
+        var seen = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var file in Directory.EnumerateFiles(directory, "*.json").OrderBy(f => f, StringComparer.OrdinalIgnoreCase))
+        {
+            var node = JsonNode.Parse(File.ReadAllText(file), documentOptions: new JsonDocumentOptions
+            {
+                CommentHandling = JsonCommentHandling.Skip,
+            });
+
+            if (node is not JsonObject obj)
+                throw new InvalidDataException($"{Path.GetFileName(file)}: expected a JSON object at the top level.");
+
+            foreach (var (key, value) in obj.ToList())
+            {
+                if (seen.TryGetValue(key, out var owner))
+                    throw new InvalidDataException(
+                        $"'{key}' is defined in both {owner} and {Path.GetFileName(file)}.");
+
+                seen[key] = Path.GetFileName(file);
+                obj.Remove(key);
+                merged[key] = value;
+            }
+        }
+
+        var data = JsonSerializer.Deserialize<GameData>(merged.ToJsonString(), SerializerOptions) ?? new GameData();
+
+        if (data.SchemaVersion != ExpectedSchemaVersion)
+            throw new InvalidDataException(
+                $"Data schemaVersion is {data.SchemaVersion}, expected {ExpectedSchemaVersion}. " +
+                "The Data folder is from a different version of the app.");
+
+        if (data.Characters.Count == 0)
+            throw new InvalidDataException("No characters loaded - the Data folder looks incomplete.");
+
+        return data;
     }
 }
