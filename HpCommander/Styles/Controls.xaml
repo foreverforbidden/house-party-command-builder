@@ -30,6 +30,13 @@
         <Setter Property="Margin" Value="0,4,0,8" />
     </Style>
 
+    <!-- A literal command shown as reference rather than built into the output box. -->
+    <Style x:Key="CommandSampleStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+    </Style>
+
     <Style x:Key="WarningTextStyle" TargetType="TextBlock" BasedOn="{StaticResource NoteTextStyle}">
         <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
         <Setter Property="FontStyle" Value="Normal" />
@@ -161,16 +168,96 @@
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}" />
     </Style>
 
-    <!-- No Foreground setter, for the same reason as TextBlock: these inherit it, and the sidebar
-         toggle sets its own. -->
+    <!-- Same problem the ComboBox had, and the same fix. The stock CheckBox/RadioButton templates
+         hardcode a white indicator with a light-grey border and ignore the palette entirely, so in
+         the dark theme every tickbox and radio was a bright white blob on a dark card - the last
+         unthemed chrome in the app (issue #6). Retemplated against the palette instead.
+
+         Still no Foreground setter, for the same reason as TextBlock: the label inherits it, and
+         the sidebar toggle sets its own. Only the indicator is themed here. -->
     <Style TargetType="CheckBox">
         <Setter Property="Margin" Value="0,0,0,10" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Border x:Name="Box" Width="15" Height="15" CornerRadius="3"
+                                BorderThickness="1" VerticalAlignment="Center" Margin="0,0,8,0"
+                                Background="{DynamicResource InputBackgroundBrush}"
+                                BorderBrush="{DynamicResource InputBorderBrush}">
+                            <Path x:Name="Tick" Visibility="Collapsed" Stroke="White" StrokeThickness="1.6"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Data="M 0,3.5 L 3,6.5 L 8,0.5" />
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center" RecognizesAccessKey="True" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="Tick" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <!-- Tri-state: neither on nor off, so a dash rather than a tick. -->
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="Tick" Property="Data" Value="M 0,3.5 L 8,3.5" />
+                            <Setter TargetName="Tick" Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" />
+                            <Setter TargetName="Tick" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource InputDisabledBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                            <Setter TargetName="Tick" Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="RadioButton">
         <Setter Property="Margin" Value="0,0,16,10" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Border x:Name="Box" Width="15" Height="15" CornerRadius="7.5"
+                                BorderThickness="1" VerticalAlignment="Center" Margin="0,0,8,0"
+                                Background="{DynamicResource InputBackgroundBrush}"
+                                BorderBrush="{DynamicResource InputBorderBrush}">
+                            <Ellipse x:Name="Dot" Width="7" Height="7" Visibility="Collapsed"
+                                     Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center" RecognizesAccessKey="True" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource InputDisabledBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- WPF keys implicit styles on the exact type, so a ComboBox subclass gets none of the
