@@ -50,11 +50,19 @@ dotnet run --project HpCommander/HpCommander.csproj
 
 ## Publishing a portable build
 
-Produces a single self-contained `.exe` (no .NET runtime required on the target machine):
+Produces a single self-contained `.exe` (no .NET runtime required on the target machine) at `publish/HpCommander.exe`:
+
+```
+./publish.ps1
+```
+
+Which is just this, if you'd rather run it yourself:
 
 ```
 dotnet publish HpCommander/HpCommander.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
 ```
+
+`publish/` is gitignored — the exe is a build output, not a checked-in artifact. Released builds are attached to the [GitHub releases](https://github.com/foreverforbidden/house-party-command-builder/releases).
 
 `Data/*.json` is copied next to the executable and can be hand-edited afterward. Each file covers one domain (`characters.json`, `clothing.json`, `values.json`, `items.json`, `world.json`, `social.json`, `quests.json`); `tools/import-data.cs` regenerates them from the `docs/` reference dumps if you want to refresh from source instead (`dotnet run tools/import-data.cs`).
 
