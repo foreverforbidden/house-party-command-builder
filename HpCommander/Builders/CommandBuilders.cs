@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace HpCommander.Builders;
 
@@ -31,6 +32,11 @@ public static class TargetHelper
         BoolMode.ForceFalse => " = False",
         _ => "",
     };
+
+    /// <summary>Normalise a display or internal name to the form the console accepts as a target:
+    /// "Front Door" -> "frontdoor", "AshleyTop" -> "ashleytop", "AC Unit" -> "acunit".</summary>
+    public static string ConsoleName(string name) =>
+        Regex.Replace(name.ToLowerInvariant(), "[^a-z0-9]", "");
 }
 
 public static class ChangeCommandBuilder
@@ -96,10 +102,19 @@ public static class PropertiesCommandBuilder
         $"{TargetHelper.Join(targets)}.properties.list";
 }
 
+/// <summary>`run` takes a character *or* an item as its target: `leah.run(...)` and
+/// `ashleytop.run(UntieShirt)` are both valid. An item target is just a single-element
+/// sequence, so <see cref="TargetHelper.Join"/> needs no special case.</summary>
 public static class RunCommandBuilder
 {
-    public static string Build(IEnumerable<string> targets, string function) =>
-        $"{TargetHelper.Join(targets)}.run({function})";
+    /// <summary>`value` is the optional trailing argument some functions take, as in
+    /// `leah.run(SwitchToAlternateTexture) = 0`.</summary>
+    public static string Build(IEnumerable<string> targets, string function, string? value = null) =>
+        $"{TargetHelper.Join(targets)}.run({function})" +
+        (string.IsNullOrWhiteSpace(value) ? "" : $" = {value.Trim()}");
+
+    public static string BuildList(IEnumerable<string> targets) =>
+        $"{TargetHelper.Join(targets)}.run.list";
 }
 
 public static class SizeCommandBuilder
@@ -260,8 +275,7 @@ public static class DoorCommandBuilder
         $"values.{doorConsole}.set({property})={value}";
 
     /// <summary>Normalise a free-typed door name to the console form: "Front Door" -> "frontdoor".</summary>
-    public static string Normalise(string name) =>
-        System.Text.RegularExpressions.Regex.Replace(name.ToLowerInvariant(), "[^a-z0-9]", "");
+    public static string Normalise(string name) => TargetHelper.ConsoleName(name);
 }
 
 public static class CutsceneCommandBuilder

@@ -94,6 +94,46 @@ public class BuilderTests
     public void NormaliseStripsEverythingButLettersAndDigits(string input, string expected) =>
         Assert.Equal(expected, DoorCommandBuilder.Normalise(input));
 
+    /// <summary>Doors are not the only thing that needs the console form: an item run target is
+    /// its internal name normalised the same way.</summary>
+    [Theory]
+    [InlineData("AshleyTop", "ashleytop")]
+    [InlineData("AC Unit", "acunit")]
+    [InlineData("Laptop", "laptop")]
+    public void ItemNamesNormaliseToTheirConsoleTarget(string input, string expected) =>
+        Assert.Equal(expected, TargetHelper.ConsoleName(input));
+
+    // ---------------- run: the three documented forms ----------------
+    // Verbatim from the game's own help text, via docs/console-examples.json.
+
+    [Fact]
+    public void RunOnAnItemTargetMatchesTheDocumentedExample() =>
+        Assert.Equal("ashleytop.run(UntieShirt)",
+            RunCommandBuilder.Build([TargetHelper.ConsoleName("AshleyTop")], "UntieShirt"));
+
+    [Fact]
+    public void RunListMatchesTheDocumentedExample() =>
+        Assert.Equal("laptop.run.list", RunCommandBuilder.BuildList(["laptop"]));
+
+    [Fact]
+    public void RunWithAValueMatchesTheDocumentedExample() =>
+        Assert.Equal("leah.run(SwitchToAlternateTexture) = 0",
+            RunCommandBuilder.Build(["leah"], "SwitchToAlternateTexture", "0"));
+
+    /// <summary>An absent, blank or whitespace value must not leave a dangling " = ".</summary>
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void RunOmitsTheSuffixWhenNoValueIsGiven(string? value) =>
+        Assert.Equal("Ashley.run(EnableFaceAndChestSpermEffect)",
+            RunCommandBuilder.Build(["Ashley"], "EnableFaceAndChestSpermEffect", value));
+
+    [Fact]
+    public void RunChainsMultipleCharacterTargets() =>
+        Assert.Equal("Rachael.Amy.run(EnableFaceAndChestSpermEffect)",
+            RunCommandBuilder.Build(["Rachael", "Amy"], "EnableFaceAndChestSpermEffect"));
+
     // ---------------- Quoting names that contain spaces ----------------
 
     [Fact]

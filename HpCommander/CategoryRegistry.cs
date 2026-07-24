@@ -38,7 +38,7 @@ public static class CategoryRegistry
         NavEntry.Item("Addforce", c => new AddforceView(c.Targets),
             "push", "force", "physics", "launch"),
         NavEntry.Item("Run", c => new RunView(c.Data, c.Targets),
-            "function", "effect", "animation"),
+            "function", "effect", "animation", "item function", "texture", "untie"),
 
         NavEntry.Header("WORLD"),
         NavEntry.Item("Inventory", c => new InventoryView(c.Data),
