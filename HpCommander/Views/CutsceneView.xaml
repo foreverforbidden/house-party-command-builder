@@ -54,7 +54,7 @@
                     <StackPanel Margin="0,8,0,0">
                         <TextBlock Style="{StaticResource NoteTextStyle}" MaxWidth="440"
                                    Text="Ends whatever scene the Player is currently in." />
-                        <TextBlock Text="cutscene EndAnySceneWithPlayer" FontFamily="Consolas" Margin="0,4,0,0" />
+                        <TextBlock Text="cutscene EndAnySceneWithPlayer" Style="{StaticResource CommandSampleStyle}" />
                     </StackPanel>
                 </TabItem>
 

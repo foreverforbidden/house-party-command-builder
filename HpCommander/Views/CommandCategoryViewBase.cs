@@ -140,7 +140,9 @@ public abstract class TargetedCommandCategoryViewBase : CommandCategoryViewBase
 
     protected CharacterChipPicker Targets { get; }
 
-    public sealed override bool NeedsGlobalTargets => true;
+    /// <summary>Not sealed: a view can take its subject from the picker in one mode and from its
+    /// own input in another - Run targets either a character or an item.</summary>
+    public override bool NeedsGlobalTargets => true;
 
     /// <summary>Builds against the current target selection, or asks for one. This is the state
     /// check that replaces TargetHelper.Join throwing on every keystroke.</summary>

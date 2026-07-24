@@ -43,8 +43,7 @@
   ],
   "runFunctions": [
     "EnableFaceAndChestSpermEffect",
-    "untieshirt",
-    "fixshirt"
+    "SwitchToAlternateTexture"
   ],
   "playerValuesByStory": {
     "A Vickie Vixen Valentine": [

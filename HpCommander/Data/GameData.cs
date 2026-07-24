@@ -129,6 +129,15 @@ public sealed class SocialAction
     public override string ToString() => Label.Length > 0 ? Label : Name;
 }
 
+/// <summary>One item's metadata, keyed by its internal name in <c>itemDetails</c>. The internal
+/// name is what <c>itemFunctions</c> is keyed by; the console target is that name normalised
+/// (<c>"AshleyTop"</c> -> <c>"ashleytop"</c>).</summary>
+public sealed class ItemDetail
+{
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = "";
+    [JsonPropertyName("story")] public string Story { get; set; } = "";
+}
+
 public sealed class ItemCatalog
 {
     [JsonPropertyName("requiresEnable")] public List<ItemAlias> RequiresEnable { get; set; } = new();
@@ -158,9 +167,12 @@ public sealed class GameData
     [JsonPropertyName("playerValuesByStory")] public Dictionary<string, List<string>> PlayerValuesByStory { get; set; } = new();
     [JsonPropertyName("characterValuesByStory")] public Dictionary<string, Dictionary<string, List<string>>> CharacterValuesByStory { get; set; } = new();
 
-    /// <summary>Item -> its `item &lt;name&gt; itemfunction &lt;fn&gt;` functions. Distinct from
-    /// the character-scoped run().</summary>
+    /// <summary>Internal item name -> the functions that item exposes to run(). Both a character
+    /// and an item can be the target: `ashleytop.run(UntieShirt)` alongside `leah.run(...)`.</summary>
     [JsonPropertyName("itemFunctions")] public Dictionary<string, List<string>> ItemFunctions { get; set; } = new();
+
+    /// <summary>Internal item name -> display name and story, for labelling the item picker.</summary>
+    [JsonPropertyName("itemDetails")] public Dictionary<string, ItemDetail> ItemDetails { get; set; } = new();
     [JsonPropertyName("examples")] public List<ConsoleExample> Examples { get; set; } = new();
     [JsonPropertyName("outfitsByCharacter")] public Dictionary<string, List<string>> OutfitsByCharacter { get; set; } = new();
     [JsonPropertyName("traits")] public List<string> Traits { get; set; } = new();

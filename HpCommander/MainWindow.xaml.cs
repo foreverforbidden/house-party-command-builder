@@ -128,7 +128,7 @@ public partial class MainWindow : Window
         _activeView.OnTargetsChanged();
         ContentHost.Content = view;
         ContentScroll.ScrollToTop();
-        TargetsCard.Visibility = view.NeedsGlobalTargets ? Visibility.Visible : Visibility.Collapsed;
+        // Recompute settles the targets card: NeedsGlobalTargets can change while a view is open.
         Recompute();
     }
 
@@ -211,6 +211,9 @@ public partial class MainWindow : Window
     {
         if (_activeView == null)
             return;
+
+        TargetsCard.Visibility = _activeView.NeedsGlobalTargets ? Visibility.Visible : Visibility.Collapsed;
+
         try
         {
             _current = _activeView.BuildCommand();
