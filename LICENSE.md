@@ -1,6 +1,6 @@
 # foreverforbidden Public Distribution License v1.0
 
-Copyright (c) <Year> foreverforbidden
+Copyright (c) 2026 foreverforbidden
 
 Permission is hereby granted to any person obtaining a copy of this software and its associated documentation files (the "Software") to use, copy, modify, compile, publish, and redistribute the Software, subject to the following terms and conditions.
 
