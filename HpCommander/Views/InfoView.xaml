@@ -17,9 +17,22 @@
                            Foreground="{DynamicResource TextPrimaryBrush}" LineHeight="20" />
             </ScrollViewer>
 
-            <Button x:Name="IssueButton" Grid.Row="2" Content="Report an issue"
-                    Style="{StaticResource PrimaryButtonStyle}" HorizontalAlignment="Left"
-                    Click="IssueButton_Click" />
+            <StackPanel Grid.Row="2">
+                <TextBlock x:Name="VersionText" Style="{StaticResource FieldLabelStyle}" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="IssueButton" Content="Report an issue"
+                            Style="{StaticResource PrimaryButtonStyle}" Click="IssueButton_Click" />
+                    <Button x:Name="UpdateButton" Content="Check for updates" Margin="8,0,0,0"
+                            Style="{StaticResource SecondaryButtonStyle}" Click="UpdateButton_Click" />
+                </StackPanel>
+
+                <CheckBox x:Name="AutoUpdateCheck" Content="Check for updates on startup"
+                          Margin="0,10,0,0" Click="AutoUpdateCheck_Click" />
+
+                <TextBlock x:Name="UpdateStatus" Style="{StaticResource NoteTextStyle}"
+                           Visibility="Collapsed" />
+            </StackPanel>
         </Grid>
     </Border>
 </hp:CommandCategoryViewBase>

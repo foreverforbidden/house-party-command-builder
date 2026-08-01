@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using HpCommander.Builders;
 using HpCommander.Controls;
 using HpCommander.Data;
+using HpCommander.Services;
 using HpCommander.Views;
 
 namespace HpCommander;
@@ -70,7 +71,7 @@ public partial class MainWindow : Window
             }
         };
         ChipPickerHost.Content = _chipPicker;
-        _context = new ViewContext(_data, _chipPicker);
+        _context = new ViewContext(_data, _chipPicker, _settings);
 
         // Filtering a view over one fixed list keeps selection identity across searches;
         // swapping ItemsSource used to drop the selection whenever the active category was
@@ -79,6 +80,14 @@ public partial class MainWindow : Window
         _navView.Filter = NavFilter;
         CategoryList.ItemsSource = _navView;
         CategoryList.SelectedItem = CategoryRegistry.All.First(n => !n.IsHeader);
+
+        // Clears the renamed exe an earlier update left behind. First thing, and before the check,
+        // so a machine that updates often does not accumulate them.
+        UpdateService.CleanUpAfterUpdate();
+
+        // Deliberately not awaited: the check is allowed to take its ten seconds in the background
+        // and say nothing. Loaded rather than the constructor, so the prompt has a window to own.
+        Loaded += async (_, _) => await new UpdatePrompt(this, _settings).RunStartupCheckAsync();
     }
 
     private static GameData LoadGameData()

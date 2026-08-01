@@ -1,0 +1,39 @@
+# Builds and publishes a release when a v* tag is pushed.
+#
+# The in-app updater (Services/UpdateService.cs) downloads whichever asset on the latest release is
+# named HpCommander-v<x.y.z>-win-x64.zip, so this workflow - not a hand-run publish - is what makes
+# the name and contents predictable. It also passes the tag through to publish.ps1 as -Version,
+# which is what stops the binary from claiming a different version than the tag it was built from.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No version pin here: global.json already pins the SDK to 10.0.302.
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      # Not in HpCommander.sln, so it needs naming explicitly.
+      - name: Test
+        run: dotnet test tests/HpCommander.Builders.Tests --configuration Release
+
+      - name: Publish
+        shell: pwsh
+        run: ./publish.ps1 -Version ${{ github.ref_name }} -Zip
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: HpCommander-*-win-x64.zip
+          generate_release_notes: true

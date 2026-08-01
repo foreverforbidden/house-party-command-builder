@@ -57,7 +57,8 @@ public static class CategoryRegistry
             "achievements", "unstuck", "help", "clear"),
         NavEntry.Item("Legacy (V1)", c => new LegacyView(c.Data),
             "enablenpc", "disablenpc", "npc", "combat", "fight", "passout", "wakeup", "setenabled", "enable", "disable"),
-        NavEntry.Item("Info", _ => new InfoView(),
+        NavEntry.Item("Info", c => new InfoView(c.Settings),
+            "update", "updates", "upgrade", "release",
             "about", "readme", "issue", "report", "bug", "version"),
     ];
 

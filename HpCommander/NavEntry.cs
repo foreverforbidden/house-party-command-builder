@@ -5,7 +5,7 @@ using HpCommander.Views;
 namespace HpCommander;
 
 /// <summary>Everything a category view needs in order to be constructed.</summary>
-public sealed record ViewContext(GameData Data, CharacterChipPicker Targets);
+public sealed record ViewContext(GameData Data, CharacterChipPicker Targets, AppSettings Settings);
 
 /// <summary>A sidebar entry: either a group header, or a selectable category with its search
 /// keywords and the factory that builds its view.</summary>

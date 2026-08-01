@@ -5,9 +5,16 @@ using System.Text.Json.Serialization;
 namespace HpCommander;
 
 /// <summary>
-/// The app's only persisted state. Deliberately two booleans: the moment a second unrelated
-/// setting lands here, someone needs migration logic, and this is not worth that.
+/// The app's only persisted state.
 /// </summary>
+/// <remarks>
+/// This used to carry a note that it should stay at two booleans because a third would demand
+/// migration logic. The update check (issue #8) needed four more fields and the note turned out to
+/// be pessimistic: System.Text.Json fills a property that is absent from the file with its default,
+/// so <em>adding</em> a setting migrates itself. The real rule is narrower - a property here may be
+/// added freely, but renaming or repurposing one silently discards what users already have, and
+/// that is the change that needs migration logic.
+/// </remarks>
 public sealed class AppSettings
 {
     /// <summary>Off unless the user turns it on. Auto-copy takes over a shared OS resource,
@@ -20,6 +27,20 @@ public sealed class AppSettings
 
     /// <summary>Light or Dark. Unparseable values fall back to Light rather than failing to load.</summary>
     public string Theme { get; set; } = nameof(AppTheme.Light);
+
+    /// <summary>Off unless the user turns it on. This is the only thing the app does over the
+    /// network, so it is opt-in for the same reason auto-copy is.</summary>
+    public bool UpdateCheckEnabled { get; set; }
+
+    /// <summary>Records that the one-time explanation has been shown, so declining once is not
+    /// re-asked on every launch.</summary>
+    public bool UpdateCheckConsentGiven { get; set; }
+
+    /// <summary>A version the user chose to skip. Anything newer still prompts.</summary>
+    public string? SkippedVersion { get; set; }
+
+    /// <summary>Throttles the startup check to once a day.</summary>
+    public DateTime? LastUpdateCheckUtc { get; set; }
 
     /// <summary>Derived, so it must not be written back into the file.</summary>
     [JsonIgnore]
