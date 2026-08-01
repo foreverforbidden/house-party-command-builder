@@ -9,6 +9,11 @@
     <AssemblyName>HpCommander</AssemblyName>
     <RootNamespace>HpCommander</RootNamespace>
     <ApplicationIcon>HP-Commander.ico</ApplicationIcon>
+
+    <!-- Keep in step with the git tag. publish.ps1 overrides this with -Version so a release build
+         cannot disagree with the tag it was built from; without it every build claimed 1.0.0 while
+         the releases were up to v1.7.0, which the update check would have read as "always stale". -->
+    <Version>1.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

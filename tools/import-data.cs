@@ -12,11 +12,16 @@
 // Sections the dumps cannot fill (states, properties, runFunctions, socialActions, genericValues,
 // doors, items, quests, intimacy) are carried through from the existing files untouched. There is
 // no bulk source for them; padding them with guesses would be worse than leaving them short.
+//
+// character-run-functions.json is the exception that is only half true: the game has no bulk dump
+// for it either, but `<character>.run.list` reports one character at a time, so the file is filled
+// in by hand as characters are confirmed. It is optional - absent means "carry the existing
+// section through", the same as the rest.
 
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-const int SchemaVersion = 2;
+const int SchemaVersion = 3;
 
 var root = FindRepoRoot();
 var docs = Path.Combine(root, "docs");
@@ -151,6 +156,14 @@ foreach (var (story, byChar) in storyValues)
     if (cleanedStory.Count > 0) characterValues[story] = cleanedStory;
 }
 
+// Hand-collected from `<character>.run.list`, one character at a time. Unlike every other section
+// here this one is merged over what is already in values.json rather than replacing it: the dump is
+// incomplete by construction, so a replace would delete confirmed characters every time someone
+// re-ran the importer before pasting in the next one.
+var characterRunFunctions = (existing["characterRunFunctions"]?.DeepClone() ?? new JsonObject()).AsObject();
+foreach (var (character, functions) in TryReadDoc("character-run-functions.json")?.AsObject() ?? new JsonObject())
+    characterRunFunctions[character] = functions?.DeepClone();
+
 var values = new JsonObject
 {
     ["traits"] = existing["traits"]!.DeepClone(),
@@ -159,12 +172,14 @@ var values = new JsonObject
     ["states"] = existing["states"]!.DeepClone(),
     ["properties"] = existing["properties"]!.DeepClone(),
     ["runFunctions"] = existing["runFunctions"]!.DeepClone(),
+    ["characterRunFunctions"] = characterRunFunctions,
     ["playerValuesByStory"] = playerValues,
     ["characterValuesByStory"] = characterValues,
 };
 
 Console.WriteLine($"playerValues    {playerValues.AsObject().Sum(kv => kv.Value!.AsArray().Count)} across {playerValues.AsObject().Count} stories");
 Console.WriteLine($"characterValues {storyValueCount} across {characterValues.Count} stories");
+Console.WriteLine($"characterRun    {characterRunFunctions.AsObject().Count} characters");
 
 // ---------------- items: functions + story metadata ----------------
 
@@ -311,6 +326,10 @@ JsonNode ReadDoc(string name)
     return JsonNode.Parse(File.ReadAllText(path))
            ?? throw new InvalidDataException($"{name} is empty.");
 }
+
+/// <summary>For dumps that are filled in over time rather than exported in one go.</summary>
+JsonNode? TryReadDoc(string name) =>
+    File.Exists(Path.Combine(docs, name)) ? ReadDoc(name) : null;
 
 /// <summary>
 /// The verb an example demonstrates, so a view can look up its own examples.

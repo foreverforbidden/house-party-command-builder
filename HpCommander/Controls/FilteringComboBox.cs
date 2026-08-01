@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 
 namespace HpCommander.Controls;
 
@@ -47,6 +48,40 @@ public class FilteringComboBox : ComboBox
     {
         base.OnApplyTemplate();
         _editBox = GetTemplateChild("PART_EditableTextBox") as TextBox;
+    }
+
+    /// <summary>
+    /// Replaces the contents with a list split under group headings, preserving whatever the user
+    /// has typed. <paramref name="groupPropertyName"/> names the property on each item that
+    /// supplies its heading.
+    /// </summary>
+    /// <remarks>
+    /// Grouping is the one thing the Items-based approach above cannot do: an ItemCollection
+    /// populated directly reports <c>CanGroup</c> false and leaves <c>Groups</c> null, so a grouped
+    /// combo has to go through ItemsSource. That does not reintroduce the shared-filter bug the
+    /// class remarks describe, because each call builds a <em>fresh</em> ListCollectionView instead
+    /// of reaching for the default view of some shared backing list - the view, its filter and its
+    /// grouping belong to this combo alone.
+    /// </remarks>
+    public void SetGroupedItems(IEnumerable<object> items, string groupPropertyName)
+    {
+        var view = new ListCollectionView(items.ToList());
+        view.GroupDescriptions.Add(new PropertyGroupDescription(groupPropertyName));
+        // Carry the in-progress filter across the swap, so refilling mid-word does not briefly
+        // show the whole list again.
+        view.Filter = Matches;
+
+        var text = Text;
+        _reentrant = true;
+        try
+        {
+            ItemsSource = view;
+            Text = text;
+        }
+        finally
+        {
+            _reentrant = false;
+        }
     }
 
     private bool Matches(object item) =>

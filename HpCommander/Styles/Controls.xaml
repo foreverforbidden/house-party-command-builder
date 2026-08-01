@@ -23,6 +23,16 @@
         <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
 
+    <!-- Heading inside a grouped dropdown. Not selectable, so it reads as a divider rather than
+         as another entry the user could pick by mistake. -->
+    <Style x:Key="GroupHeaderTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="8,8,8,2" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
     <Style x:Key="NoteTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -86,6 +96,13 @@
         <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel KeyboardNavigation.DirectionalNavigation="Contained" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -120,8 +137,13 @@
                                     BorderThickness="1" CornerRadius="6"
                                     MinWidth="{TemplateBinding ActualWidth}"
                                     MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <!-- ItemsPresenter, not a hand-declared StackPanel IsItemsHost:
+                                     a hardcoded items host leaves a grouped dropdown's nested
+                                     presenters with no panel to build, so the popup draws its
+                                     group headings and none of the items under them. The panel
+                                     itself now comes from the ItemsPanel setter below. -->
                                 <ScrollViewer Margin="2">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    <ItemsPresenter />
                                 </ScrollViewer>
                             </Border>
                         </Popup>

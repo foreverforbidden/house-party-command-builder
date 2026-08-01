@@ -45,6 +45,7 @@
     "EnableFaceAndChestSpermEffect",
     "SwitchToAlternateTexture"
   ],
+  "characterRunFunctions": {},
   "playerValuesByStory": {
     "A Vickie Vixen Valentine": [
       "AshleyTexts",

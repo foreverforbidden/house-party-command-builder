@@ -173,6 +173,21 @@ public sealed class GameData
 
     /// <summary>Internal item name -> display name and story, for labelling the item picker.</summary>
     [JsonPropertyName("itemDetails")] public Dictionary<string, ItemDetail> ItemDetails { get; set; } = new();
+
+    /// <summary>
+    /// The physics/audio/texture boilerplate that essentially every item carries, so the item
+    /// picker can push it below the two or three functions that are actually specific to the item.
+    /// </summary>
+    /// <remarks>
+    /// Derived at load rather than authored in JSON: it stays correct as items are added, and the
+    /// frequency distribution makes the threshold uncontroversial. Over the shipped 133 items, 25
+    /// functions appear on 80-100% of them and the next most common appears on 10.5% - so anything
+    /// from 25% to 75% picks out the same 25. Empty for a dataset too small to measure.
+    /// </remarks>
+    [JsonIgnore]
+    public IReadOnlySet<string> CommonItemFunctions { get; private set; } =
+        new HashSet<string>(StringComparer.Ordinal);
+
     [JsonPropertyName("examples")] public List<ConsoleExample> Examples { get; set; } = new();
     [JsonPropertyName("outfitsByCharacter")] public Dictionary<string, List<string>> OutfitsByCharacter { get; set; } = new();
     [JsonPropertyName("traits")] public List<string> Traits { get; set; } = new();
@@ -181,7 +196,18 @@ public sealed class GameData
     [JsonPropertyName("states")] public List<string> States { get; set; } = new();
     [JsonPropertyName("properties")] public List<string> Properties { get; set; } = new();
     [JsonPropertyName("sizeParts")] public List<string> SizeParts { get; set; } = new();
+
+    /// <summary>Functions any character exposes to run(). Short, and known to be incomplete: the
+    /// game has no `character run function list` dump to import from, so this grows only as
+    /// functions are confirmed in-game. <see cref="CharacterRunFunctions"/> overrides it per
+    /// character where that has been done.</summary>
     [JsonPropertyName("runFunctions")] public List<string> RunFunctions { get; set; } = new();
+
+    /// <summary>Character name -> the run functions confirmed for that character. Optional and
+    /// currently sparse; a character with no entry falls back to <see cref="RunFunctions"/>.</summary>
+    [JsonPropertyName("characterRunFunctions")]
+    public Dictionary<string, List<string>> CharacterRunFunctions { get; set; } = new();
+
     [JsonPropertyName("items")] public ItemCatalog Items { get; set; } = new();
     [JsonPropertyName("legacyCombatActions")] public List<string> LegacyCombatActions { get; set; } = new();
     [JsonPropertyName("socialValues")] public List<string> SocialValues { get; set; } = new();
@@ -202,7 +228,7 @@ public sealed class GameData
     /// <summary>Bumped when the on-disk shape changes. A mismatch is a hard error: a renamed or
     /// mistyped key otherwise deserializes to an empty list and shows up only as an empty combo,
     /// which is very plausibly how several sections rotted unnoticed.</summary>
-    public const int ExpectedSchemaVersion = 2;
+    public const int ExpectedSchemaVersion = 3;
 
     [JsonPropertyName("schemaVersion")] public int SchemaVersion { get; set; }
 
@@ -259,6 +285,35 @@ public sealed class GameData
         if (data.Characters.Count == 0)
             throw new InvalidDataException("No characters loaded - the Data folder looks incomplete.");
 
+        data.CommonItemFunctions = DeriveCommonItemFunctions(data.ItemFunctions);
+
         return data;
+    }
+
+    /// <summary>Below this many items the frequency argument does not hold - with three items
+    /// loaded, "on half of them" would classify almost everything as common.</summary>
+    private const int MinItemsForCommonFunctions = 10;
+
+    private const double CommonItemFunctionShare = 0.5;
+
+    /// <summary>Fills <see cref="CommonItemFunctions"/>. Public so the derivation can be exercised
+    /// against synthetic item tables: the interesting cases are all about how many items are in
+    /// play, which is awkward to set up through a whole Data folder.</summary>
+    public static IReadOnlySet<string> DeriveCommonItemFunctions(
+        IReadOnlyDictionary<string, List<string>> itemFunctions)
+    {
+        if (itemFunctions.Count < MinItemsForCommonFunctions)
+            return new HashSet<string>(StringComparer.Ordinal);
+
+        var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var functions in itemFunctions.Values)
+        foreach (var function in functions.Distinct(StringComparer.Ordinal))
+            counts[function] = counts.GetValueOrDefault(function) + 1;
+
+        var threshold = itemFunctions.Count * CommonItemFunctionShare;
+        return counts
+            .Where(pair => pair.Value >= threshold)
+            .Select(pair => pair.Key)
+            .ToHashSet(StringComparer.Ordinal);
     }
 }

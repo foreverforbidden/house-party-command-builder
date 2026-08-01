@@ -21,4 +21,13 @@
     <ProjectReference Include="..\..\HpCommander\HpCommander.csproj" />
   </ItemGroup>
 
+  <!-- CopyToOutputDirectory does not flow across a ProjectReference, so the app's Data folder has
+       to be linked in explicitly. CommonItemFunctionTests asserts against the real shipped data -
+       the whole point of the split is that it holds for the actual 133 items. -->
+  <ItemGroup>
+    <None Include="..\..\HpCommander\Data\*.json"
+          Link="Data\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

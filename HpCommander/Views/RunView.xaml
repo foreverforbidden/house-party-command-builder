@@ -30,9 +30,33 @@
 
             <TextBlock x:Name="FuncLabel" Text="Function name (unbounded - type any known run function)"
                        Style="{StaticResource FieldLabelStyle}" MaxWidth="440" HorizontalAlignment="Left" TextWrapping="Wrap" />
-            <controls:FilteringComboBox x:Name="FuncCombo" IsEditable="True" Width="420" HorizontalAlignment="Left" />
+            <controls:FilteringComboBox x:Name="FuncCombo" IsEditable="True" Width="420" HorizontalAlignment="Left">
+                <!-- ContainerStyle rather than the simpler HeaderTemplate, so each heading and its
+                     group's own ItemsPresenter sit together in one panel. See also the ComboBox
+                     template in Styles/Controls.xaml, which had to stop hardcoding its items host
+                     before any of this would render. -->
+                <ItemsControl.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="GroupItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GroupItem">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}"
+                                                           Style="{StaticResource GroupHeaderTextStyle}" />
+                                                <ItemsPresenter />
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ItemsControl.GroupStyle>
+            </controls:FilteringComboBox>
 
-            <TextBlock x:Name="ValueLabel" Text="Value (optional - some functions take one, e.g. a texture index)"
+            <TextBlock Text="Value (optional - some functions take one, e.g. a texture index)"
                        Style="{StaticResource FieldLabelStyle}" MaxWidth="440" HorizontalAlignment="Left"
                        TextWrapping="Wrap" Margin="0,10,0,4" />
             <TextBox x:Name="ValueBox" Width="140" HorizontalAlignment="Left" TextChanged="OnTextChanged" />
